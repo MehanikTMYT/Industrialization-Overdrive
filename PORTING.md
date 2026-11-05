@@ -184,3 +184,15 @@ NeoForm/NeoForge подготовка и компиляция Minecraft заве
 
 Эта ветка — воспроизводимая отправная точка с документированной неудачной
 сборкой, **не полный порт Industrialization Overdrive**.
+
+## Round 2 — B: GrandPower decision
+
+GrandPower main inspected via GitHub tree and source at
+`875c7ce0b61dee0a20961c9d93eac0b7397e7b8f`: 8 Java files (<30).
+A separate port was judged unnecessary: its long capability and boolean simulation
+API wrap the old IEnergyStorage, while MI 2.6 now directly uses native NeoForge
+EnergyHandler, ItemAccess and transactions. The two Overdrive uses (Vajra and
+IOOtherRegistries) now use Tesseract SimpleEnergyItem backed by native MI
+ItemEnergyHandler. Long charge/capacity, MI ENERGY component, creative charged
+variant and tool energy accounting are retained. No GrandPower clone/artifact
+was created or published. Compilation is verified together with stage C.

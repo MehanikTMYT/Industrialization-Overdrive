@@ -3,7 +3,7 @@ package dev.wp.industrialization_overdrive.item;
 import aztech.modern_industrialization.MIComponents;
 import aztech.modern_industrialization.api.energy.CableTier;
 import aztech.modern_industrialization.items.DynamicToolItem;
-import dev.technici4n.grandpower.api.ISimpleEnergyItem;
+import net.swedz.tesseract.neoforge.compat.mi.api.SimpleEnergyItem;
 import dev.wp.industrialization_overdrive.IO;
 import dev.wp.industrialization_overdrive.IOComponents;
 import net.minecraft.core.BlockPos;
@@ -39,7 +39,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vajra extends Item implements DynamicToolItem, ISimpleEnergyItem {
+public class Vajra extends Item implements DynamicToolItem, SimpleEnergyItem {
     private final long maxEnergy = CableTier.HV.getEu() * 10000;
     private final long energyUsagePerBlock = maxEnergy / 6000;
 

@@ -1,6 +1,6 @@
 package dev.wp.industrialization_overdrive;
 
-import dev.technici4n.grandpower.api.ISimpleEnergyItem;
+import net.swedz.tesseract.neoforge.compat.mi.api.SimpleEnergyItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -32,7 +32,7 @@ public final class IOOtherRegistries {
                         .forEach((item) -> {
                             output.accept(item);
 
-                            if (item.get() instanceof ISimpleEnergyItem energyItem) {
+                            if (item.get() instanceof SimpleEnergyItem energyItem) {
                                 var chargedItem = item.get().getDefaultInstance();
                                 if (energyItem.getEnergyCapacity(chargedItem) > 0) {
                                     energyItem.setStoredEnergy(chargedItem, energyItem.getEnergyCapacity(chargedItem));
