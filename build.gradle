@@ -1,247 +1,47 @@
 plugins {
     id 'java-library'
-    id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '1.0.17'
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
-    id 'com.modrinth.minotaur' version '2.+'
+    id 'net.neoforged.gradle.userdev' version '7.1.38'
 }
-
 version = "${mod_version}+${minecraft_version}"
 group = mod_group_id
-base {
-    archivesName = artifact_name
-}
-
+base { archivesName = artifact_name }
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 repositories {
-    maven {
-        name "Modmaven"
-        url "https://modmaven.dev"
-        content {
-            // GrandPower
-            includeGroup "dev.technici4n"
-            // Modern Industrialization
-            includeGroup "aztech"
-            // Tesseract
-            includeGroup "net.swedz"
-            // Almost Unified
-            includeGroup "com.almostreliable.mods"
-        }
-    }
-    maven {
-        name = "shedaniel"
-        url "https://maven.shedaniel.me"
-        content {
-            includeGroup "me.shedaniel.cloth"
-        }
-    }
-    maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/releases/"
-        content {
-            // EMI
-            includeGroup "dev.emi"
-        }
-    }
-    maven {
-        url "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-
-    maven {
-        url "https://maven.latvian.dev/releases"
-        content {
-            includeGroup "dev.latvian.mods"
-            includeGroup "dev.latvian.apps"
-        }
-    }
-
-    maven {
-        url 'https://jitpack.io'
-        content {
-            includeGroup "com.github.rtyley"
-        }
-    }
-
     mavenLocal()
     mavenCentral()
+    maven { url = 'https://modmaven.dev' }
+    maven { url = 'https://maven.shedaniel.me' }
 }
-
 dependencies {
-    implementation "aztech:Modern-Industrialization:${modern_industrialization_version}"
-    implementation "dev.technici4n:GrandPower:${grandpower_version}"
-    implementation "me.shedaniel.cloth:cloth-config-neoforge:${cloth_config_version}"
+    implementation "net.neoforged:neoforge:${neo_version}"
+    implementation("aztech:Modern-Industrialization:${modern_industrialization_version}") { transitive = false }
     implementation "net.swedz:tesseract-api-neoforge:${tesseract_version}-${minecraft_version}"
-    implementation "org.appliedenergistics:guideme:${guideme_version}"
-    compileOnly "net.swedz:extended-industrialization:${extended_industrialization_version}-${minecraft_version}"
     compileOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}:api"
-    compileOnly "com.almostreliable.mods:almostunified-neoforge:${project.minecraft_version}-${project.au_version}:api"
-
-    //compileOnly "net.swedz:mi-tweaks:${mi_tweaks_version}-${minecraft_version}"
-    //runtimeOnly "net.swedz:mi-tweaks:${mi_tweaks_version}-${minecraft_version}"
-
-    runtimeOnly "curse.maven:kotlin-for-forge-351264:8335665"
-    runtimeOnly "curse.maven:yet-another-industrialization-1358516:8657774"
     runtimeOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}"
-    runtimeOnly "net.swedz:extended-industrialization:${extended_industrialization_version}-${minecraft_version}"
-    runtimeOnly "dev.emi:emi-neoforge:${emi_version}+${minecraft_version}"
-    runtimeOnly "dev.latvian.mods:kubejs-neoforge:${kubejs_version}"
-    runtimeOnly "curse.maven:jade-324717:5639932"
+    runtimeOnly 'dev.emi:emi-neoforge:1.1.24-semi151a6c88+26.1.2'
 }
-
-tasks.named('jar') {
-    from "LICENSE"
+runs {
+    configureEach { modSource project.sourceSets.main }
+    client {}
+    server { argument '--nogui' }
 }
-
-task sourceJar(type: Jar) {
-    archiveClassifier.set("sources")
-    from sourceSets.main.allJava
-    from "LICENSE"
-}
-
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            from components.java
-            artifactId = project.artifact_name
-
-            artifact(sourceJar) {
-                classifier "sources"
-            }
-        }
-    }
-
-    repositories {
-        mavenLocal()
-
-        maven {
-            credentials {
-                username = System.getenv("MODMAVEN_USERNAME")
-                password = System.getenv("MODMAVEN_PASSWORD")
-            }
-            name = "modmaven"
-            url = "https://modmaven.dev/artifactory/local-releases/"
-        }
-    }
-}
-
-neoForge {
-    version = project.neo_version
-
-    mods {
-        "${mod_id}" {
-            sourceSet sourceSets.main
-        }
-    }
-
-    validateAccessTransformers = true
-    accessTransformers = [
-            "src/main/resources/${mod_id}.accesstransformer.cfg"
-    ]
-
-    runs {
-        configureEach {
-            mods = [neoForge.mods."${mod_id}"]
-            systemProperty 'forge.logging.markers', 'REGISTRIES'
-            systemProperty 'forge.logging.console.level', 'debug'
-
-            sourceSet = project.sourceSets.main
-        }
-
-        client {
-            client()
-
-            gameDirectory.set(project.getLayout().getProjectDirectory().dir('runs/client'))
-
-            programArguments.addAll '--username', 'White_Phant0m', '--uuid', 'f83bd929-fbf0-4186-becb-658d676fcc42'
-
-            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-
-            systemProperty 'mixin.env.remapRefMap', 'true'
-            systemProperty 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
-            systemProperty 'mixin.debug.export', 'true'
-            systemProperty 'mixin.debug.verbose', 'true'
-
-            systemProperty 'guideme.modern_industrialization.book.sources', file("guidebook").absolutePath
-        }
-
-        server {
-            server()
-
-            gameDirectory.set(project.getLayout().getProjectDirectory().dir('runs/server'))
-
-            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-            programArgument '--nogui'
-        }
-
-        data {
-            data()
-
-            gameDirectory.set(project.getLayout().getProjectDirectory().dir('runs/data'))
-
-            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
-        }
-    }
-}
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
-configurations {
-    runtimeClasspath.extendsFrom localRuntime
-}
-
-tasks.withType(ProcessResources).configureEach {
-    var replaceProperties = [
-            minecraft_version                     : minecraft_version,
-            minecraft_version_range               : minecraft_version_range,
-            neo_version                           : neo_version,
-            neo_version_range                     : neo_version_range,
-            loader_version_range                  : loader_version_range,
-            mod_id                                : mod_id,
-            mod_name                              : mod_name,
-            mod_version                           : version,
-            mod_authors                           : mod_authors,
-            mod_description                       : mod_description,
-            mod_license                           : mod_license,
-            mod_github                            : mod_github,
-            mod_credits                           : mod_credits,
-            modern_industrialization_version_range: modern_industrialization_version_range,
-            tesseract_version_range               : tesseract_version_range,
-            guideme_version_range                 : guideme_version_range,
-    ]
-    inputs.properties replaceProperties
-
-    filesMatching(['META-INF/neoforge.mods.toml']) {
-        expand replaceProperties
-    }
-}
-
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
-
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
+sourceSets.main.resources.srcDir 'src/generated/resources'
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xmaxerrs', '1000']
 }
-
-idea {
-    module {
-        downloadSources = true
-        downloadJavadoc = true
-    }
-}
-
-processResources {
+tasks.withType(ProcessResources).configureEach {
+    def resourceProperties = project.properties.findAll { k, v -> k.startsWith('mod_') || k.endsWith('_range') || k == 'minecraft_version' || k == 'neo_version' } + [mod_version: project.version.toString()]
+    inputs.properties(resourceProperties)
+    filesMatching('META-INF/neoforge.mods.toml') { expand resourceProperties }
     duplicatesStrategy = 'exclude'
-    exclude(".cache")
+    exclude('.cache')
 }
-
-tasks.jar {
-    exclude("**/datagen/**")
-
-    from('guidebook') {
-        into('assets/modern_industrialization/mi_guidebook')
-    }
+jar {
+    from 'LICENSE'
+    exclude '**/datagen/**'
+    from('guidebook') { into 'assets/modern_industrialization/mi_guidebook' }
 }
+java.withSourcesJar()
+publishing { publications { mavenJava(MavenPublication) { from components.java; artifactId = project.artifact_name } } }

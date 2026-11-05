@@ -24,3 +24,7 @@ runs
 run-data
 
 src/generated/resources/.cache/
+
+# Port investigation downloads and local build evidence
+.port-tools/deps/
+.port-tools/logs/
