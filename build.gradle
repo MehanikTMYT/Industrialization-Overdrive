@@ -11,20 +11,35 @@ repositories {
     mavenLocal()
     mavenCentral()
     maven { url = 'https://modmaven.dev' }
-    maven { url = 'https://maven.shedaniel.me' }
+    maven { url = 'https://maven.appliedenergistics.org' }
 }
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation("aztech:Modern-Industrialization:${modern_industrialization_version}") { transitive = false }
-    implementation "net.swedz:tesseract-api-neoforge:${tesseract_version}-${minecraft_version}"
+    implementation "net.swedz:tesseract-api-neoforge:${tesseract_version}"
+    compileOnly "net.swedz:tesseract-api:1.0.2"
     compileOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}:api"
     runtimeOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}"
+    implementation('org.appliedenergistics:guideme:26.1.14-beta') { transitive = false }
     runtimeOnly 'dev.emi:emi-neoforge:1.1.24-semi151a6c88+26.1.2'
 }
 runs {
     configureEach { modSource project.sourceSets.main }
     client {}
-    server { argument '--nogui' }
+    server {
+        argument '--nogui'; argument '--port'; argument '25671'
+    }
+    serverData {
+        argument '--mod'; argument mod_id
+        argument '--all'
+        argument '--output'; argument file('.port-tools/server-data').absolutePath
+    }
+    clientData {
+        argument '--mod'; argument mod_id
+        argument '--all'
+        argument '--output'; argument file('src/generated/resources').absolutePath
+        argument '--existing'; argument file('src/main/resources').absolutePath
+    }
 }
 sourceSets.main.resources.srcDir 'src/generated/resources'
 tasks.withType(JavaCompile).configureEach {
@@ -39,9 +54,10 @@ tasks.withType(ProcessResources).configureEach {
     exclude('.cache')
 }
 jar {
-    from 'LICENSE'
+    from 'LICENSE.md'
     exclude '**/datagen/**'
     from('guidebook') { into 'assets/modern_industrialization/mi_guidebook' }
 }
 java.withSourcesJar()
+tasks.named('sourcesJar') { from 'LICENSE.md' }
 publishing { publications { mavenJava(MavenPublication) { from components.java; artifactId = project.artifact_name } } }

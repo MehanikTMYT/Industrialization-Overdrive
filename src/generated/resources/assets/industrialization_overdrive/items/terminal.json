@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "entries": [
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "industrialization_overdrive:item/terminal_copy_paste"
+        },
+        "threshold": 1
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "industrialization_overdrive:item/terminal_tear_down"
+        },
+        "threshold": 2
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "industrialization_overdrive:item/terminal"
+    },
+    "property": "industrialization_overdrive:mode"
+  }
+}

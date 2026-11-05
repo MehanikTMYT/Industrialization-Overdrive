@@ -14,7 +14,7 @@ public final class DatagenDelegatorClient {
     public static void configure(GatherDataEvent event) {
         MIDatagenHooks.Client.includeMISprites(event);
 
-        MIDatagenHooks.Client.addMachineCasingModelsHook(event, IO.ID);
+        // BlockModelsDatagenProvider delegates casing and machine definitions to the native MI hook.
 
         add(event, BlockModelsDatagenProvider::new);
         add(event, ItemModelsDatagenProvider::new);
@@ -22,6 +22,6 @@ public final class DatagenDelegatorClient {
     }
 
     private static void add(GatherDataEvent event, Function<GatherDataEvent, DataProvider> providerCreator) {
-        event.getGenerator().addProvider(event.includeClient(), providerCreator.apply(event));
+        event.getGenerator().addProvider(true, providerCreator.apply(event));
     }
 }

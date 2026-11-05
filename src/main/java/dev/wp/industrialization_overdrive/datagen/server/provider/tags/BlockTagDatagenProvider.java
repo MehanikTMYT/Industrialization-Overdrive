@@ -13,7 +13,7 @@ import java.util.Comparator;
 
 public final class BlockTagDatagenProvider extends BlockTagsProvider {
     public BlockTagDatagenProvider(GatherDataEvent event) {
-        super(event.getGenerator().getPackOutput(), event.getLookupProvider(), IO.ID, event.getExistingFileHelper());
+        super(event.getGenerator().getPackOutput(), event.getLookupProvider(), IO.ID);
     }
 
     @Override

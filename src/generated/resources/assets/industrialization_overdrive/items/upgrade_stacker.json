@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "industrialization_overdrive:item/upgrade_stacker"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "industrialization_overdrive:item/upgrade_stacker_filled"
+    },
+    "property": "industrialization_overdrive:filled"
+  }
+}

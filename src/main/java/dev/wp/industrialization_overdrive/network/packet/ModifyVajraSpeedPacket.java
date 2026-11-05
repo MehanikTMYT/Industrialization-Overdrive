@@ -36,7 +36,7 @@ public record ModifyVajraSpeedPacket(boolean increase) implements IOCustomPacket
                     case INSTANT -> vajraSpeed = IO.text().vajraSpeedInstant();
                 }
 
-                player.displayClientMessage(IO.text().vajraSpeedChanged(vajraSpeed), true);
+                player.sendOverlayMessage(IO.text().vajraSpeedChanged(vajraSpeed));
             }
         }
     }

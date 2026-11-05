@@ -48,7 +48,7 @@ public record ModifyMultiblockBuilderModePacket(boolean next) implements IOCusto
                 case COPY_PASTE -> IO.text().multiblockBuilderModeCopyPaste();
                 case TEAR_DOWN -> IO.text().multiblockBuilderModeTearDown();
             };
-            player.displayClientMessage(IO.text().multiblockBuilderModeChanged(mode), true);
+            player.sendOverlayMessage(IO.text().multiblockBuilderModeChanged(mode));
         }
     }
 }

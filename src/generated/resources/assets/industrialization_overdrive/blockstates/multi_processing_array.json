@@ -1,7 +1,17 @@
 {
   "variants": {
     "": {
-      "model": "industrialization_overdrive:block/multi_processing_array"
+      "type": "modern_industrialization:machine",
+      "casing": "modern_industrialization:solid_titanium_machine_casing",
+      "default_overlays": {
+        "fluid_auto": "modern_industrialization:block/overlays/fluid_auto",
+        "front": "industrialization_overdrive:block/machines/multi_processing_array/overlay_front",
+        "front_active": "industrialization_overdrive:block/machines/multi_processing_array/overlay_front_active",
+        "item_auto": "modern_industrialization:block/overlays/item_auto",
+        "output": "modern_industrialization:block/overlays/output"
+      },
+      "no_overlay_on_output_side": false,
+      "tiered_overlays": {}
     }
   }
 }

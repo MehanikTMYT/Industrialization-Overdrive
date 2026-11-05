@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "modern_industrialization:machine",
+    "machine": "industrialization_overdrive:multi_processing_array"
+  }
+}

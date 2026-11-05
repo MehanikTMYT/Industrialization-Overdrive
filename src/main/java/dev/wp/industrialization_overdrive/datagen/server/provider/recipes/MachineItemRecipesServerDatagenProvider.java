@@ -14,8 +14,8 @@ import net.swedz.tesseract.neoforge.compat.vanilla.recipe.ShapelessRecipeBuilder
 import java.util.function.Consumer;
 
 public final class MachineItemRecipesServerDatagenProvider extends RecipesServerDatagenProvider {
-    public MachineItemRecipesServerDatagenProvider(GatherDataEvent event) {
-        super(event);
+    public MachineItemRecipesServerDatagenProvider(net.minecraft.core.HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
     }
 
     private static String machine(String machine, String tier) {
@@ -30,10 +30,10 @@ public final class MachineItemRecipesServerDatagenProvider extends RecipesServer
         return machine(machine, "steel");
     }
 
-    private static void addBasicCraftingMachineRecipes(String machineName, String machineTier, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
+    private void addBasicCraftingMachineRecipes(String machineName, String machineTier, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
         String recipeId = machineTier == null ? "" : "/%s".formatted(machineTier);
 
-        ShapedRecipeBuilder shapedRecipeBuilder = new ShapedRecipeBuilder();
+        ShapedRecipeBuilder shapedRecipeBuilder = new ShapedRecipeBuilder(registries);
         crafting.accept(shapedRecipeBuilder);
         shapedRecipeBuilder.output(machine(machineName, machineTier), 1);
         shapedRecipeBuilder.offerTo(output, IO.id("machines/%s/craft%s".formatted(machineName, recipeId)));
@@ -41,24 +41,24 @@ public final class MachineItemRecipesServerDatagenProvider extends RecipesServer
         MIMachineRecipeBuilder.fromShapedToAssembler(shapedRecipeBuilder).offerTo(output, IO.id("machines/%s/assembler%s".formatted(machineName, recipeId)));
     }
 
-    private static void addBasicCraftingMachineRecipes(String machineName, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
+    private void addBasicCraftingMachineRecipes(String machineName, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
         addBasicCraftingMachineRecipes(machineName, null, crafting, output);
     }
 
-    private static void addBronzeMachineRecipes(String machine, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
+    private void addBronzeMachineRecipes(String machine, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
         addBasicCraftingMachineRecipes(machine, "bronze", crafting, output);
     }
 
-    private static void addSteelMachineRecipes(String machine, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
+    private void addSteelMachineRecipes(String machine, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
         addBasicCraftingMachineRecipes(machine, "steel", crafting, output);
     }
 
-    private static void addElectricMachineRecipes(String machine, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
+    private void addElectricMachineRecipes(String machine, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
         addBasicCraftingMachineRecipes(machine, "electric", crafting, output);
     }
 
-    private static void addSteelUpgradeMachineRecipes(String machine, RecipeOutput output) {
-        ShapelessRecipeBuilder shapelessRecipeBuilder = new ShapelessRecipeBuilder()
+    private void addSteelUpgradeMachineRecipes(String machine, RecipeOutput output) {
+        ShapelessRecipeBuilder shapelessRecipeBuilder = new ShapelessRecipeBuilder(registries)
                 .with(machineBronze(machine))
                 .with(MIItem.STEEL_UPGRADE)
                 .output(machineSteel(machine), 1);
@@ -69,12 +69,12 @@ public final class MachineItemRecipesServerDatagenProvider extends RecipesServer
         MIMachineRecipeBuilder.fromShapelessToUnpackerAndFlip(shapelessRecipeBuilder).offerTo(output, IO.id("machines/%s/unpacker/downgrade_steel".formatted(machine)));
     }
 
-    private static void addBronzeAndSteelMachineRecipes(String machine, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
+    private void addBronzeAndSteelMachineRecipes(String machine, Consumer<ShapedRecipeBuilder> crafting, RecipeOutput output) {
         addBronzeMachineRecipes(machine, crafting, output);
         addSteelUpgradeMachineRecipes(machine, output);
     }
 
-    private static void multiProcessingArray(RecipeOutput output) {
+    private void multiProcessingArray(RecipeOutput output) {
         addBasicCraftingMachineRecipes(
                 "multi_processing_array",
                 (builder) -> builder
@@ -89,7 +89,7 @@ public final class MachineItemRecipesServerDatagenProvider extends RecipesServer
         );
     }
 
-    private static void pyrolyseOven(RecipeOutput output) {
+    private void pyrolyseOven(RecipeOutput output) {
         addBasicCraftingMachineRecipes(
                 "pyrolyse_oven",
                 (builder) -> builder
@@ -106,7 +106,7 @@ public final class MachineItemRecipesServerDatagenProvider extends RecipesServer
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput output) {
+    protected void buildRecipes() {
         multiProcessingArray(output);
         pyrolyseOven(output);
     }

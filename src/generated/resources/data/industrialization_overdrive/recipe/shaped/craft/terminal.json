@@ -2,22 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "E": {
-      "item": "modern_industrialization:electronic_circuit"
-    },
-    "G": {
-      "tag": "c:glass_panes"
-    },
-    "S": {
-      "tag": "c:plates/steel"
-    }
+    "E": "modern_industrialization:electronic_circuit",
+    "G": "#c:glass_panes",
+    "S": "#c:plates/steel"
   },
   "pattern": [
     "SGS",
     "SES"
   ],
   "result": {
-    "count": 1,
     "id": "industrialization_overdrive:terminal"
-  }
+  },
+  "show_notification": false
 }

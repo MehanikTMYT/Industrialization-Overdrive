@@ -16,7 +16,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
-import net.minecraft.client.renderer.item.ItemProperties;
+
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
@@ -37,27 +37,17 @@ public final class IOClient {
     public static final KeyMapping MULTIBLOCK_BUILDER_MODE_SWITCH = new KeyMapping(
             "key.industrialization_overdrive.terminal_mode_switch",
             GLFW.GLFW_KEY_V,
-            "key.categories.industrialization_overdrive"
+            KeyMapping.Category.register(IO.id("main"))
     );
 
     public IOClient(IEventBus bus) {
         bus.addListener(RegisterKeyMappingsEvent.class, event -> event.register(MULTIBLOCK_BUILDER_MODE_SWITCH));
-        bus.addListener(FMLClientSetupEvent.class, event -> event.enqueueWork(() -> {
-            ItemProperties.register(
-                    IOItems.MULTIBLOCK_BUILDER.get(),
-                    IO.id("mode"),
-                    (stack, level, entity, seed) -> stack.getOrDefault(IOComponents.MULTI_BUILDER_MODE, MultiblockBuilder.Mode.BUILD).ordinal()
-            );
-            ItemProperties.register(
-                    IOItems.UPGRADE_STACKER.get(),
-                    IO.id("filled"),
-                    (stack, level, entity, seed) -> {
-                        var contents = stack.get(IOComponents.UPGRADE_STACKER_CONTENTS.get());
-                        return contents != null && contents.count() > 0 ? 1.0f : 0.0f;
-                    }
-            );
-        }));
-        NeoForge.EVENT_BUS.addListener(RenderLevelStageEvent.class, MultiblockBuilderRenderer::render);
+        bus.addListener(net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent.class,
+                event -> event.register(IO.id("mode"), BuilderModeProperty.CODEC));
+        bus.addListener(net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyEvent.class,
+                event -> event.register(IO.id("filled"), StackerFilledProperty.CODEC));
+        NeoForge.EVENT_BUS.addListener(net.neoforged.neoforge.client.event.ExtractLevelRenderStateEvent.class, MultiblockBuilderRenderer::extract);
+        NeoForge.EVENT_BUS.addListener(net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent.class, MultiblockBuilderRenderer::submit);
 
         NeoForge.EVENT_BUS.addListener(InputEvent.Key.class, (event) -> {
             var player = Minecraft.getInstance().player;
@@ -84,6 +74,21 @@ public final class IOClient {
                 }
             }
         });
+    }
+
+    public record BuilderModeProperty() implements net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty {
+        public static final com.mojang.serialization.MapCodec<BuilderModeProperty> CODEC = com.mojang.serialization.MapCodec.unit(new BuilderModeProperty());
+        @Override public float get(net.minecraft.world.item.ItemStack stack, net.minecraft.client.multiplayer.ClientLevel level, net.minecraft.world.entity.ItemOwner owner, int seed) {
+            return stack.getOrDefault(IOComponents.MULTI_BUILDER_MODE, MultiblockBuilder.Mode.BUILD).ordinal();
+        }
+        @Override public com.mojang.serialization.MapCodec<BuilderModeProperty> type() { return CODEC; }
+    }
+    public record StackerFilledProperty() implements net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty {
+        public static final com.mojang.serialization.MapCodec<StackerFilledProperty> CODEC = com.mojang.serialization.MapCodec.unit(new StackerFilledProperty());
+        @Override public boolean get(net.minecraft.world.item.ItemStack stack, net.minecraft.client.multiplayer.ClientLevel level, net.minecraft.world.entity.LivingEntity entity, int seed, net.minecraft.world.item.ItemDisplayContext context) {
+            var contents=stack.get(IOComponents.UPGRADE_STACKER_CONTENTS.get()); return contents!=null && contents.count()>0;
+        }
+        @Override public com.mojang.serialization.MapCodec<StackerFilledProperty> type() { return CODEC; }
     }
 
     @EventBusSubscriber(value = Dist.CLIENT, modid = IO.ID)

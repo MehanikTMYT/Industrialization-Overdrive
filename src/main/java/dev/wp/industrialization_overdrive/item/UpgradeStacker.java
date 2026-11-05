@@ -3,7 +3,7 @@ package dev.wp.industrialization_overdrive.item;
 import aztech.modern_industrialization.machines.components.UpgradeComponent;
 import dev.wp.industrialization_overdrive.IOComponents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -43,24 +43,24 @@ public final class UpgradeStacker extends Item {
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
         IOComponents.UpgradeStackerContents contents = stack.get(IOComponents.UPGRADE_STACKER_CONTENTS.get());
         if (contents == null || contents.count() <= 0) {
-            return InteractionResultHolder.pass(stack);
+            return InteractionResult.PASS;
         }
 
         if (player.isShiftKeyDown()) {
             if (!level.isClientSide()) {
                 giveContentsToPlayer(stack, contents, player);
             }
-            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
 
         if (!level.isClientSide()) {
             int space = MAX_STORED - contents.count();
             int added = 0;
-            for (ItemStack inventoryStack : player.getInventory().items) {
+            for (ItemStack inventoryStack : player.getInventory().getNonEquipmentItems()) {
                 if (space <= 0) break;
                 if (inventoryStack.getItem() != contents.upgradeType()) continue;
                 int toAdd = Math.min(inventoryStack.getCount(), space);
@@ -73,7 +73,7 @@ public final class UpgradeStacker extends Item {
                         new IOComponents.UpgradeStackerContents(contents.upgradeType(), contents.count() + added));
             }
         }
-        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     private static void giveContentsToPlayer(ItemStack stack, IOComponents.UpgradeStackerContents contents, Player player) {

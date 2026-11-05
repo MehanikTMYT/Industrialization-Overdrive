@@ -13,7 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -153,10 +153,6 @@ public class Vajra extends Item implements DynamicToolItem, SimpleEnergyItem {
         return !newStack.is(this) || !canUse(newStack);
     }
 
-    @Override
-    public boolean isEnchantable(@NotNull ItemStack stack) {
-        return false;
-    }
 
     @Override
     public boolean mineBlock(ItemStack stack, Level world, BlockState state, BlockPos pos, LivingEntity miner) {
@@ -174,16 +170,16 @@ public class Vajra extends Item implements DynamicToolItem, SimpleEnergyItem {
     }
 
     @Override
-    public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public @NotNull InteractionResult use(Level level, Player player, InteractionHand hand) {
         if (hand == InteractionHand.MAIN_HAND && player.isShiftKeyDown()) {
             var stack = player.getItemInHand(hand);
 
             setSilkTouch(stack, !isSilkTouch(stack));
-            if (level.isClientSide) {
-                player.displayClientMessage(IO.text().vajraSilkTouchInfo(isSilkTouch(stack) ? IO.text().enabled() : IO.text().disabled()), true);
+            if (level.isClientSide()) {
+                player.sendOverlayMessage(IO.text().vajraSilkTouchInfo(isSilkTouch(stack) ? IO.text().enabled() : IO.text().disabled()));
             }
 
-            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
+            return InteractionResult.SUCCESS;
         }
 
         return super.use(level, player, hand);
@@ -204,7 +200,7 @@ public class Vajra extends Item implements DynamicToolItem, SimpleEnergyItem {
 
         if (!canUse(stack)) return super.useOn(ctx);
 
-        if (level.isClientSide) {
+        if (level.isClientSide()) {
             if (!level.isEmptyBlock(pos)) player.swing(InteractionHand.MAIN_HAND);
         } else if (player instanceof ServerPlayer serverPlayer) {
             useEnergy(stack, energyUsagePerBlock);
@@ -214,7 +210,7 @@ public class Vajra extends Item implements DynamicToolItem, SimpleEnergyItem {
         }
 
 
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -291,7 +287,7 @@ public class Vajra extends Item implements DynamicToolItem, SimpleEnergyItem {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext ctx, @NotNull List<Component> tooltip, @NotNull TooltipFlag flag) {
+    public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext ctx, net.minecraft.world.item.component.TooltipDisplay tooltipDisplay, java.util.function.Consumer<Component> tooltip, @NotNull TooltipFlag flag) {
         Component speed = null;
         switch (getToolSpeed(stack)) {
             case SLOW -> speed = IO.text().vajraSpeedSlow();
@@ -300,8 +296,8 @@ public class Vajra extends Item implements DynamicToolItem, SimpleEnergyItem {
             case INSTANT -> speed = IO.text().vajraSpeedInstant();
         }
 
-        tooltip.add(IO.text().vajraSpeedInfo(speed));
-        tooltip.add(IO.text().vajraSilkTouchInfo(isSilkTouch(stack) ? IO.text().enabled() : IO.text().disabled()));
-        tooltip.add(IO.text().energyInfo(stack.getOrDefault(MIComponents.ENERGY, 0L), getEnergyCapacity(stack)));
+        tooltip.accept(IO.text().vajraSpeedInfo(speed));
+        tooltip.accept(IO.text().vajraSilkTouchInfo(isSilkTouch(stack) ? IO.text().enabled() : IO.text().disabled()));
+        tooltip.accept(IO.text().energyInfo(stack.getOrDefault(MIComponents.ENERGY, 0L), getEnergyCapacity(stack)));
     }
 }

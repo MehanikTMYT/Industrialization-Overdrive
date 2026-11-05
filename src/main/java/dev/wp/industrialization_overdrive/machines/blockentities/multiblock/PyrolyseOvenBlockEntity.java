@@ -16,7 +16,7 @@ import dev.wp.industrialization_overdrive.IO;
 import dev.wp.industrialization_overdrive.IOMachines;
 import dev.wp.industrialization_overdrive.datamap.PyrolyseOvenTier;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.swedz.tesseract.neoforge.compat.mi.TesseractMI;
 import net.swedz.tesseract.neoforge.compat.mi.component.craft.multiplied.EuCostTransformer;
 import net.swedz.tesseract.neoforge.compat.mi.component.craft.multiplied.EuCostTransformers;
@@ -75,18 +75,18 @@ public final class PyrolyseOvenBlockEntity extends AbstractElectricMultipliedCra
     }
 
     private static List<Tier> TIERS = List.of();
-    private static Map<ResourceLocation, Tier> TIERS_BY_COIL = Collections.unmodifiableMap(new HashMap<>());
+    private static Map<Identifier, Tier> TIERS_BY_COIL = Collections.unmodifiableMap(new HashMap<>());
     private static ShapeTemplate[] SHAPE_TEMPLATES = new ShapeTemplate[0];
 
     public static List<Tier> getTiers() {
         return TIERS;
     }
 
-    public static Map<ResourceLocation, Tier> getTiersByCoil() {
+    public static Map<Identifier, Tier> getTiersByCoil() {
         return TIERS_BY_COIL;
     }
 
-    public record Tier(ResourceLocation blockId, int batchSize, float euCostMultiplier) {
+    public record Tier(Identifier blockId, int batchSize, float euCostMultiplier) {
         public String getTranslationKey() {
             return "pyro_tier.%s.%s.%s".formatted(IO.ID, blockId.getNamespace(), blockId.getPath());
         }
@@ -99,7 +99,7 @@ public final class PyrolyseOvenBlockEntity extends AbstractElectricMultipliedCra
     public static void initTiers() {
         List<Tier> tiers = new ArrayList<>();
         PyrolyseOvenTier.getAll().forEach((block, tier) ->
-                tiers.add(new Tier(block.location(), tier.batchSize(), tier.euCostMultiplier())));
+                tiers.add(new Tier(block.identifier(), tier.batchSize(), tier.euCostMultiplier())));
         tiers.sort(Comparator.comparingInt(Tier::batchSize));
 
         TIERS = Collections.unmodifiableList(tiers);

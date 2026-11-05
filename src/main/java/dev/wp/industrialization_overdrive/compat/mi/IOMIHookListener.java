@@ -7,7 +7,7 @@ import dev.wp.industrialization_overdrive.IOTooltips;
 import dev.wp.industrialization_overdrive.machines.guicomponents.multiprocessingarraymachineslot.MultiProcessingArrayMachineSlot;
 import dev.wp.industrialization_overdrive.machines.guicomponents.multiprocessingarraymachineslot.MultiProcessingArrayMachineSlotClient;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.swedz.tesseract.neoforge.compat.mi.hook.MIHookEntrypoint;
 import net.swedz.tesseract.neoforge.compat.mi.hook.MIHookListener;
@@ -57,8 +57,8 @@ public class IOMIHookListener implements MIHookListener {
     public void viewerSetup(ViewerSetupMIHookContext hook) {
         ReiMachineRecipes.categories.forEach((__, params) -> {
             boolean isValidForMultiProcessingArray = false;
-            for (ResourceLocation workstationId : params.workstations) {
-                Item workstationItem = BuiltInRegistries.ITEM.get(workstationId);
+            for (Identifier workstationId : params.workstations) {
+                Item workstationItem = BuiltInRegistries.ITEM.getValue(workstationId);
                 if (MultiProcessingArrayMachineSlot.isMachine(workstationItem)) {
                     isValidForMultiProcessingArray = true;
                     break;

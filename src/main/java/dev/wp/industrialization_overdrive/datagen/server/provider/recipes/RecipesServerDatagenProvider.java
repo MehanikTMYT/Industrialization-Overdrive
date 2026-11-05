@@ -17,34 +17,35 @@ import java.util.function.Consumer;
 import static aztech.modern_industrialization.materials.property.MaterialProperty.HARDNESS;
 
 public abstract class RecipesServerDatagenProvider extends RecipeProvider {
-    protected RecipesServerDatagenProvider(GatherDataEvent event) {
-        super(event.getGenerator().getPackOutput(), event.getLookupProvider());
+    protected RecipesServerDatagenProvider(net.minecraft.core.HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
     }
 
-    protected static Ingredient ingredient(String maybeTag) {
-        return RecipeHelper.ingredient(maybeTag);
+    protected Ingredient ingredient(String maybeTag) {
+        return RecipeHelper.ingredient(registries, maybeTag);
     }
+
+    public final void generate() { buildRecipes(); }
 
     protected static boolean hasPart(Material material, PartTemplate part) {
         return material.getParts().containsKey(part.key());
     }
 
-    protected static void addMachineRecipe(String path, String name, MachineRecipeType recipeType, int eu, int duration, Consumer<MIMachineRecipeBuilder> recipeBuilder, RecipeOutput output) {
-        MIMachineRecipeBuilder recipe = new MIMachineRecipeBuilder(recipeType, eu, duration);
+    protected void addMachineRecipe(String path, String name, MachineRecipeType recipeType, int eu, int duration, Consumer<MIMachineRecipeBuilder> recipeBuilder, RecipeOutput output) {
+        MIMachineRecipeBuilder recipe = new MIMachineRecipeBuilder(registries, recipeType, eu, duration);
         recipeBuilder.accept(recipe);
         recipe.offerTo(output, IO.id(path + "/" + name));
     }
 
-    protected static void addMaterialMachineRecipe(Material material, String name, MachineRecipeType recipeType, int eu, int duration, Consumer<MIMachineRecipeBuilder> recipeBuilder, RecipeOutput output) {
+    protected void addMaterialMachineRecipe(Material material, String name, MachineRecipeType recipeType, int eu, int duration, Consumer<MIMachineRecipeBuilder> recipeBuilder, RecipeOutput output) {
         addMachineRecipe("materials/%s/%s".formatted(material.name, recipeType.getPath()), name, recipeType, eu, duration, recipeBuilder, output);
     }
 
-    protected static void addMaterialMachineRecipe(Material material, String name, MachineRecipeType recipeType, int eu, Consumer<MIMachineRecipeBuilder> recipeBuilder, RecipeOutput output) {
+    protected void addMaterialMachineRecipe(Material material, String name, MachineRecipeType recipeType, int eu, Consumer<MIMachineRecipeBuilder> recipeBuilder, RecipeOutput output) {
         addMaterialMachineRecipe(material, name, recipeType, eu, (int) (200 * material.get(HARDNESS).timeFactor), recipeBuilder, output);
     }
 
     @NotNull
-    @Override
     public String getName() {
         return this.getClass().getSimpleName();
     }

@@ -9,7 +9,7 @@ import dev.wp.industrialization_overdrive.machines.blockentities.multiblock.Pyro
 import dev.wp.industrialization_overdrive.network.IOPackets;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
@@ -45,8 +45,8 @@ public final class IO {
     public static final String ID = "industrialization_overdrive";
     public static final String NAME = "Industrialization Overdrive";
 
-    public static ResourceLocation id(String name) {
-        return ResourceLocation.fromNamespaceAndPath(ID, name);
+    public static Identifier id(String name) {
+        return Identifier.fromNamespaceAndPath(ID, name);
     }
 
     public static final Logger LOGGER = LoggerFactory.getLogger(NAME);

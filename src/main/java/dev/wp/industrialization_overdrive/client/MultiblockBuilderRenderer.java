@@ -7,16 +7,21 @@ import aztech.modern_industrialization.machines.MachineBlock;
 import aztech.modern_industrialization.machines.MachineBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.systems.RenderSystem;
+
 import dev.wp.industrialization_overdrive.IOComponents;
 import dev.wp.industrialization_overdrive.IOItems;
 import dev.wp.industrialization_overdrive.item.MultiblockBuilder;
 import net.minecraft.nbt.CompoundTag;
+import net.neoforged.neoforge.model.data.ModelData;
+import net.neoforged.neoforge.client.event.ExtractLevelRenderStateEvent;
+import net.neoforged.neoforge.client.event.SubmitCustomGeometryEvent;
+import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
@@ -27,8 +32,8 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
-import net.neoforged.neoforge.client.model.data.ModelData;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,63 +47,55 @@ public final class MultiblockBuilderRenderer {
 
     private MultiblockBuilderRenderer() {}
 
-    public static void render(RenderLevelStageEvent event) {
-        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) return;
+    private record ExtractedPreview(BlockPos pos, int tint, List<BakedQuad> quads) {}
+    private static final net.minecraft.util.context.ContextKey<List<ExtractedPreview>> PREVIEWS = new net.minecraft.util.context.ContextKey<>(dev.wp.industrialization_overdrive.IO.id("builder_previews"));
 
-        Minecraft minecraft = Minecraft.getInstance();
-        ClientLevel level = minecraft.level;
-        Player player = minecraft.player;
-        if (level == null || player == null || !(minecraft.hitResult instanceof BlockHitResult hit)
-                || hit.getType() == HitResult.Type.MISS) return;
-
-        ItemStack stack = heldBuilder(player);
-        if (stack.isEmpty()) return;
-
-        List<Preview> previews = previews(level, player, hit, stack);
-        if (previews.isEmpty()) return;
-
-        PoseStack poseStack = event.getPoseStack();
-        MultiBufferSource.BufferSource buffers = minecraft.renderBuffers().bufferSource();
-        BlockRenderDispatcher dispatcher = minecraft.getBlockRenderer();
-        var camera = event.getCamera().getPosition();
-        poseStack.pushPose();
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
-        RenderSystem.enablePolygonOffset();
-        RenderSystem.polygonOffset(-1.0F, -10.0F);
-        try {
-            poseStack.translate(-camera.x, -camera.y, -camera.z);
-            for (Preview preview : previews) {
-                poseStack.pushPose();
-                try {
-                    poseStack.translate(preview.pos.getX(), preview.pos.getY(), preview.pos.getZ());
-                    float scale = preview.tint == GREEN ? 0.999F : 1.001F;
-                    poseStack.translate(0.5F, 0.5F, 0.5F);
-                    poseStack.scale(scale, scale, scale);
-                    poseStack.translate(-0.5F, -0.5F, -0.5F);
-                    ModelData modelData = modelData(level, preview);
-                    if (modelData == null) {
-                        dispatcher.renderSingleBlock(preview.state, poseStack,
-                                tintedSource(buffers, preview.tint), 0xF000F0, 0);
-                    } else {
-                        dispatcher.renderBatched(preview.state, preview.pos, level, poseStack,
-                                tinted(buffers.getBuffer(RenderType.translucent()), preview.tint), false,
-                                RandomSource.create(), modelData, RenderType.translucent());
-                    }
-                } finally {
-                    poseStack.popPose();
-                }
+    public static void extract(ExtractLevelRenderStateEvent event) {
+        var minecraft=Minecraft.getInstance();var level=event.getLevel();var player=minecraft.player;
+        List<ExtractedPreview> extracted=new ArrayList<>();
+        if(player!=null && minecraft.hitResult instanceof BlockHitResult hit && hit.getType()!=HitResult.Type.MISS) {
+            var stack=heldBuilder(player);
+            if(!stack.isEmpty()) for(var preview:previews(level,player,hit,stack)) {
+                var parts=new ArrayList<BlockStateModelPart>();
+                var model=minecraft.getModelManager().getBlockStateModelSet().get(preview.state());
+                var data=modelData(level,preview);
+                net.minecraft.client.renderer.block.BlockAndTintGetter view=new net.minecraft.client.renderer.block.BlockAndTintGetter() {
+                    @Override public net.minecraft.world.level.CardinalLighting cardinalLighting(){return level.cardinalLighting();}
+                    @Override public net.minecraft.world.level.lighting.LevelLightEngine getLightEngine(){return level.getLightEngine();}
+                    @Override public int getBlockTint(BlockPos pos,net.minecraft.world.level.ColorResolver resolver){return level.getBlockTint(pos,resolver);}
+                    @Override public net.minecraft.world.level.block.entity.BlockEntity getBlockEntity(BlockPos pos){return level.getBlockEntity(pos);}
+                    @Override public BlockState getBlockState(BlockPos pos){return pos.equals(preview.pos())?preview.state():level.getBlockState(pos);}
+                    @Override public net.minecraft.world.level.material.FluidState getFluidState(BlockPos pos){return getBlockState(pos).getFluidState();}
+                    @Override public int getHeight(){return level.getHeight();}
+                    @Override public int getMinY(){return level.getMinY();}
+                    @Override public ModelData getModelData(BlockPos pos){return pos.equals(preview.pos()) && data!=null?data:level.getModelData(pos);}
+                };
+                model.collectParts(view,preview.pos(),preview.state(),RandomSource.create(42),parts);
+                var quads=new ArrayList<BakedQuad>();
+                for(var part:parts){quads.addAll(part.getQuads(null));for(var direction:net.minecraft.core.Direction.values())quads.addAll(part.getQuads(direction));}
+                extracted.add(new ExtractedPreview(preview.pos().immutable(),preview.tint(),List.copyOf(quads)));
             }
-            buffers.endBatch(RenderType.translucent());
-        } finally {
-            RenderSystem.disableBlend();
-            RenderSystem.disablePolygonOffset();
-            poseStack.popPose();
+        }
+        event.getRenderState().setRenderData(PREVIEWS,List.copyOf(extracted));
+    }
+
+    public static void submit(SubmitCustomGeometryEvent event) {
+        var previews=event.getLevelRenderState().getRenderData(PREVIEWS);if(previews==null)return;
+        var camera=event.getLevelRenderState().cameraRenderState.pos;var pose=event.getPoseStack();
+        for(var preview:previews){
+            pose.pushPose();
+            pose.translate(preview.pos().getX()-camera.x,preview.pos().getY()-camera.y,preview.pos().getZ()-camera.z);
+            float scale=preview.tint()==GREEN?0.999F:1.001F;pose.translate(0.5,0.5,0.5);pose.scale(scale,scale,scale);pose.translate(-0.5,-0.5,-0.5);
+            event.getSubmitNodeCollector().submitCustomGeometry(pose,net.minecraft.client.renderer.Sheets.translucentBlockSheet(),(matrix,buffer)->{
+                var instance=new com.mojang.blaze3d.vertex.QuadInstance();instance.setColor(0x7D000000|preview.tint());instance.setLightCoords(0xF000F0);instance.setOverlayCoords(0);
+                for(var quad:preview.quads())buffer.putBakedQuad(matrix,quad,instance);
+            });
+            pose.popPose();
         }
     }
 
     private static ItemStack heldBuilder(Player player) {
-        for (var hand : player.getHandSlots()) {
+        for (var hand : List.of(player.getMainHandItem(),player.getOffhandItem())) {
             if (hand.is(IOItems.MULTIBLOCK_BUILDER.get())) return hand;
         }
         return ItemStack.EMPTY;
@@ -154,7 +151,7 @@ public final class MultiblockBuilderRenderer {
         if (preview.settings == null || !(preview.state.getBlock() instanceof MachineBlock machineBlock)) return null;
         try {
             MachineBlockEntity machine = machineBlock.newBlockEntity(preview.pos, preview.state);
-            machine.load(preview.settings, level.registryAccess(), false);
+            machine.load(net.minecraft.world.level.storage.TagValueInput.create(net.minecraft.util.ProblemReporter.DISCARDING,level.registryAccess(),preview.settings), false);
             return machine.getModelData();
         } catch (RuntimeException ignored) {
             return null;
@@ -169,23 +166,4 @@ public final class MultiblockBuilderRenderer {
         return flags != null && flags.allows(hatch.getHatchType());
     }
 
-    private static VertexConsumer tinted(VertexConsumer delegate, int tint) {
-        int red = tint >> 16 & 255;
-        int green = tint >> 8 & 255;
-        int blue = tint & 255;
-        return new VertexConsumer() {
-            @Override public VertexConsumer addVertex(float x, float y, float z) { return delegate.addVertex(x, y, z); }
-            @Override public VertexConsumer setColor(int r, int g, int b, int alpha) {
-                return delegate.setColor(r * red / 255, g * green / 255, b * blue / 255, 125);
-            }
-            @Override public VertexConsumer setUv(float u, float v) { return delegate.setUv(u, v); }
-            @Override public VertexConsumer setUv1(int u, int v) { return delegate.setUv1(u, v); }
-            @Override public VertexConsumer setUv2(int u, int v) { return delegate.setUv2(u, v); }
-            @Override public VertexConsumer setNormal(float x, float y, float z) { return delegate.setNormal(x, y, z); }
-        };
-    }
-
-    private static MultiBufferSource tintedSource(MultiBufferSource source, int tint) {
-        return renderType -> tinted(source.getBuffer(RenderType.translucent()), tint);
-    }
 }

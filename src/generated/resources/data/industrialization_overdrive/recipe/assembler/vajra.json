@@ -5,43 +5,43 @@
   "fluid_inputs": [
     {
       "amount": 1000,
-      "fluid": "modern_industrialization:cryofluid"
+      "ingredient": "modern_industrialization:cryofluid"
     }
   ],
   "item_inputs": [
     {
       "amount": 8,
-      "item": "modern_industrialization:digital_circuit"
+      "ingredient": "modern_industrialization:digital_circuit"
     },
     {
       "amount": 8,
-      "item": "modern_industrialization:turbo_upgrade"
+      "ingredient": "modern_industrialization:turbo_upgrade"
     },
     {
       "amount": 8,
-      "item": "modern_industrialization:advanced_motor"
+      "ingredient": "modern_industrialization:advanced_motor"
     },
     {
       "amount": 1,
-      "item": "modern_industrialization:sodium_battery"
+      "ingredient": "modern_industrialization:sodium_battery"
     },
     {
       "amount": 1,
-      "item": "modern_industrialization:diesel_mining_drill"
+      "ingredient": "modern_industrialization:diesel_mining_drill"
     },
     {
       "amount": 1,
-      "item": "modern_industrialization:diesel_chainsaw"
+      "ingredient": "modern_industrialization:diesel_chainsaw"
     },
     {
       "amount": 1,
-      "item": "modern_industrialization:overdrive_module"
+      "ingredient": "modern_industrialization:overdrive_module"
     }
   ],
   "item_outputs": [
     {
       "amount": 1,
-      "item": "industrialization_overdrive:vajra"
+      "id": "industrialization_overdrive:vajra"
     }
   ]
 }

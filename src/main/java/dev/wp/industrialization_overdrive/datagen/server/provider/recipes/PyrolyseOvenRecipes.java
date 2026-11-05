@@ -8,19 +8,19 @@ import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 public class PyrolyseOvenRecipes extends RecipesServerDatagenProvider {
-    public PyrolyseOvenRecipes(GatherDataEvent event) {
-        super(event);
+    public PyrolyseOvenRecipes(net.minecraft.core.HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput output) {
+    protected void buildRecipes() {
         addMachineRecipe(
                 "pyrolyse_oven", "charcoal_from_logs", IOMachines.RecipeTypes.PYROLYSE_OVEN,
                 8, 32 * 20 / 4,
                 recipe -> recipe
-                        .addItemInput(ItemTags.LOGS_THAT_BURN, 4)
-                        .addItemOutput(Items.CHARCOAL, 5)
-                        .addFluidOutput(MIFluids.CREOSOTE, 1000),
+                        .itemIn(ItemTags.LOGS_THAT_BURN, 4)
+                        .itemOut(Items.CHARCOAL, 5)
+                        .fluidOut(MIFluids.CREOSOTE, 1000),
                 output
         );
         // Not sure how this would work, as you can't really select the recipe you want if the output is the same
@@ -29,10 +29,10 @@ public class PyrolyseOvenRecipes extends RecipesServerDatagenProvider {
 //                "pyrolyse_oven", "charcoal_from_logs_fast", IOMachines.RecipeTypes.PYROLYSE_OVEN,
 //                8, 32*20/4/2,
 //                recipe -> recipe
-//                        .addItemInput(ItemTags.LOGS_THAT_BURN, 4)
-//                        .addFluidInput(MIFluids.NITROGEN, 250)
-//                        .addItemOutput(Items.CHARCOAL, 5)
-//                        .addFluidOutput(MIFluids.CREOSOTE, 1000),
+//                        .itemIn(ItemTags.LOGS_THAT_BURN, 4)
+//                        .fluidIn(MIFluids.NITROGEN, 250)
+//                        .itemOut(Items.CHARCOAL, 5)
+//                        .fluidOut(MIFluids.CREOSOTE, 1000),
 //                output
 //        );
     }

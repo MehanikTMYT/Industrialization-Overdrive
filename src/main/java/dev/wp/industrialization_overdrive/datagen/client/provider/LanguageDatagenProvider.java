@@ -40,7 +40,7 @@ public final class LanguageDatagenProvider extends LanguageProvider {
 
         this.add("itemGroup.%s.%s".formatted(IO.ID, IO.ID), IO.NAME);
         this.add("key.%s.terminal_mode_switch".formatted(IO.ID), "Switch Multiblock Builder mode");
-        this.add("key.categories.%s".formatted(IO.ID), IO.NAME);
+        this.add("key.category.%s.main".formatted(IO.ID), IO.NAME);
 
         this.add("pyro_tier.%s.%s.%s".formatted(IO.ID, MI.ID, "cupronickel_coil"), "Cupronickel");
         this.add("pyro_tier.%s.%s.%s".formatted(IO.ID, MI.ID, "kanthal_coil"), "Kanthal");

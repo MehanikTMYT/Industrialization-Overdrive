@@ -7,10 +7,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-@EventBusSubscriber(modid = IO.ID)
+@EventBusSubscriber(modid = IO.ID, value = net.neoforged.api.distmarker.Dist.CLIENT)
 public final class DatagenDelegator {
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
+    public static void gatherData(GatherDataEvent.Client event) {
         DatagenDelegatorClient.configure(event);
         DatagenDelegatorServer.configure(event);
     }

@@ -5,7 +5,8 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.util.FakePlayer;
 
 public class IOUtil {
-    public final static boolean isEILoaded = isModLoaded("extended_industrialization");
+    public final static boolean isEILoaded = false; // Disabled until EI is ported to 26.1.x
+    // was ModList.get().isLoaded("extended_industrialization");
     public final static boolean isAE2Loaded = isModLoaded("ae2");
 
     public static boolean isModLoaded(String modId) {

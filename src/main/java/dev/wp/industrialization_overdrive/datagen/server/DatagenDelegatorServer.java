@@ -24,21 +24,30 @@ public class DatagenDelegatorServer {
 
         addLootTable(event, BlockLootTableDatagenProvider::new);
 
-        add(event, PyrolyseOvenRecipes::new);
-        add(event, CommonRecipesServerDatagenProvider::new);
-        add(event, MachineItemRecipesServerDatagenProvider::new);
+        event.getGenerator().addProvider(true, new net.minecraft.data.recipes.RecipeProvider.Runner(event.getGenerator().getPackOutput(), event.getLookupProvider()) {
+            @Override protected net.minecraft.data.recipes.RecipeProvider createRecipeProvider(HolderLookup.Provider registries, net.minecraft.data.recipes.RecipeOutput output) {
+                return new net.minecraft.data.recipes.RecipeProvider(registries, output) {
+                    @Override protected void buildRecipes() {
+                        new PyrolyseOvenRecipes(registries, output).generate();
+                        new CommonRecipesServerDatagenProvider(registries, output).generate();
+                        new MachineItemRecipesServerDatagenProvider(registries, output).generate();
+                    }
+                };
+            }
+            @Override public String getName() { return "Overdrive recipes"; }
+        });
 
         add(event, BlockTagDatagenProvider::new);
         add(event, ItemTagDatagenProvider::new);
     }
 
     private static void add(GatherDataEvent event, Function<GatherDataEvent, DataProvider> providerCreator) {
-        event.getGenerator().addProvider(event.includeServer(), providerCreator.apply(event));
+        event.getGenerator().addProvider(true, providerCreator.apply(event));
     }
 
     private static void addLootTable(GatherDataEvent event, Function<HolderLookup.Provider, LootTableSubProvider> providerCreator) {
         event.getGenerator().addProvider(
-                event.includeServer(),
+                true,
                 new LootTableProvider(
                         event.getGenerator().getPackOutput(),
                         Set.of(),

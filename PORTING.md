@@ -1,198 +1,133 @@
-# Industrialization Overdrive — подготовка порта 26.1.2
+# Industrialization Overdrive — порт 26.1.2, round 2
 
-**Статус: НЕ ЗАВЕРШЁН. compileJava FAIL. Готового порта и проверенного jar нет.**
+**Java-порт: compileJava, build и клиентский datagen PASS; dedicated loader PASS.**
 
-Основа: `master` HEAD `8a97e1de84d30d221ea6159f0ebb9de2c9f966b8`.
-Ветка: `port/26.1.2`. Цель: Minecraft 26.1.2, NeoForge 26.1.2.126,
-Java 25. Изменения выполнялись только в этом дереве, без push и без изменения
-соседнего Modern Industrialization. Дата проверки: 2026-11-06.
+Продолжение `port/26.1.2` с `e66fb69`, 2026-11-06.
+Цель: Minecraft 26.1.2 / NeoForge 26.1.2.126 / Java 25.
+Gradle userdev 7.1.38, wrapper 9.2.1. Итоговая версия Overdrive:
+`1.14.0-port.2+26.1.2`. MIT LICENSE и существующие copyright сохранены.
+Изменяются только Overdrive и новое дерево tesseract-neoforge. Push нет.
 
-## Что сделано
+## A — Tesseract MI bridge
 
-- Gradle moddev 1.0.17 заменён на NeoGradle userdev 7.1.38.
-- Wrapper закреплён на Gradle 9.2.1; toolchain — Java 25.
-- NeoForge подключён обычной implementation-зависимостью, runs переведены на
-  userdev DSL; сохранены generated resources, лицензия и guidebook assets.
-- Диапазоны Minecraft `[26.1.2,26.2)`, NeoForge `[26.1.2.122,26.2)`.
-- Удалены старые runtime-зависимости Minecraft 1.21.1 и плагины публикации
-  CurseForge/Modrinth. Публикация и mavenLocal-запись не выполнялись.
-- В runtime настроен только EMI (без JEI/REI), AE2 закреплён на
-  `org.appliedenergistics:appliedenergistics2:26.1.12-SNAPSHOT`, API — classifier `api`.
-- Исправлен executable-бит gradlew.
-- Все 52 исходных Java-файла сохранены **без изменений**; их перенос не выполнен.
-  Инвентарь областей миграции: [.port-tools/java-inventory.md](.port-tools/java-inventory.md).
-  Ядро машин, Vajra, Multiblock Builder, Upgrade Stacker и mixin не удалялось.
+Создано `../tesseract-neoforge`, ветка `port/26.1.2-mi`.
+Базы проверены: 26.1.2 `2a38561ba8278911a8ca4f16af8db8a072748f8b`,
+1.21.1 `6a9c981a6e6dc35ea58db3b4c8a919d893dcf744`.
+Восстановлены все 139 compat/mi Java, datagen/mi, MICommonCapabitilies,
+MI mixin, языковые ресурсы и связанные fluid helpers. Реально собирается
+подмножество для Overdrive: исключены 8 material-authoring Java,
+MIFluidHolder, TexturesMIHookDatagenProvider и старый FakedMachineModelBuilder.
+Они сохранены исходниками и перечислены в Tesseract PORTING.md; не являются
+рабочими API 26.1.2. Старый model builder заменён native codec datagen.
+Ядро машин, hooks, multiplied crafter и все 20 типов из
+`.port-tools/missing-mi-bridge.txt` присутствуют в опубликованном jar.
 
-## Инвентарь обязательных зависимостей
+Опубликовано в MavenLocal:
+`net.swedz:tesseract-api-neoforge:1.13.7-26.1.2-fleet.1`.
+Версия берётся напрямую из mod_version, без дополнительного суффикса.
+Основной jar включает plain Java Tesseract API 1.0.2 через JarJar;
+Gradle API/runtime variants указывают на этот self-contained jar.
+MI: `aztech:Modern-Industrialization:2.6.0-26.1.2-fleet01`,
+range `[2.6.0-,2.7-)`. MI mixin включён, client viewer mixin находится
+в client-секции. ValueInput injection, Identifier, transfer resources,
+GUI extraction, recipe helpers и casing/state/item codecs перенесены.
 
-`~/.m2/repository` является symlink на `/root/build-farm/build-farm/m2/repository`.
-Проверка выполнена с разыменованием symlink.
+Коммиты Tesseract: `2d0e957` (bridge), `b68c05c` (registry lookup для datagen),
+`6bed28f` (ItemStackTemplate без создания live stack).
+`compile-04`, `build-final`, `build-integration`, `publish` и
+`publish-integration`, `build-template`, `publish-template`: PASS, exit 0. Логи: `../tesseract-neoforge/.port-tools/logs/`.
+MI исходники и чужие worktrees не изменялись.
 
-| Зависимость | Фактическое состояние |
+## B — GrandPower: замена native API
+
+GrandPower main проверен через GitHub tree и исходники:
+`875c7ce0b61dee0a20961c9d93eac0b7397e7b8f`, 8 Java (<30).
+Отдельный порт нецелесообразен: его long capability/boolean simulate оборачивают
+старый IEnergyStorage, а MI 2.6 использует native EnergyHandler, ItemAccess
+и transactions. GrandPower не клонировался и не публиковался.
+
+Два использования Overdrive — Vajra и IOOtherRegistries — заменены на
+Tesseract SimpleEnergyItem, регистрируемый через MI ItemEnergyHandler.
+Сохранены long charge/capacity, компонент MI ENERGY, creative charged variant,
+зарядка и расход энергии инструментом. Native transfer ограничен int на одну
+операцию; ёмкость Vajra меньше этого предела. Коммит Overdrive `7d84c01`.
+
+## C — Overdrive
+
+- Все 52 исходных Java обработаны: 50 активных Java компилируются; две
+  недоступные интеграции сохранены текстом в `.port-tools/deferred/`.
+- EI отключён до порта Extended Industrialization: активных imports/вызовов
+  EIIntegration нет. EI-only chainer copy/tear-down удалён из активного builder;
+  копирование/постройка/разборка MI multiblock сохранены.
+- AlmostUnified отключён, IOAUPlugin вынесен из source set. Старые KubeJS,
+  Jade, YAI, Kotlin не подключены. JEI/REI зависимостей нет, viewer — EMI/SEMI.
+  Имена Rei* в MI — существующие MI abstractions, не добавленный REI.
+- MI и Tesseract fleet, AE2 `26.1.12-SNAPSHOT` и EMI
+  `1.1.24-semi151a6c88+26.1.2` подключены из MavenLocal.
+- GuideME разрешился по координатам `org.appliedenergistics:guideme:26.1.14-beta`.
+  Fallback `/root/home/forks/external/official/guideme-26.1.14-beta.jar`
+  не понадобился.
+- Identifier, InteractionResult, overlay messages, inventory slot view,
+  TooltipDisplay/Consumer, key category и item model property codecs перенесены.
+- Component persistence использует ValueInput/ValueOutput; builder settings
+  используют TagValueInput/TagValueOutput и registry-aware codecs слотов.
+  Пустые placeholders настроек слотов пропускаются при decode.
+- Preview renderer использует ExtractLevelRenderStateEvent и
+  SubmitCustomGeometryEvent: immutable snapshots baked quads, settings-aware
+  model data, translucent зелёный/красный preview. В submit нет чтения world.
+- Сохранены все четыре mixin, Java 25 compatibility. Сигнатуры insertion
+  используют InteractionResult. Старый AT для RecipeProvider больше не нужен.
+- Datagen перенесён на GatherDataEvent.Client, RecipeProvider.Runner,
+  registry context, native machine/item definitions и новые tag providers.
+  Старые item overrides заменены native range_dispatch/condition definitions.
+
+## Реальные прогоны
+
+Все Gradle команды строго последовательно, с
+`JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64`.
+Перед тяжёлыми запусками сохраняются pgrep GradleDaemon/free -m; проверенные
+чужие daemon простаивали, процессы не останавливались. opcScript в деревьях нет.
+Полные логи Overdrive: `.port-tools/logs/round2/`, рядом `.exitcode` и
+`.errors.txt` от grep `error:`. Отсутствие error не заменяет exit code.
+
+| Лог | Результат |
 |---|---|
-| MI | Есть `aztech:Modern-Industrialization:2.6.0-26.1.2-fleet01`, jar/POM/module/sources в Maven Local |
-| Соседний MI build/libs | Каталог `../Modern-Industrialization/build/libs` отсутствует; сосед не изменялся и не собирался |
-| AE2 | Есть 26.1.12-SNAPSHOT jar/api/sources в Maven Local |
-| EMI | Есть `dev.emi:emi-neoforge:1.1.24-semi151a6c88+26.1.2` в Maven Local; выбран этот вариант |
-| Tesseract API | Нет в Maven Local/pack-libs; ModMaven отдаёт 1.13.6-26.1.2, но **без MI bridge** |
-| GrandPower | Нет локального артефакта для 26.1.2; опубликованный список ModMaven заканчивается на 3.0.2 (2024); старый API ещё импортируется Vajra и IOOtherRegistries |
-| GuideME | Локальный jar не найден; MI объявляет `guideme [26.1.10-alpha,)` обязательным |
+| compile-01 | FAIL, exit 1, 160 javac errors |
+| compile-02 | FAIL, exit 1, 5 javac errors |
+| compile-03 | PASS, exit 0, 3 warnings |
+| datagen-01 | FAIL, exit 1: подписка на abstract GatherDataEvent; исправлено |
+| datagen-02 | FAIL, exit 1: recipe builder без datagen registry context; исправлено |
+| datagen-03 | FAIL, exit 1: ItemStackTemplate.create на unbound datagen holder; исправлено в bridge |
+| datagen-04 | PASS, exit 0; все providers, 33 актуальных generated files |
+| server-data | PASS, exit 0; dedicated mod loading, 0 providers, без запуска мира |
+| compile-final | PASS, exit 0; актуальные классы UP-TO-DATE после успешной компиляции datagen |
+| build-final | PASS, exit 0 |
+| build-license | PASS, exit 0; итоговые binary/sources jar с оригинальным LICENSE.md |
 
-`pack-libs` прочитан: там есть FD, SilentLib/Gear, Jade 26.1.12, Curios,
-Undergarden, DynamicTrees, Regions Unexplored, Refined Storage, Reliquary,
-OreBerries, L2 и FruitsDelight. MI/Tesseract/GrandPower/GuideME там не найдены.
-Чужие jar не копировались и не изменялись.
+Внешний EMI в client datagen выдаёт warning о необязательном отсутствующем
+JEI PluginCaller. JEI/REI отсутствуют в фактическом Mod List; это не dependency
+failure и не ошибка загрузки Overdrive/bridge.
 
-## Блокер Tesseract MI
+Проверка упаковки дополнительно обнаружила ссылку прежнего Gradle-слоя на
+несуществующий `LICENSE`: файл проекта называется `LICENSE.md`. Binary и sources
+jar теперь включают оригинальный LICENSE.md без изменений. `build-license`:
+PASS, exit 0. ZIP integrity, version, все четыре mixin class, пять item definitions,
+ссылки на собственные текстуры и отсутствие EI/AU классов проверены.
+Проверка: `.port-tools/logs/round2/artifact-check.txt`.
 
-В sources и бинарном jar `net.swedz:tesseract-api-neoforge:1.13.6-26.1.2`
-отсутствует весь `net.swedz.tesseract.neoforge.compat.mi`. В версии
-1.12.16-1.21.1 этот пакет содержит 138 Java-файлов. Также отсутствуют
-`datagen.mi.MIDatagenHooks` и `registry.common.MICommonCapabitilies`.
-Точный список импортов Overdrive, которых нет в новом артефакте:
-[.port-tools/missing-mi-bridge.txt](.port-tools/missing-mi-bridge.txt).
+Итоговый jar:
+`build/libs/industrialization_overdrive-1.14.0-port.2+26.1.2.jar`.
+SHA256: `6ecd0999a115f03a934cf06db0e06bf1967fe8603322f4eff529a9c427f28ff4`.
+Overdrive в MavenLocal не публиковался: запрошена сборка jar.
+Tesseract MavenLocal проверен отдельно, binary + POM/module + sources + AT.
 
-Внутри нового jar, `META-INF/neoforge.mods.toml`:
+Завершено: перенос активного Java, необходимые mixins, новые generated resources,
+сборка и проверки загрузчика. Неперенесённые дополнительные API Tesseract и
+отключённые интеграции явно перечислены выше.
 
-```toml
-#TODO wait for MI
-#[[mixins]]
-#config = "tesseract_api_mi.mixins.json"
-```
+## Ограничения QA
 
-Его optional MI range — `[2.5.0-dev-, 2.6-)`, несовместимый с локальным MI 2.6.0.
-Поэтому просто изменить Gradle version/range недостаточно даже для runtime.
-Отсутствуют реальные базовые классы двух машин, multiplied crafter, регистрация
-машин/рецептов/GUI через hooks и вспомогательные capability/tooltip/datagen API.
-Ни stubs, ни старый 1.21 jar вместо этих реализаций не добавлены.
-Нужен совместимый порт MI bridge Tesseract или его полноценный перенос в этот
-проект с сохранением лицензии, событий регистрации, mixin и поведения машин.
-
-Проверенные первичные артефакты:
-
-- https://modmaven.dev/net/swedz/tesseract-api-neoforge/maven-metadata.xml
-- https://modmaven.dev/net/swedz/tesseract-api-neoforge/1.13.6-26.1.2/tesseract-api-neoforge-1.13.6-26.1.2.jar
-- https://modmaven.dev/net/swedz/tesseract-api-neoforge/1.13.6-26.1.2/tesseract-api-neoforge-1.13.6-26.1.2-sources.jar
-
-Загруженные материалы и извлечённые mods.toml сохранены локально в
-`.port-tools/deps/` (игнорируются Git).
-
-## Необязательные интеграции и runtime
-
-Ниже перечислены **все удаления из Gradle**. Удаление зависимости не означает
-завершённого переноса Java-кода интеграции; это явно указано отдельно.
-
-| Интеграция | Состояние |
-|---|---|
-| GuideME Overdrive | Прямая зависимость и optional запись Overdrive в mods.toml удалены; guidebook assets сохранены. Сам MI требует GuideME для runtime, это требование не изменено |
-| Extended Industrialization | compileOnly/runtime зависимости удалены; ModMaven содержит только 1.21.1. EIIntegration и вызовы ещё исходные, значит **отключение Java-интеграции НЕ завершено** |
-| AlmostUnified | compileOnly API удалён; IOAUPlugin ещё исходный и пока не исключён из compilation/discovery. **Отключение Java-интеграции НЕ завершено** |
-| GrandPower | Старое подключение удалено; native MI/NeoForge energy capability для Vajra ещё нужно реализовать, энергия не заменена заглушкой |
-| Cloth Config | Старое подключение 15.0.127 удалено; прямых импортов в Overdrive нет, новый конфигурационный стек требует проверки |
-| Kotlin for Forge | Удалена старая runtime-зависимость CurseMaven 8335665 |
-| Yet Another Industrialization | Удалена старая runtime-зависимость CurseMaven 8657774 |
-| KubeJS | Удалена старая runtime-зависимость 2101.7.2-build.336; новой нет в конфигурации |
-| Jade | Удалена старая runtime-зависимость CurseMaven 5639932; имеющийся Jade 26.1.12 из pack-libs автоматически не подключался |
-| MI Tweaks | Уже был закомментирован upstream; не включён |
-| AE2 | Настроен новый API/runtime 26.1.12-SNAPSHOT; AE2Integration ещё не портирован и не проверен |
-| EMI | Настроен runtime 26.1.2 из Maven Local, запуск клиента не проверен |
-| JEI / REI | Не подключены |
-
-MI подключён с `transitive = false` для отдельной диагностики Overdrive.
-Это **не готовый runtime-набор**: в частности, обязательный для MI GuideME нужно
-будет добавить отдельно. Не следует запускать этот WIP как рабочий порт.
-
-## Mixin и access transformer
-
-Один JSON содержит **четыре** mixin-класса:
-
-| Mixin | Проверка цели |
-|---|---|
-| AbstractElectricMultipliedCraftingMultiblockMixin | Класс Tesseract отсутствует; `getMaxRecipeEuBonus` и `useItemOn` проверить невозможно. Возвращаемый ItemInteractionResult требует переноса на InteractionResult |
-| AbstractMultipliedCraftingMultiblockAccessor | Класс Tesseract отсутствует; поле crafter проверить невозможно |
-| SlotPanelAccessor | В локальном MI есть private final MachineBlockEntity machine |
-| SlotPanelUpgradeStackerMixin | javap подтвердил SlotPanel$1, this$0, val$type и mayPlace(ItemStack). Проверка instanceof всё ещё зависит от отсутствующего Tesseract-класса |
-
-JSON пока исходный (`JAVA_21`); регистрация mixin не отключена. После восстановления
-MI bridge нужны перенос и фактическая проверка применения mixin на Java 25.
-Старый access transformer `RecipeProvider.getName()` ещё требует проверки/замены
-в новом datagen API; userdev пока не настроен на его применение.
-
-## Остатки переноса Java и данных
-
-Кроме блокера Tesseract, javac обнаруживает ResourceLocation → Identifier,
-ItemInteractionResult/InteractionResultHolder → InteractionResult, изменения
-ItemProperties, client renderer/RenderType/ModelData и datagen API.
-У MI изменились сериализация компонентов (ValueInput/ValueOutput) и transfer API.
-Нужны native energy capability и сохранение charging/разряда/energy bar Vajra.
-Необходим перенос item definitions/models и проверка рецептов/loot/tag JSON.
-
-Ни один Java-файл не объявляется портированным. Полный список всех 52 файлов
-и статически обнаруженных областей работы находится в java-inventory.md.
-
-## Проверки
-
-Java: `/usr/lib/jvm/java-25-openjdk-amd64`.
-
-```sh
-JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 ./gradlew compileJava --console=plain
-JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 ./gradlew build --console=plain
-```
-
-`opcScript` в дереве отсутствует; `-PopcScript` не требуется.
-Перед тяжёлыми запусками проверялись `pgrep -af GradleDaemon`, `free -m`,
-cmd/cwd и логи daemon. Проверенные чужие daemon простаивали. Чужие процессы
-не останавливались. Запуски выполнялись последовательно.
-
-Первый запуск: exit 126, gradlew без executable-бита; исправлено.
-Следующий compileJava: exit 1, 342 ошибки javac (Gradle повторяет диагностику
-в итоговом failure summary, поэтому число строк `error:` в логе больше).
-NeoForm/NeoForge подготовка и компиляция Minecraft завершились; это не успех
-компиляции Overdrive.
-
-Итоговые прогоны:
-
-| Команда с JAVA_HOME Java 25 | Exit code | Результат | Полный лог |
-|---|---|---|---|
-| `./gradlew compileJava --console=plain` | 1 | FAIL, 342 ошибки javac | `.port-tools/logs/compile-final.log` |
-| `./gradlew build --console=plain` | 1 | FAIL на compileJava, 342 ошибки javac | `.port-tools/logs/build-final.log` |
-| `./gradlew processResources --console=plain` | 0 | PASS; фактический output TOML разобран, версия и NeoForge range проверены | `.port-tools/logs/resources-final.log` |
-
-Соответствующие `.exitcode` и `.errors.txt` лежат рядом с каждым логом.
-`rg 'error:'` выполнен для обоих итоговых логов; Gradle дублирует диагностику
-в summary. Дополнительно синтаксический разбор TOML с подстановками и JSON mixin
-прошёл; это не проверка применения mixin и не runtime QA.
-`git diff --check` проходит. Логи/скачанные jar игнорируются Git, но остаются
-в этом дереве. В Git сохраняются этот отчёт и оба текстовых инвентаря.
-
-## Runtime QA — НЕ выполнялась
-
-После настоящего compileJava/build PASS обязательны:
-
-1. Отдельный server boot с точными MI/Tesseract/GuideME и проверка применения
-   всех четырёх mixin, datamap и регистрации recipe types/машин.
-2. Pyrolyse Oven: tiers, питание, fluid/item IO, multiplied crafting и EU cost.
-3. Multi Processing Array: insertion/removal машин, лимиты, upgrades, crafter,
-   GUI и сохранение состояния после перезапуска.
-4. Upgrade Stacker: insertion через GUI/ПКМ, EU bonus, batch cap и возврат вещей.
-5. Vajra: заряд, четыре скорости, silk touch, pickup, рекурсивное разрушение,
-   unbreakable blocks, creative/survival, синхронизация компонентов.
-6. Multiblock Builder: copy/build/tear-down, настройки, AE2 simulation/extraction,
-   права доступа и измерения, отображение preview и переключение режимов.
-7. Клиент: item definitions/models, tooltips, key mappings, previews, GUI, EMI.
-8. Datagen, рецепты, loot, теги и совместимость сохранений компонентов.
-
-Эта ветка — воспроизводимая отправная точка с документированной неудачной
-сборкой, **не полный порт Industrialization Overdrive**.
-
-## Round 2 — B: GrandPower decision
-
-GrandPower main inspected via GitHub tree and source at
-`875c7ce0b61dee0a20961c9d93eac0b7397e7b8f`: 8 Java files (<30).
-A separate port was judged unnecessary: its long capability and boolean simulation
-API wrap the old IEnergyStorage, while MI 2.6 now directly uses native NeoForge
-EnergyHandler, ItemAccess and transactions. The two Overdrive uses (Vajra and
-IOOtherRegistries) now use Tesseract SimpleEnergyItem backed by native MI
-ItemEnergyHandler. Long charge/capacity, MI ENERGY component, creative charged
-variant and tool energy accounting are retained. No GrandPower clone/artifact
-was created or published. Compilation is verified together with stage C.
+Javac/build не доказывают игровую корректность. Требуются ручные проверки:
+Pyrolyse tiers/crafting, MPA batch/upgrades/GUI, Upgrade Stacker возврат вещей,
+Vajra четыре скорости/silk touch/pickup, builder copy/paste/tear-down,
+AE2 linking/extraction и визуальная проверка preview на клиенте.

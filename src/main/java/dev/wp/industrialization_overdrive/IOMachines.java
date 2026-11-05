@@ -7,7 +7,7 @@ import aztech.modern_industrialization.machines.recipe.MachineRecipeType;
 import dev.wp.industrialization_overdrive.machines.blockentities.multiblock.MultiProcessingArrayBlockEntity;
 import dev.wp.industrialization_overdrive.machines.blockentities.multiblock.PyrolyseOvenBlockEntity;
 import dev.wp.industrialization_overdrive.machines.recipe.PyrolyseOvenRecipeType;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.swedz.tesseract.neoforge.compat.mi.hook.context.listener.MachineRecipeTypesMIHookContext;
 import net.swedz.tesseract.neoforge.compat.mi.hook.context.listener.MultiblockMachinesMIHookContext;
 
@@ -37,7 +37,7 @@ public final class IOMachines {
             return RECIPE_TYPE_NAMES;
         }
 
-        private static MachineRecipeType create(MachineRecipeTypesMIHookContext hook, String englishName, String id, Function<ResourceLocation, MachineRecipeType> creator) {
+        private static MachineRecipeType create(MachineRecipeTypesMIHookContext hook, String englishName, String id, Function<Identifier, MachineRecipeType> creator) {
             MachineRecipeType recipeType = hook.create(id, creator);
             RECIPE_TYPE_NAMES.put(recipeType, englishName);
             return recipeType;

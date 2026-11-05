@@ -9,7 +9,7 @@ import aztech.modern_industrialization.machines.gui.GuiComponent;
 import aztech.modern_industrialization.util.Rectangle;
 import dev.wp.industrialization_overdrive.IO;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Unit;
 import net.minecraft.world.Container;
@@ -73,18 +73,18 @@ public class MultiProcessingArrayMachineSlotClient extends GuiComponentClient<Un
             }
 
             @Override
-            public void renderBackground(GuiGraphics graphics, int leftPos, int topPos) {
+            public void extractBackground(GuiGraphicsExtractor graphics, int leftPos, int topPos) {
                 Rectangle box = this.getBox(leftPos, topPos);
 
                 int textureX = box.x() - leftPos - box.w();
-                graphics.blit(MachineScreen.BACKGROUND, box.x(), box.y(), textureX, 0, box.w(), box.h() - 4);
-                graphics.blit(MachineScreen.BACKGROUND, box.x(), box.y() + box.h() - 4, textureX, 252, box.w(), 4);
+                graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, MachineScreen.BACKGROUND, box.x(), box.y(), textureX, 0, box.w(), box.h() - 4, 256, 256);
+                graphics.blit(net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED, MachineScreen.BACKGROUND, box.x(), box.y() + box.h() - 4, textureX, 252, box.w(), 4, 256, 256);
             }
 
             @Override
-            public boolean renderTooltip(MachineScreen screen, Font font, GuiGraphics graphics, int x, int y, int cursorX, int cursorY) {
+            public boolean renderTooltip(MachineScreen screen, Font font, GuiGraphicsExtractor graphics, int x, int y, int cursorX, int cursorY) {
                 if (screen.getFocusedSlot() instanceof SlotTooltip st && !screen.getFocusedSlot().hasItem()) {
-                    graphics.renderTooltip(font, st.getTooltip(), cursorX, cursorY);
+                    graphics.setTooltipForNextFrame(font, st.getTooltip(), cursorX, cursorY);
                     return true;
                 }
                 return false;

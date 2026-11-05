@@ -7,13 +7,14 @@ import aztech.modern_industrialization.machines.recipe.MachineRecipeType;
 import dev.wp.industrialization_overdrive.IO;
 import dev.wp.industrialization_overdrive.machines.guicomponents.multiprocessingarraymachineslot.MultiProcessingArrayMachineSlot;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.swedz.tesseract.neoforge.compat.mi.api.ComponentStackHolder;
 
 public final class MultiProcessingArrayMachineComponent implements MachineComponent.ServerOnly, DropableComponent, ComponentStackHolder {
-    public static final ResourceLocation ID = IO.id("multi_processing_array_machine");
+    public static final Identifier ID = IO.id("multi_processing_array_machine");
 
     private ItemStack machines = ItemStack.EMPTY;
     private MachineRecipeType machineRecipeType;
@@ -41,16 +42,13 @@ public final class MultiProcessingArrayMachineComponent implements MachineCompon
     }
 
     @Override
-    public void writeNbt(CompoundTag tag, HolderLookup.Provider registries) {
-        tag.put("machinesStack", machines.saveOptional(registries));
+    public void writeNbt(ValueOutput tag) {
+        tag.store("machinesStack", ItemStack.OPTIONAL_CODEC, machines);
     }
 
     @Override
-    public void readNbt(CompoundTag tag, HolderLookup.Provider registries, boolean isUpgradingMachine) {
-        machines = ItemStack.parseOptional(registries, tag.getCompound("machinesStack"));
-        if (!machines.isEmpty()) {
-            machineRecipeType = MultiProcessingArrayMachineSlot.getMachine(machines).recipeType();
-        }
+    public void readNbt(ValueInput tag, boolean isUpgradingMachine) {
+        setStack(tag.read("machinesStack", ItemStack.OPTIONAL_CODEC).orElse(ItemStack.EMPTY));
     }
 
     @Override

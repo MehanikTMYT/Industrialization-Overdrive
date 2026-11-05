@@ -8,7 +8,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import dev.wp.industrialization_overdrive.compat.EIIntegration;
 import net.swedz.tesseract.neoforge.registry.holder.ItemHolder;
 
 import java.util.Comparator;
@@ -48,6 +47,6 @@ public final class IOOtherRegistries {
         RECIPE_TYPES.register(bus);
         CREATIVE_MODE_TABS.register(bus);
 
-        if (IOUtil.isEILoaded) EIIntegration.registerMachineConfigPanel();
+        // EI disabled until Extended Industrialization is ported to 26.1.x.
     }
 }

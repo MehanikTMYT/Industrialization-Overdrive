@@ -6,7 +6,7 @@ import dev.wp.industrialization_overdrive.IOComponents;
 import dev.wp.industrialization_overdrive.item.UpgradeStacker;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -37,19 +37,19 @@ public abstract class AbstractElectricMultipliedCraftingMultiblockMixin {
 
     @Inject(method = "useItemOn", at = @At("HEAD"), cancellable = true)
     private void io_batchUpgradeInsertion(Player player, InteractionHand hand, Direction face,
-                                          CallbackInfoReturnable<ItemInteractionResult> cir) {
+                                          CallbackInfoReturnable<InteractionResult> cir) {
         ItemStack stack = player.getItemInHand(hand);
         if (!(stack.getItem() instanceof UpgradeStacker)) return;
         MachineBlockEntity be = (MachineBlockEntity) (Object) this;
         Level level = be.getLevel();
         if (!upgrades.getDrop().isEmpty()) {
-            cir.setReturnValue(ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
+            cir.setReturnValue(InteractionResult.TRY_WITH_EMPTY_HAND);
             return;
         }
         if (level != null && !level.isClientSide()) {
             upgrades.setStackServer(be, stack.copyWithCount(1));
             if (!player.isCreative()) stack.shrink(1);
         }
-        cir.setReturnValue(ItemInteractionResult.sidedSuccess(level != null && level.isClientSide()));
+        cir.setReturnValue(InteractionResult.SUCCESS);
     }
 }

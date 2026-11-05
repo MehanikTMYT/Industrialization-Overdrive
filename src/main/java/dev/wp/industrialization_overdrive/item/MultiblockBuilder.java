@@ -18,11 +18,13 @@ import dev.wp.industrialization_overdrive.IO;
 import dev.wp.industrialization_overdrive.IOComponents;
 import dev.wp.industrialization_overdrive.IOUtil;
 import dev.wp.industrialization_overdrive.compat.AE2Integration;
-import dev.wp.industrialization_overdrive.compat.EIIntegration;
 import dev.wp.industrialization_overdrive.machines.components.craft.MultiProcessingArrayMachineComponent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.storage.TagValueInput;
+import net.minecraft.world.level.storage.TagValueOutput;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -68,7 +70,7 @@ public final class MultiblockBuilder extends Item {
         Level level = ctx.getLevel();
         BlockPos pos = ctx.getClickedPos();
         Player player = ctx.getPlayer();
-        if (!IOUtil.isRealPlayer(player) || level.isClientSide)
+        if (!IOUtil.isRealPlayer(player) || level.isClientSide())
             return InteractionResult.PASS;
 
         ItemStack stack = ctx.getItemInHand();
@@ -80,9 +82,7 @@ public final class MultiblockBuilder extends Item {
             if (be instanceof MultiblockMachineBlockEntity multiblock) {
                 return handleTearDown(level, player, multiblock);
             }
-            if (IOUtil.isEILoaded && EIIntegration.isMachineChainer(be)) {
-                return handleChainerTearDown(level, player, pos);
-            }
+
             return InteractionResult.PASS;
         }
 
@@ -92,9 +92,7 @@ public final class MultiblockBuilder extends Item {
                 if (be instanceof MultiblockMachineBlockEntity multiblock) {
                     return handleCopy(stack, level, pos, player, multiblock);
                 }
-                if (IOUtil.isEILoaded && IO.config().machineChainerCopyDepth() != 0 && EIIntegration.isMachineChainer(be)) {
-                    return handleChainerCopy(stack, level, pos, player);
-                }
+
             }
             return handlePaste(stack, level, isSneaking ? pos : pos.relative(ctx.getClickedFace()), player);
         }
@@ -126,27 +124,15 @@ public final class MultiblockBuilder extends Item {
             template.put(memberPos.subtract(pos), new IOComponents.BlockData(state.getBlock().asItem(), settings != null ? settings : new CompoundTag()));
         }
 
-        if (IOUtil.isEILoaded && IO.config().machineChainerCopyDepth() != 0) {
-            EIIntegration.copyChainedBlocks(level, pos, template, IO.config().machineChainerCopyDepth(), this::copySettings);
-        }
+
 
         stack.set(IOComponents.MULTI_BUILDER_TEMPLATE, IOComponents.Template.from(template));
-        player.displayClientMessage(IO.text().multiblockBuilderTemplateCopied(pos.getX(), pos.getY(), pos.getZ()), true);
+        player.sendOverlayMessage(IO.text().multiblockBuilderTemplateCopied(pos.getX(), pos.getY(), pos.getZ()));
 
         return InteractionResult.SUCCESS;
     }
 
-    private InteractionResult handleChainerCopy(ItemStack stack, Level level, BlockPos pos, Player player) {
-        Map<BlockPos, IOComponents.BlockData> template = new HashMap<>();
-        EIIntegration.copyChainer(level, pos, template, IO.config().machineChainerCopyDepth(), this::copySettings);
-        IOComponents.BlockData root = template.get(BlockPos.ZERO);
-        CompoundTag rootSettings = root.settings().copy();
-        rootSettings.putInt("chainerCopyFacingDirection", player.getDirection().getOpposite().get3DDataValue());
-        template.put(BlockPos.ZERO, new IOComponents.BlockData(root.item(), rootSettings));
-        stack.set(IOComponents.MULTI_BUILDER_TEMPLATE, IOComponents.Template.from(template));
-        player.displayClientMessage(IO.text().multiblockBuilderTemplateCopied(pos.getX(), pos.getY(), pos.getZ()), true);
-        return InteractionResult.SUCCESS;
-    }
+
 
     private CompoundTag copySettings(MachineBlockEntity machine) {
         CompoundTag tag = new CompoundTag();
@@ -154,25 +140,28 @@ public final class MultiblockBuilder extends Item {
         var registries = machine.getLevel().registryAccess();
 
         // Always copy: facingDirection and output/auto-extract settings
-        machine.orientation.writeNbt(tag, registries);
+        var settingsOutput = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registries);
+        machine.orientation.writeNbt(settingsOutput);
 
         machine.components.forType(ActiveShapeComponent.class, activeShape -> {
-            if (activeShape.getActiveShapeIndex() != 0) activeShape.writeNbt(tag, registries);
+            if (activeShape.getActiveShapeIndex() != 0) activeShape.writeNbt(settingsOutput);
         });
 
         // Copy optional modules (only consumed if present in paste)
-        machine.components.forType(UpgradeComponent.class, upgrade -> upgrade.writeNbt(tag, registries));
-        machine.components.forType(RedstoneControlComponent.class, redstone -> redstone.writeNbt(tag, registries));
-        machine.components.forType(OverdriveComponent.class, overdrive -> overdrive.writeNbt(tag, registries));
-        machine.components.forType(MultiProcessingArrayMachineComponent.class, machines -> machines.writeNbt(tag, registries));
+        machine.components.forType(UpgradeComponent.class, upgrade -> upgrade.writeNbt(settingsOutput));
+        machine.components.forType(RedstoneControlComponent.class, redstone -> redstone.writeNbt(settingsOutput));
+        machine.components.forType(OverdriveComponent.class, overdrive -> overdrive.writeNbt(settingsOutput));
+        machine.components.forType(MultiProcessingArrayMachineComponent.class, machines -> machines.writeNbt(settingsOutput));
         machine.components.forType(CasingComponent.class, casing -> {
             CompoundTag casingTag = new CompoundTag();
-            casing.writeNbt(casingTag, registries);
-            if (!casingTag.getCompound("casing").isEmpty()) tag.put("casing", casingTag.get("casing"));
+            var casingOutput = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registries);
+            casing.writeNbt(casingOutput);
+            casingTag.merge(casingOutput.buildResult());
+            if (!casingTag.getCompoundOrEmpty("casing").isEmpty()) tag.put("casing", casingTag.get("casing"));
         });
-        if (IOUtil.isEILoaded) EIIntegration.writeSettings(machine, tag, registries);
+        tag.merge(settingsOutput.buildResult());
         for (String key : List.of("redstoneModuleStack", "upgradesItemStack", "overdriveModuleStack")) {
-            if (tag.getCompound(key).isEmpty()) tag.remove(key);
+            if (tag.getCompoundOrEmpty(key).isEmpty()) tag.remove(key);
         }
 
         MIInventory inventory = machine.getInventory();
@@ -180,7 +169,7 @@ public final class MultiblockBuilder extends Item {
         boolean hasItemLocks = false;
         for (ConfigurableItemStack itemStack : inventory.getItemStacks()) {
             boolean configured = itemStack.isPlayerLocked() || itemStack.getAdjustedCapacity() != 1;
-            itemLocks.add(configured ? itemStack.toNbt(registries) : new CompoundTag());
+            itemLocks.add(configured ? ConfigurableItemStack.CODEC.encodeStart(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), itemStack).getOrThrow() : new CompoundTag());
             hasItemLocks |= configured;
         }
         if (hasItemLocks) tag.put("itemLocks", itemLocks);
@@ -189,7 +178,7 @@ public final class MultiblockBuilder extends Item {
         boolean hasFluidLocks = false;
         for (ConfigurableFluidStack fluidStack : inventory.getFluidStacks()) {
             boolean configured = fluidStack.isPlayerLocked();
-            fluidLocks.add(configured ? fluidStack.toNbt(registries) : new CompoundTag());
+            fluidLocks.add(configured ? ConfigurableFluidStack.CODEC.encodeStart(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), fluidStack).getOrThrow() : new CompoundTag());
             hasFluidLocks |= configured;
         }
         if (hasFluidLocks) tag.put("fluidLocks", fluidLocks);
@@ -200,7 +189,7 @@ public final class MultiblockBuilder extends Item {
     private InteractionResult handlePaste(ItemStack stack, Level level, BlockPos pos, Player player) {
         IOComponents.Template storedTemplate = stack.get(IOComponents.MULTI_BUILDER_TEMPLATE);
         if (storedTemplate == null || storedTemplate.blocks().isEmpty()) {
-            player.displayClientMessage(IO.text().multiblockBuilderNoTemplate(), true);
+            player.sendOverlayMessage(IO.text().multiblockBuilderNoTemplate());
             return InteractionResult.FAIL;
         }
         Map<BlockPos, IOComponents.BlockData> template = storedTemplate.expand();
@@ -229,31 +218,31 @@ public final class MultiblockBuilder extends Item {
                 CompoundTag settings = entry.getValue().settings();
                 var registries = level.registryAccess();
                 if (settings.contains("upgradesItemStack")) {
-                    ItemStack upgrades = ItemStack.parseOptional(registries, settings.getCompound("upgradesItemStack"));
+                    ItemStack upgrades = ItemStack.OPTIONAL_CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), settings.getCompoundOrEmpty("upgradesItemStack")).result().orElse(ItemStack.EMPTY);
                     if (!upgrades.isEmpty()) {
                         requiredBlocks.merge(upgrades.getItem(), upgrades.getCount(), Integer::sum);
                     }
                 }
                 if (settings.contains("redstoneModuleStack")) {
-                    ItemStack redstone = ItemStack.parseOptional(registries, settings.getCompound("redstoneModuleStack"));
+                    ItemStack redstone = ItemStack.OPTIONAL_CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), settings.getCompoundOrEmpty("redstoneModuleStack")).result().orElse(ItemStack.EMPTY);
                     if (!redstone.isEmpty()) {
                         requiredBlocks.merge(redstone.getItem(), redstone.getCount(), Integer::sum);
                     }
                 }
                 if (settings.contains("overdriveModuleStack")) {
-                    ItemStack overdrive = ItemStack.parseOptional(registries, settings.getCompound("overdriveModuleStack"));
+                    ItemStack overdrive = ItemStack.OPTIONAL_CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), settings.getCompoundOrEmpty("overdriveModuleStack")).result().orElse(ItemStack.EMPTY);
                     if (!overdrive.isEmpty()) {
                         requiredBlocks.merge(overdrive.getItem(), overdrive.getCount(), Integer::sum);
                     }
                 }
                 if (settings.contains("machinesStack")) {
-                    ItemStack machines = ItemStack.parseOptional(registries, settings.getCompound("machinesStack"));
+                    ItemStack machines = ItemStack.OPTIONAL_CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), settings.getCompoundOrEmpty("machinesStack")).result().orElse(ItemStack.EMPTY);
                     if (!machines.isEmpty()) {
                         requiredBlocks.merge(machines.getItem(), machines.getCount(), Integer::sum);
                     }
                 }
                 if (settings.contains("casing")) {
-                    ItemStack casing = ItemStack.parseOptional(registries, settings.getCompound("casing"));
+                    ItemStack casing = ItemStack.OPTIONAL_CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), settings.getCompoundOrEmpty("casing")).result().orElse(ItemStack.EMPTY);
                     if (!casing.isEmpty()) {
                         requiredBlocks.merge(casing.getItem(), casing.getCount(), Integer::sum);
                     }
@@ -283,8 +272,8 @@ public final class MultiblockBuilder extends Item {
         if (!targetDirection.getAxis().isHorizontal()) return Rotation.NONE;
 
         if (!settings.contains("chainerCopyFacingDirection") && !settings.contains("facingDirection")) return Rotation.NONE;
-        Direction sourceDirection = Direction.from3DDataValue(settings.getInt(
-                settings.contains("chainerCopyFacingDirection") ? "chainerCopyFacingDirection" : "facingDirection"));
+        Direction sourceDirection = Direction.from3DDataValue(settings.getIntOr(
+                settings.contains("chainerCopyFacingDirection") ? "chainerCopyFacingDirection" : "facingDirection", 0));
         for (Rotation rotation : Rotation.values()) {
             if (rotation.rotate(sourceDirection) == targetDirection) return rotation;
         }
@@ -310,10 +299,10 @@ public final class MultiblockBuilder extends Item {
 
         CompoundTag rotated = settings.copy();
         if (rotated.contains("facingDirection")) {
-            rotated.putInt("facingDirection", rotation.rotate(Direction.from3DDataValue(rotated.getInt("facingDirection"))).get3DDataValue());
+            rotated.putInt("facingDirection", rotation.rotate(Direction.from3DDataValue(rotated.getIntOr("facingDirection", 0))).get3DDataValue());
         }
         if (rotated.contains("outputDirection")) {
-            rotated.putInt("outputDirection", rotation.rotate(Direction.from3DDataValue(rotated.getInt("outputDirection"))).get3DDataValue());
+            rotated.putInt("outputDirection", rotation.rotate(Direction.from3DDataValue(rotated.getIntOr("outputDirection", 0))).get3DDataValue());
         }
         return rotated;
     }
@@ -343,36 +332,38 @@ public final class MultiblockBuilder extends Item {
         var registries = machine.getLevel().registryAccess();
 
         // 1. Mandatory settings (orientation and shape); placer is the player pasting it
-        machine.orientation.readNbt(settings, registries, false);
+        var settingsInput = TagValueInput.create(ProblemReporter.DISCARDING, registries, settings);
+        machine.orientation.readNbt(settingsInput, false);
         machine.placedBy.onPlaced(player);
-        machine.components.forType(ActiveShapeComponent.class, activeShape -> activeShape.readNbt(settings, registries, false));
+        machine.components.forType(ActiveShapeComponent.class, activeShape -> activeShape.readNbt(settingsInput, false));
 
         // 2. Optional settings (upgrades, modules) - We already consumed them if survival, so we can just set them.
         // Actually, MI's readNbt for these components might handle things differently, but let's use the provided settings.
-        machine.components.forType(UpgradeComponent.class, upgrade -> upgrade.readNbt(settings, registries, false));
-        machine.components.forType(RedstoneControlComponent.class, redstone -> redstone.readNbt(settings, registries, false));
-        machine.components.forType(OverdriveComponent.class, overdrive -> overdrive.readNbt(settings, registries, false));
-        machine.components.forType(MultiProcessingArrayMachineComponent.class, machines -> machines.readNbt(settings, registries, false));
-        machine.components.forType(CasingComponent.class, casing -> casing.readNbt(settings, registries, false));
-        if (IOUtil.isEILoaded) EIIntegration.readSettings(machine, settings, registries);
+        machine.components.forType(UpgradeComponent.class, upgrade -> upgrade.readNbt(settingsInput, false));
+        machine.components.forType(RedstoneControlComponent.class, redstone -> redstone.readNbt(settingsInput, false));
+        machine.components.forType(OverdriveComponent.class, overdrive -> overdrive.readNbt(settingsInput, false));
+        machine.components.forType(MultiProcessingArrayMachineComponent.class, machines -> machines.readNbt(settingsInput, false));
+        machine.components.forType(CasingComponent.class, casing -> casing.readNbt(settingsInput, false));
 
         // 3. Slot locks
         MIInventory inventory = machine.getInventory();
-        if (settings.contains("itemLocks", Tag.TAG_LIST)) {
-            ListTag itemLocks = settings.getList("itemLocks", Tag.TAG_COMPOUND);
+        if (settings.contains("itemLocks")) {
+            ListTag itemLocks = settings.getListOrEmpty("itemLocks");
             List<ConfigurableItemStack> stacks = inventory.getItemStacks();
             for (int i = 0; i < Math.min(itemLocks.size(), stacks.size()); i++) {
-                CompoundTag lockTag = itemLocks.getCompound(i);
-                ConfigurableItemStack copiedStack = new ConfigurableItemStack(lockTag, registries);
+                CompoundTag lockTag = itemLocks.getCompoundOrEmpty(i);
+                if (lockTag.isEmpty()) continue;
+                ConfigurableItemStack copiedStack = ConfigurableItemStack.CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), lockTag).getOrThrow();
                 applyStackSettings(stacks.get(i), copiedStack);
             }
         }
-        if (settings.contains("fluidLocks", Tag.TAG_LIST)) {
-            ListTag fluidLocks = settings.getList("fluidLocks", Tag.TAG_COMPOUND);
+        if (settings.contains("fluidLocks")) {
+            ListTag fluidLocks = settings.getListOrEmpty("fluidLocks");
             List<ConfigurableFluidStack> stacks = inventory.getFluidStacks();
             for (int i = 0; i < Math.min(fluidLocks.size(), stacks.size()); i++) {
-                CompoundTag lockTag = fluidLocks.getCompound(i);
-                ConfigurableFluidStack copiedStack = new ConfigurableFluidStack(lockTag, registries);
+                CompoundTag lockTag = fluidLocks.getCompoundOrEmpty(i);
+                if (lockTag.isEmpty()) continue;
+                ConfigurableFluidStack copiedStack = ConfigurableFluidStack.CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), lockTag).getOrThrow();
                 applyStackSettings(stacks.get(i), copiedStack);
             }
         }
@@ -394,17 +385,11 @@ public final class MultiblockBuilder extends Item {
         // Tear down controller
         tearDownBlock(level, player, pos);
 
-        player.displayClientMessage(IO.text().multiblockBuilderDismantled(), true);
+        player.sendOverlayMessage(IO.text().multiblockBuilderDismantled());
         return InteractionResult.SUCCESS;
     }
 
-    private InteractionResult handleChainerTearDown(Level level, Player player, BlockPos pos) {
-        for (BlockPos chainedPos : EIIntegration.getChainedPositions(level, pos)) {
-            tearDownBlock(level, player, chainedPos);
-        }
-        player.displayClientMessage(IO.text().multiblockBuilderDismantled(), true);
-        return InteractionResult.SUCCESS;
-    }
+
 
     private void tearDownBlock(Level level, Player player, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
@@ -508,7 +493,7 @@ public final class MultiblockBuilder extends Item {
 
     private static Map<Item, Integer> countInventory(Player player) {
         Map<Item, Integer> inventoryCount = new HashMap<>();
-        for (ItemStack stack : player.getInventory().items) {
+        for (ItemStack stack : player.getInventory().getNonEquipmentItems()) {
             Item id = stack.getItem();
             inventoryCount.merge(id, stack.getCount(), Integer::sum);
         }
@@ -524,7 +509,7 @@ public final class MultiblockBuilder extends Item {
 
             if (remainingToConsume <= 0) continue;
 
-            for (ItemStack stack : player.getInventory().items) {
+            for (ItemStack stack : player.getInventory().getNonEquipmentItems()) {
                 if (stack.getItem().equals(item)) {
                     int amountToShrink = Math.min(remainingToConsume, stack.getCount());
                     stack.shrink(amountToShrink);

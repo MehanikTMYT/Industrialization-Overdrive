@@ -2,18 +2,10 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "A": {
-      "item": "modern_industrialization:large_advanced_motor"
-    },
-    "C": {
-      "item": "modern_industrialization:solid_titanium_machine_casing"
-    },
-    "D": {
-      "item": "modern_industrialization:processing_unit"
-    },
-    "S": {
-      "item": "modern_industrialization:assembler"
-    }
+    "A": "modern_industrialization:large_advanced_motor",
+    "C": "modern_industrialization:solid_titanium_machine_casing",
+    "D": "modern_industrialization:processing_unit",
+    "S": "modern_industrialization:assembler"
   },
   "pattern": [
     "ADA",
@@ -21,7 +13,7 @@
     "ADA"
   ],
   "result": {
-    "count": 1,
     "id": "industrialization_overdrive:multi_processing_array"
-  }
+  },
+  "show_notification": false
 }
