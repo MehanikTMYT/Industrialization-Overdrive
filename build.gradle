@@ -27,7 +27,8 @@ runs {
     configureEach { modSource project.sourceSets.main }
     client {}
     server {
-        argument '--nogui'; argument '--port'; argument '25671'
+        workingDirectory = project.file('run/server')
+        argument '--nogui'
     }
     serverData {
         argument '--mod'; argument mod_id
