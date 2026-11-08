@@ -1,0 +1,4 @@
+Selected available ports: game=51921 rcon=42385
+
+Stopping the server
+

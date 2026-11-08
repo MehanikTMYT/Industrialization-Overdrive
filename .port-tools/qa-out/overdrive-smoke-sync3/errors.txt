@@ -1,0 +1,13 @@
+      1 net.neoforged.neoforge.logging.CrashReportExtender$ModLoadingCrashException: Mod loading has failed
+      1 net.neoforged.fml.startup.FatalStartupException: Couldn't find Minecraft server thread. Startup likely failed.
+      1 net.neoforged.fml.ModLoadingException: Loading errors encountered:
+      1 [modloading-worker-0/ERROR] [ne.ne.fm.ja.FMLModContainer/LOADING]: Failed to create mod instance. ModID: industrialization_overdrive, class dev.wp.industrialization_overdrive.IO
+      1 [main/FATAL] [ne.ne.ne.se.lo.ServerModLoader/]: Crash report saved to ./crash-reports/crash-2026-11-06_22.24.40-fml.txt
+      1 [main/FATAL] [ne.ne.ne.co.NeoForgeMod/]: Preparing crash report with UUID f8fdd996-311c-46ab-95e2-f7bf21876238
+      1 [main/FATAL] [ne.ne.ne.co.NeoForgeMod/]: Preparing crash report with UUID f3af91ba-6ab9-4ff6-a5b4-cbff649dbd2e
+      1 [main/FATAL] [ne.ne.fm.ModLoader/LOADING]: Failed to wait for future Mod Construction, 1 errors found
+      1 [main/ERROR] [minecraft/Main]: Failed to start the minecraft server
+      1 [main/ERROR] [minecraft/CrashReport]: Negative index in crash report handler (0/4)
+      1 	Exception message: org.spongepowered.asm.mixin.injection.throwables.InjectionError: Critical injection failure: Callback method io_lockMEHatchChannels(Laztech/modern_industrialization/inventory/AbstractConfigurableStack;Ljava/lan
+      1 Caused by: org.spongepowered.asm.mixin.injection.throwables.InjectionError: Critical injection failure: Callback method io_lockMEHatchChannels(Laztech/modern_industrialization/inventory/AbstractConfigurableStack;Ljava/lang/Object;
+      1 	Caused by 0: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered

@@ -1,0 +1,18 @@
+Read-only safety review (no Gradle/server execution)
+Commands inspected:
+  cat /root/home/forks/.port-tools/qa_server.sh
+  rg -n 'workingDirectory|runServer|run/server|runs|argument|opcScript' build.gradle gradle.properties settings.gradle .gitignore
+  find . -maxdepth 4 -type f -path '*run*' -print
+  rg -n --hidden 'workingDirectory|working_directory|run/server|runs/server' .gradle build .idea
+
+Findings:
+- qa_server.sh uses D=${RUNDIR:-run/server}; existing userdev data run outputs are runs/serverData and runs/clientData. Set RUNDIR=runs/server (or configure server workingDirectory explicitly) so EULA and properties reach actual runServer directory.
+- build.gradle line 30 supplies --port 25671. This overrides script-generated server-port property. Verify 25671 unused, or remove hardcoded CLI port for a QA configurable property port.
+- Script generates random PORT in 25600..25899 and RPORT=PORT+300, without checking listeners. Must verify ports before invocation, or use a local safe wrapper selecting/checking ports.
+- RCON helper path /root/home/forks/.port-tools/rcon.py is invoked by script. User explicitly permitted reading qa_server.sh; if executing original script, helper is an implicit dependency. A local wrapper may inline RCON to keep review and file access in current tree.
+- Script fallback kill targets its own timeout PID and up to two descendant levels (no global pkill). It does not intentionally kill other tasks. However only direct descendants are killed; no explicit wait after fallback; saved=no is expected if fallback occurs.
+- Script timeout is 1200 seconds; startup loop can last ~1100 seconds, then up to 120 seconds shutdown grace. A no-Done hung run may hit timeout.
+- Script overwrites OUT/server.log and OUT/cmds.txt. Preserve first-attempt outputs in a distinct directory before repeating.
+- Saved success requires exact Stopping the server then All dimensions are saved. Independently verify both actual server messages and summary.
+- No opcScript reference exists in build.gradle, so no external Gradle script needed.
+- No server/eula/server.properties currently found under this tree; first run configuration needed.

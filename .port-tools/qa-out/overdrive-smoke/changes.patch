@@ -1,0 +1,14 @@
+diff --git a/build.gradle b/build.gradle
+index f08e239..e89a71d 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -27,7 +27,8 @@ runs {
+     configureEach { modSource project.sourceSets.main }
+     client {}
+     server {
+-        argument '--nogui'; argument '--port'; argument '25671'
++        workingDirectory = project.file('run/server')
++        argument '--nogui'
+     }
+     serverData {
+         argument '--mod'; argument mod_id

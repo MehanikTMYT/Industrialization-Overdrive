@@ -1,6 +1,7 @@
 package dev.wp.industrialization_overdrive;
 
 import aztech.modern_industrialization.client.machines.MachineBlockEntityRenderer;
+import aztech.modern_industrialization.guidebook.MultiblockShapeCompiler;
 import aztech.modern_industrialization.client.machines.multiblocks.MultiblockMachineBER;
 import aztech.modern_industrialization.client.machines.multiblocks.MultiblockTankBER;
 import aztech.modern_industrialization.machines.MachineBlock;
@@ -12,6 +13,8 @@ import dev.wp.industrialization_overdrive.item.MultiblockBuilder;
 import dev.wp.industrialization_overdrive.item.Vajra;
 import dev.wp.industrialization_overdrive.network.packet.ModifyMultiblockBuilderModePacket;
 import dev.wp.industrialization_overdrive.network.packet.ModifyVajraSpeedPacket;
+import guideme.Guide;
+import guideme.scene.element.SceneElementTagCompiler;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -41,6 +44,9 @@ public final class IOClient {
     );
 
     public IOClient(IEventBus bus) {
+        // Синк 2026-11-06: гайд регистрируется только на клиенте — GuideME GuidebookLevel реализует
+        // client-only BlockAndTintGetter и не грузится на dedicated server (как в MI: MIGuide из MIClient).
+        setupGuide();
         bus.addListener(RegisterKeyMappingsEvent.class, event -> event.register(MULTIBLOCK_BUILDER_MODE_SWITCH));
         bus.addListener(net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent.class,
                 event -> event.register(IO.id("mode"), BuilderModeProperty.CODEC));
@@ -74,6 +80,13 @@ public final class IOClient {
                 }
             }
         });
+    }
+
+    private static void setupGuide() {
+        var guide = Guide.builder(IO.id("guide"))
+                .extension(SceneElementTagCompiler.EXTENSION_POINT, new MultiblockShapeCompiler());
+        // // TesseractGuideMETags.includeIn(guide);
+        guide.build();
     }
 
     public record BuilderModeProperty() implements net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty {

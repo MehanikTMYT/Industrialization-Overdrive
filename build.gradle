@@ -17,15 +17,28 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation("aztech:Modern-Industrialization:${modern_industrialization_version}") { transitive = false }
     implementation "net.swedz:tesseract-api-neoforge:${tesseract_version}"
+    compileOnly "net.swedz:extended-industrialization:0.0.0-port.1+26.1.2" // опубликован в mavenLocal 2026-11-06 (порт EI 26.1.2)
     compileOnly "net.swedz:tesseract-api:1.0.2"
-    compileOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}:api"
+    // синк 2026-11-06: новые ME-hatch файлы требуют appeng.helpers/menu — они НЕ в api-classifier, берём полный jar
+    compileOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}"
     runtimeOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}"
     implementation('org.appliedenergistics:guideme:26.1.14-beta') { transitive = false }
     runtimeOnly 'dev.emi:emi-neoforge:1.1.24-semi151a6c88+26.1.2'
+
+    // синк 2026-11-06: тестовые зависимости апстрима (дельта не была применена ранее)
+    testImplementation(platform("org.junit:junit-bom:5.11.4"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 runs {
     configureEach { modSource project.sourceSets.main }
-    client {}
+    client {
+        // Fleet QA: -PquickPlay=<world> joins a singleplayer world directly (headless visual checks,
+        // паттерн Modern-Industrialization 26.1.2; см. .port-tools/run-client.sh).
+        if (project.hasProperty('quickPlay')) {
+            programArguments.addAll('--quickPlaySingleplayer', project.property('quickPlay').toString(), '--width', '1280', '--height', '720')
+        }
+    }
     server {
         workingDirectory = project.file('run/server')
         argument '--nogui'
@@ -60,5 +73,9 @@ jar {
     from('guidebook') { into 'assets/modern_industrialization/mi_guidebook' }
 }
 java.withSourcesJar()
+tasks.named('test', Test) {
+    useJUnitPlatform()
+}
+
 tasks.named('sourcesJar') { from 'LICENSE.md' }
 publishing { publications { mavenJava(MavenPublication) { from components.java; artifactId = project.artifact_name } } }

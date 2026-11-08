@@ -1,0 +1,832 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/root/.gradle/wrapper/dists/gradle-9.2.1-bin/2t0n5ozlw9xmuyvbp7dnzaxug/gradle-9.2.1/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+-------------------------------------
+NeoGradle detected a problem with your project: Run.getProgramArguments()
+Details: The method getProgramArguments() is deprecated and will be removed in the future
+Potential Solution: Use getArguments() instead of getProgramArguments()
+More information: https://github.com/neoforged/NeoGradle/blob/NG_7.1/README.md#common-runs-configuration-types-configure-by-type
+-------------------------------------
+Enabling dist annotations on PMJ
+
+> Task :neoFormListLibraries UP-TO-DATE
+> Task :neoFormListTransformLibraries UP-TO-DATE
+> Task :cacheVersionManifest26.1.2 UP-TO-DATE
+> Task :cacheVersionExecutableClient26.1.2 UP-TO-DATE
+> Task :cacheVersionExecutableServer26.1.2 UP-TO-DATE
+> Task :neoFormSetup UP-TO-DATE
+> Task :neoFormDecompile UP-TO-DATE
+> Task :neoFormPatch UP-TO-DATE
+> Task :neoFormPatchUserDev UP-TO-DATE
+> Task :neoFormTransformSource UP-TO-DATE
+> Task :neoFormRecompile UP-TO-DATE
+> Task :supplyRawJarForneoFormJoined26.1.2-1 UP-TO-DATE
+> Task :selectRawArtifactNg_dummy_ng.net.neoforged_neoforge_26.1.2.126 UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :neoFormJoined26.1.2-1DownloadAssets UP-TO-DATE
+> Task :neoFormJoined26.1.2-1ExtractNatives UP-TO-DATE
+
+> Task :runClient
+2026-11-06T20:57:44.138034712Z main WARN Advanced terminal features are not available in this environment
+[23:57:44] [main/INFO] [ne.ne.fm.st.Entrypoint/]: JVM Uptime at startup: 229ms
+[23:57:44] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Starting FancyModLoader version 11.0.15 (CLIENT in DEV)
+[23:57:44] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: /root/home/forks/mi-stack/Industrialization-Overdrive/runs/client
+[23:57:44] [main/INFO] [ne.ne.fm.lo.EarlyServiceDiscovery/]: Found 2 early service jars (out of 103) in 94ms
+[23:57:44] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Early Services:
+[23:57:44] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /root/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/earlydisplay/11.0.15/b254aa4ec40828f8ce65411dcb7fb9f6ce008064/earlydisplay-11.0.15.jar
+[23:57:44] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /root/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/11.0.15/69ddd98736a6b095783523404d1af8992842722/loader-11.0.15.jar
+[23:57:44] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[23:57:46] [ForkJoinPool.commonPool-worker-5/INFO] [ne.ne.fm.lo.mo.lo.GameLocator/]: Detected a joined NeoForge and Minecraft configuration. Applying filtering...
+[23:57:46] [fml-loadingscreen/INFO] [ne.ne.fm.ea.re.LoadingScreenRenderer/]: GL info: llvmpipe (LLVM 20.1.2, 256 bits) GL version 4.5 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.4, Mesa
+[23:57:46] [ForkJoinPool.commonPool-worker-5/INFO] [ne.ne.fm.lo.mo.lo.InDevFolderLocator/CORE]: Got mod coordinates Industrialization-Overdrive%%/root/home/forks/mi-stack/Industrialization-Overdrive/build/resources/main:Industrialization-Overdrive%%/root/home/forks/mi-stack/Industrialization-Overdrive/build/classes/java/main from env
+[23:57:47] [ForkJoinPool.commonPool-worker-5/WARN] [ne.ne.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: library:mixinextras.neoforge. Using jar(/root/.gradle/caches/modules-2/files-2.1/io.github.llamalad7/mixinextras-neoforge/0.5.5/26f2905a37afd203c3da1d6a2e164472a7531b41/mixinextras-neoforge-0.5.5.jar)
+[23:57:47] [ForkJoinPool.commonPool-worker-5/WARN] [ne.ne.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: library:tesseract.api. Using jar(/root/.gradle/caches/modules-2/files-2.1/net.swedz/tesseract-api/1.0.2/2885b77e564eb154f6f169e707c8d533c5ab0473/tesseract-api-1.0.2.jar)
+[23:57:47] [ForkJoinPool.commonPool-worker-5/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[23:57:47] [ForkJoinPool.commonPool-worker-5/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Applied Energistics 2 26.1.12-SNAPSHOT (ae2)
+		GuideME 26.1.14-beta (guideme)
+		Industrialization Overdrive 1.14.0-port.2+26.1.2 (industrialization_overdrive)
+		Minecraft 26.1.2 (minecraft)
+		Modern Industrialization 2.6.0-26.1.2-fleet01 (modern_industrialization)
+		NeoForge 26.1.2.126 (neoforge)
+		SEMI 1.1.24-semi151a6c88+26.1.2+neoforge (emi)
+		Tesseract API 1.13.7-26.1.2-fleet.1 (tesseract_api)
+[23:57:47] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/root/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/5f66cc9f59b8efaa942155a3d5a30599bf6640dd/sponge-mixin-0.17.4+mixin.0.8.7.jar Service=FML Env=CLIENT
+/*********************************************************************************************************************************************************************************************************************************/
+/*                                                                                        SpongePowered MIXIN (Verbose debugging enabled)                                                                                        */
+/*********************************************************************************************************************************************************************************************************************************/
+/*                                         Code source : file:/root/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/5f66cc9f59b8efaa942155a3d5a30599bf6640dd/sponge-mixin-0.17.4+mixin.0.8.7.jar */
+/*                                    Internal Version : 0.8.7                                                                                                                                                                   */
+/*                                        Java Version : 25.0 (supports compatibility 6-25)                                                                                                                                      */
+/*                         Default Compatibility Level : JAVA_21                                                                                                                                                                 */
+/*                   Max Effective Compatibility Level : JAVA_13                                                                                                                                                                 */
+/*                                Detected ASM Version : ASM 9.9.1 (ASM10_EXPERIMENTAL)                                                                                                                                          */
+/*                          Detected ASM Supports Java : Up to Java 26 (class file version 70.0)                                                                                                                                 */
+/*********************************************************************************************************************************************************************************************************************************/
+/*                                        Service Name : FML                                                                                                                                                                     */
+/*                                 Mixin Service Class : net.neoforged.fml.loading.mixin.FMLMixinService                                                                                                                         */
+/*                       Global Property Service Class : net.neoforged.fml.loading.mixin.FMLMixinGlobalProperties                                                                                                                */
+/*                                 Logger Adapter Type : Log4j2 (via FML)                                                                                                                                                        */
+/*********************************************************************************************************************************************************************************************************************************/
+/*                                         mixin.debug : <true>                                                                                                                                                                  */
+/*                                  mixin.debug.export : - <true>                                                                                                                                                                */
+/*                           mixin.debug.export.filter : - - <null>                                                                                                                                                              */
+/*                        mixin.debug.export.decompile : - - <true>                                                                                                                                                              */
+/*                  mixin.debug.export.decompile.async : - - - <true>                                                                                                                                                            */
+/* mixin.debug.export.decompile.mergeGenericSignatures : - - - <true>                                                                                                                                                            */
+/*                                  mixin.debug.verify : - <true>                                                                                                                                                                */
+/*                                 mixin.debug.verbose : - <true>                                                                                                                                                                */
+/*                         mixin.debug.countInjections : - <true>                                                                                                                                                                */
+/*                                  mixin.debug.strict : - <false>                                                                                                                                                               */
+/*                           mixin.debug.strict.unique : - - <false>                                                                                                                                                             */
+/*                          mixin.debug.strict.targets : - - <false>                                                                                                                                                             */
+/*                                mixin.debug.profiler : - <true>                                                                                                                                                                */
+/*                           mixin.dumpTargetOnFailure : <false>                                                                                                                                                                 */
+/*                                        mixin.checks : <false>                                                                                                                                                                 */
+/*                             mixin.checks.interfaces : - <false>                                                                                                                                                               */
+/*                      mixin.checks.interfaces.strict : - - <false>                                                                                                                                                             */
+/*                             mixin.ignoreConstraints : <false>                                                                                                                                                                 */
+/*                                       mixin.hotSwap : <false>                                                                                                                                                                 */
+/*                                       mixin.env.obf : - <false>                                                                                                                                                               */
+/*                             mixin.env.disableRefMap : - <false>                                                                                                                                                               */
+/*                               mixin.env.remapRefMap : - <false>                                                                                                                                                               */
+/*                       mixin.env.refMapRemappingFile : - <>                                                                                                                                                                    */
+/*                        mixin.env.refMapRemappingEnv : - <searge>                                                                                                                                                              */
+/*                      mixin.env.allowPermissiveMatch : - <false>                                                                                                                                                               */
+/*                            mixin.env.ignoreRequired : - <false>                                                                                                                                                               */
+/*                               mixin.env.compatLevel : - <false>                                                                                                                                                               */
+/*                          mixin.env.shiftByViolation : - <warn>                                                                                                                                                                */
+/*                      mixin.initialiserInjectionMode : <default>                                                                                                                                                               */
+/*               mixin.tunable.classReaderExpandFrames : - <false>                                                                                                                                                               */
+/*********************************************************************************************************************************************************************************************************************************/
+/*                                    UNSAFE_INJECTION : available=<true> enabled=<true>                                                                                                                                         */
+/*                       INJECTORS_IN_INTERFACE_MIXINS : available=<true> enabled=<true>                                                                                                                                         */
+/*********************************************************************************************************************************************************************************************************************************/
+/*                                       Detected Side : CLIENT                                                                                                                                                                  */
+/*********************************************************************************************************************************************************************************************************************************/
+[23:57:47] [main/INFO] [mixin/]: Attempting to load Fernflower decompiler (Threaded mode)
+[23:57:47] [main/INFO] [mixin/]: Fernflower could not be loaded, exported classes will not be decompiled. NoClassDefFoundError: org/jetbrains/java/decompiler/main/extern/IResultSaver
+[23:57:47] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
+[23:57:47] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /root/.gradle/caches/modules-2/files-2.1/net.neoforged/neoforge/26.1.2.126/e03e444b0e0793b0fa76b967d944af6fa855516e/neoforge-26.1.2.126-universal.jar > net.neoforged.neoforge-coremods-26.1.2.126.jar
+[23:57:48] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
+ - ae2 (jar(/root/build-farm/build-farm/m2/repository/org/appliedenergistics/appliedenergistics2/26.1.12-SNAPSHOT/appliedenergistics2-26.1.12-SNAPSHOT.jar))
+ - emi (jar(/root/build-farm/build-farm/m2/repository/dev/emi/emi-neoforge/1.1.24-semi151a6c88+26.1.2/emi-neoforge-1.1.24-semi151a6c88+26.1.2.jar))
+ - guideme (jar(/root/.gradle/caches/modules-2/files-2.1/org.appliedenergistics/guideme/26.1.14-beta/abe3222d6c8303a49f3fa468267c2a1d3371c699/guideme-26.1.14-beta.jar))
+ - industrialization_overdrive (composite(folder(/root/home/forks/mi-stack/Industrialization-Overdrive/build/resources/main), folder(/root/home/forks/mi-stack/Industrialization-Overdrive/build/classes/java/main)))
+ - minecraft (composite(filtered(jar(/root/home/forks/mi-stack/Industrialization-Overdrive/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/26.1.2.126/neoforge-26.1.2.126.jar)), filtered(jar(/root/home/forks/mi-stack/Industrialization-Overdrive/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/26.1.2.126/neoforge-26.1.2.126.jar))))
+ - mixinextras.neoforge (jar(/root/.gradle/caches/modules-2/files-2.1/io.github.llamalad7/mixinextras-neoforge/0.5.5/26f2905a37afd203c3da1d6a2e164472a7531b41/mixinextras-neoforge-0.5.5.jar))
+ - modern_industrialization (jar(/root/build-farm/build-farm/m2/repository/aztech/Modern-Industrialization/2.6.0-26.1.2-fleet01/Modern-Industrialization-2.6.0-26.1.2-fleet01.jar))
+ - neoforge (composite(filtered(jar(/root/.gradle/caches/modules-2/files-2.1/net.neoforged/neoforge/26.1.2.126/e03e444b0e0793b0fa76b967d944af6fa855516e/neoforge-26.1.2.126-universal.jar))))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+ - tesseract.api (jar(/root/.gradle/caches/modules-2/files-2.1/net.swedz/tesseract-api/1.0.2/2885b77e564eb154f6f169e707c8d533c5ab0473/tesseract-api-1.0.2.jar))
+ - tesseract_api (jar(/root/build-farm/build-farm/m2/repository/net/swedz/tesseract-api-neoforge/1.13.7-26.1.2-fleet.1/tesseract-api-neoforge-1.13.7-26.1.2-fleet.1.jar))
+[23:57:48] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Built game content classloader in 47ms
+[23:57:48] [main/INFO] [mixin/]: Compatibility level JAVA_17 specified by emi.mixins.json is lower than the default level supported by the current mixin service (JAVA_21).
+[23:57:48] [main/WARN] [mixin/]: Compatibility level JAVA_17 specified by emi.mixins.json is higher than the maximum level supported by this version of mixin (JAVA_13).
+[23:57:48] [main/INFO] [mixin/]: Compatibility level JAVA_17 specified by emi-neoforge.mixins.json is lower than the default level supported by the current mixin service (JAVA_21).
+[23:57:48] [main/WARN] [mixin/]: Compatibility level JAVA_17 specified by emi-neoforge.mixins.json is higher than the maximum level supported by this version of mixin (JAVA_13).
+[23:57:48] [main/INFO] [mixin/]: Compatibility level JAVA_11 specified by guideme.mixins.json is lower than the default level supported by the current mixin service (JAVA_21).
+[23:57:48] [main/INFO] [mixin/]: Compatibility level JAVA_11 specified by guideme.optional.mixins.json is lower than the default level supported by the current mixin service (JAVA_21).
+[23:57:48] [main/INFO] [mixin/]: Compatibility level JAVA_11 specified by ae2.mixins.json is lower than the default level supported by the current mixin service (JAVA_21).
+[23:57:48] [main/INFO] [mixin/]: Compatibility level JAVA_8 specified by modern_industrialization.mixins.json is lower than the default level supported by the current mixin service (JAVA_21).
+[23:57:48] [main/WARN] [mixin/]: Compatibility level JAVA_25 specified by tesseract_api_mi.mixins.json is higher than the maximum level supported by this version of mixin (JAVA_13).
+[23:57:48] [main/INFO] [mixin/]: Preparing mixins for MixinEnvironment[DEFAULT]
+[23:57:48] [main/INFO] [mixin/]: Selecting config emi.mixins.json
+[23:57:48] [main/INFO] [mixin/]: Selecting config emi-neoforge.mixins.json
+[23:57:48] [main/INFO] [mixin/]: Selecting config guideme.mixins.json
+[23:57:48] [main/INFO] [mixin/]: Selecting config guideme.optional.mixins.json
+[23:57:48] [main/INFO] [mixin/]: Selecting config neoforge.mixins.json
+[23:57:48] [main/INFO] [mixin/]: Selecting config ae2.mixins.json
+[23:57:48] [main/INFO] [mixin/]: Selecting config modern_industrialization.mixins.json
+[23:57:48] [main/INFO] [mixin/]: Selecting config tesseract_api.mixins.json
+[23:57:48] [main/INFO] [mixin/]: Selecting config tesseract_api_mi.mixins.json
+[23:57:48] [main/INFO] [mixin/]: Selecting config industrialization_overdrive.mixins.json
+[23:57:48] [main/INFO] [mixin/]: Selecting config mixinextras.init.mixins.json
+[23:57:48] [main/INFO] [mixin/]: Preparing emi.mixins.json (29)
+[23:57:48] [main/WARN] [mixin/]: Error loading class: mezz/jei/library/load/PluginCaller (java.lang.ClassNotFoundException: mezz.jei.library.load.PluginCaller)
+[23:57:49] [main/INFO] [mixin/]: Preparing emi-neoforge.mixins.json (0)
+[23:57:49] [main/INFO] [mixin/]: Preparing guideme.mixins.json (0)
+[23:57:49] [main/INFO] [mixin/]: Preparing guideme.optional.mixins.json (1)
+[23:57:49] [main/INFO] [mixin/]: Preparing neoforge.mixins.json (2)
+[23:57:49] [main/INFO] [mixin/]: Preparing ae2.mixins.json (14)
+[23:57:49] [main/INFO] [mixin/]: Preparing modern_industrialization.mixins.json (1)
+[23:57:49] [main/INFO] [mixin/]: Preparing tesseract_api.mixins.json (12)
+[23:57:49] [main/INFO] [mixin/]: Preparing tesseract_api_mi.mixins.json (20)
+[23:57:49] [main/INFO] [mixin/]: Preparing industrialization_overdrive.mixins.json (17)
+[23:57:49] [main/INFO] [mixin/]: Preparing mixinextras.init.mixins.json (0)
+[23:57:49] [main/INFO] [mixin/]: Prepared 94 mixins in 1.093 sec (11.6ms avg) (0ms load, 0ms transform, 0ms plugin)
+[23:57:53] [Datafixer Bootstrap/INFO] [mojang/DataFixerBuilder]: 294 Datafixer optimizations took 1611 milliseconds
+[23:57:55] [pool-10-thread-1/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[23:57:55] [pool-10-thread-1/INFO] [mixin/]: Mixing MappedRegistryAccessor from neoforge.mixins.json into net.minecraft.core.MappedRegistry
+[23:57:55] [pool-10-thread-1/WARN] [mixin/]: neoforge.mixins.json:MappedRegistryAccessor from mod neoforge: Class version 69 required is higher than the class version supported by the current version of Mixin (JAVA_21 supports class version 65)
+[23:57:55] [pool-10-thread-1/INFO] [mixin/]: Mixing BlockStateBaseMixin from modern_industrialization.mixins.json into net.minecraft.world.level.block.state.BlockBehaviour$BlockStateBase
+[23:57:55] [pool-10-thread-1/WARN] [mixin/]: modern_industrialization.mixins.json:BlockStateBaseMixin from mod modern_industrialization: Class version 69 required is higher than the class version supported by the current version of Mixin (JAVA_8 supports class version 52)
+[23:57:56] [pool-10-thread-1/INFO] [mixin/]: Mixing event.treegrowth.LevelTrackBlockChangesExtensionMixin from tesseract_api.mixins.json into net.minecraft.world.level.Level
+[23:57:56] [pool-10-thread-1/WARN] [mixin/]: tesseract_api.mixins.json:event.treegrowth.LevelTrackBlockChangesExtensionMixin from mod tesseract_api: Class version 69 required is higher than the class version supported by the current version of Mixin (JAVA_21 supports class version 65)
+[23:57:56] [pool-10-thread-1/INFO] [mixin/]: Mixing ItemEntityMixin from ae2.mixins.json into net.minecraft.world.entity.item.ItemEntity
+[23:57:56] [pool-10-thread-1/WARN] [mixin/]: ae2.mixins.json:ItemEntityMixin from mod ae2: Class version 69 required is higher than the class version supported by the current version of Mixin (JAVA_11 supports class version 55)
+[23:57:56] [pool-10-thread-1/INFO] [mixin/]: Renaming synthetic method lambda$handleEntityTransform$0(Lnet/minecraft/world/level/material/FluidState;Lappeng/recipes/transform/TransformCircumstance;)Z to mdc9d51d$ae2$lambda$handleEntityTransform$0$0 in ae2.mixins.json:ItemEntityMixin from mod ae2
+[23:57:57] [pool-10-thread-1/INFO] [mixin/]: Mixing BlockEntityTypeAccessor from neoforge.mixins.json into net.minecraft.world.level.block.entity.BlockEntityType
+[23:57:58] [pool-10-thread-1/INFO] [mixin/]: Mixing event.FarmlandLoseMoistureEventMixin from tesseract_api.mixins.json into net.minecraft.world.level.block.FarmlandBlock
+[23:57:59] [pool-10-thread-1/INFO] [mixin/]: Mixing AnvilMenuMixin from ae2.mixins.json into net.minecraft.world.inventory.AnvilMenu
+[23:58:00] [pool-10-thread-1/INFO] [mixin/]: Mixing tests.TestInstanceBlockEntityMixin from ae2.mixins.json into net.minecraft.world.level.block.entity.TestInstanceBlockEntity
+[23:58:01] [pool-10-thread-1/INFO] [mixin/]: Mixing ItemStackMixin from emi.mixins.json into net.minecraft.world.item.ItemStack
+[23:58:01] [pool-10-thread-1/WARN] [mixin/]: emi.mixins.json:ItemStackMixin from mod emi: Class version 69 required is higher than the class version supported by the current version of Mixin (JAVA_17 supports class version 61)
+[23:58:01] [pool-10-thread-1/INFO] [mixin/]: Mixing DataComponentTooltipProviderMixin from tesseract_api.mixins.json into net.minecraft.world.item.ItemStack
+[23:58:01] [pool-10-thread-1/INFO] [mixin/]: Mixing event.ItemHurtEventMixin from tesseract_api.mixins.json into net.minecraft.world.item.ItemStack
+[23:58:01] [pool-10-thread-1/INFO] [mixin/]: Mixing event.PlayerInventoryChangeEventMixin from tesseract_api.mixins.json into net.minecraft.server.level.ServerPlayer
+[23:58:03] [pool-10-thread-1/INFO] [mixin/]: Mixing accessor.HoeItemAccessor from emi.mixins.json into net.minecraft.world.item.HoeItem
+[23:58:03] [pool-10-thread-1/INFO] [mixin/]: Renaming @Accessor method getTillingActions()Ljava/util/Map; to getTillingActions$emi_$md$c9d51d$0 in emi.mixins.json:accessor.HoeItemAccessor from mod emi
+[23:58:03] [pool-10-thread-1/INFO] [mixin/]: Mixing HoeItemMixin from emi.mixins.json into net.minecraft.world.item.HoeItem
+[23:58:03] [pool-10-thread-1/INFO] [mixin/]: Mixing accessor.AxeItemAccessor from emi.mixins.json into net.minecraft.world.item.AxeItem
+[23:58:03] [pool-10-thread-1/INFO] [mixin/]: Renaming @Accessor method getStrippedBlocks()Ljava/util/Map; to getStrippedBlocks$emi_$md$c9d51d$0 in emi.mixins.json:accessor.AxeItemAccessor from mod emi
+[23:58:03] [pool-10-thread-1/INFO] [mixin/]: Mixing accessor.ShovelItemAccessor from emi.mixins.json into net.minecraft.world.item.ShovelItem
+[23:58:03] [pool-10-thread-1/INFO] [mixin/]: Renaming @Accessor method getPathStates()Ljava/util/Map; to getPathStates$emi_$md$c9d51d$0 in emi.mixins.json:accessor.ShovelItemAccessor from mod emi
+[23:58:03] [pool-10-thread-1/INFO] [mixin/]: Mixing DynamicDyedItemDyeColorMixin from tesseract_api.mixins.json into net.minecraft.world.item.component.DyedItemColor
+[23:58:05] [pool-10-thread-1/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.platform.EmiClient
+[23:58:05] [pool-10-thread-1/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.network.EmiPacket
+[23:58:06] [pool-10-thread-1/INFO] [mixin/]: Mixing accessor.CraftingResultSlotAccessor from emi.mixins.json into net.minecraft.world.inventory.ResultSlot
+[23:58:06] [pool-10-thread-1/INFO] [mixin/]: Mixing CraftingResultSlotMixin from emi.mixins.json into net.minecraft.world.inventory.ResultSlot
+[23:58:06] [pool-10-thread-1/INFO] [mixin/]: Mixing DynamicDyedItemTrackStackDyeRecipeMixin from tesseract_api.mixins.json into net.minecraft.world.item.crafting.DyeRecipe
+[23:58:06] [pool-10-thread-1/INFO] [mixin/]: Mixing accessor.DecoratedPotRecipeAccessor from emi.mixins.json into net.minecraft.world.item.crafting.DecoratedPotRecipe
+[23:58:07] [pool-10-thread-1/INFO] [mixin/]: Mixing accessor.SmithingTransformRecipeAccessor from emi.mixins.json into net.minecraft.world.item.crafting.SmithingTransformRecipe
+[23:58:08] [pool-10-thread-1/INFO] [mixin/]: Mixing event.treegrowth.TreeGrowthEventMixin from tesseract_api.mixins.json into net.minecraft.world.level.levelgen.feature.Feature
+[23:58:08] [pool-10-thread-1/INFO] [mixin/]: Mixing event.treegrowth.TreeGrowthFeatureTestCacheMixin from tesseract_api.mixins.json into net.minecraft.world.level.levelgen.feature.Feature
+[23:58:11] [main/INFO] [mixin/]: Mixing tests.TestCommandMixin from ae2.mixins.json into net.minecraft.gametest.framework.TestCommand
+[23:58:12] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[23:58:12] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[23:58:12] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[23:58:12] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[23:58:12] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[23:58:12] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [time, set, time] and [time, set, timemarker] with inputs: [0, 0s, 0d, 0t]
+[23:58:12] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [time, set, timemarker] and [time, set, time] with inputs: [012]
+[23:58:12] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [time, of, clock, set, time] and [time, of, clock, set, timemarker] with inputs: [0, 0s, 0d, 0t]
+[23:58:12] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [time, of, clock, set, timemarker] and [time, of, clock, set, time] with inputs: [012]
+[23:58:12] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [waypoint, modify, waypoint, color, reset] and [waypoint, modify, waypoint, color, color] with inputs: [reset]
+[23:58:12] [main/INFO] [mixin/]: Mixing ScreenMixin from emi.mixins.json into net.minecraft.client.gui.screens.Screen
+[23:58:12] [main/INFO] [mixin/]: Mixing client.WrappedGenericStackTooltipModIdMixin from ae2.mixins.json into net.minecraft.client.gui.screens.Screen
+[23:58:12] [main/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.platform.neoforge.EmiNeoForge
+[23:58:12] [main/INFO] [mixin/]: Mixing hook.listener.BeforeAfterInitHookMixin from tesseract_api_mi.mixins.json into aztech.modern_industrialization.MI
+[23:58:12] [main/INFO] [mixin/]: Renaming synthetic method lambda$afterInit$0(Lnet/swedz/tesseract/neoforge/compat/mi/hook/MIHook;Lnet/swedz/tesseract/neoforge/compat/mi/hook/MIHookListener;)V to mdc9d51d$tesseract_api$lambda$afterInit$0$0 in tesseract_api_mi.mixins.json:hook.listener.BeforeAfterInitHookMixin from mod tesseract_api
+[23:58:12] [main/INFO] [mixin/]: Renaming synthetic method lambda$beforeInit$0(Lnet/swedz/tesseract/neoforge/compat/mi/hook/MIHook;Lnet/swedz/tesseract/neoforge/compat/mi/hook/MIHookListener;)V to mdc9d51d$tesseract_api$lambda$beforeInit$0$1 in tesseract_api_mi.mixins.json:hook.listener.BeforeAfterInitHookMixin from mod tesseract_api
+[23:58:12] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.platform.EmiMain
+[23:58:12] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.platform.neoforge.EmiPacketHandler
+[23:58:12] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.network.EmiNetwork
+[23:58:12] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.EmiPort
+[23:58:12] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 26.1.2.126, for MC 26.1.2
+[23:58:12] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.platform.neoforge.EmiClientNeoForge
+[23:58:12] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.HandledScreenAccessor from emi.mixins.json into net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+[23:58:12] [modloading-worker-0/INFO] [mixin/]: Mixing HandledScreenMixin from emi.mixins.json into net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+[23:58:12] [modloading-worker-0/INFO] [mixin/]: Mixing client.AbstractContainerScreenMixin from ae2.mixins.json into net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+[23:58:12] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.ConfigScreen
+[23:58:13] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.data.EmiResourceReloadListener
+[23:58:13] [modloading-worker-0/INFO] [mixin/]: Mixing spatial.MinecraftServerMixin from ae2.mixins.json into net.minecraft.server.MinecraftServer
+[23:58:13] [modloading-worker-0/WARN] [mixin/]: @Shadow target ae2.mixins.json:spatial.MinecraftServerMixin from mod ae2::levels is final but shadow is not decorated with @Final
+[23:58:13] [modloading-worker-0/WARN] [mixin/]: @Shadow target ae2.mixins.json:spatial.MinecraftServerMixin from mod ae2::worldData is final but shadow is not decorated with @Final
+[23:58:13] [modloading-worker-0/WARN] [mixin/]: @Shadow target ae2.mixins.json:spatial.MinecraftServerMixin from mod ae2::worldGenSettings is final but shadow is not decorated with @Final
+[23:58:13] [modloading-worker-0/WARN] [mixin/]: @Shadow target ae2.mixins.json:spatial.MinecraftServerMixin from mod ae2::executor is final but shadow is not decorated with @Final
+[23:58:13] [modloading-worker-0/WARN] [mixin/]: @Shadow target ae2.mixins.json:spatial.MinecraftServerMixin from mod ae2::storageSource is final but shadow is not decorated with @Final
+[23:58:13] [modloading-worker-0/WARN] [mixin/]: @Shadow target ae2.mixins.json:spatial.MinecraftServerMixin from mod ae2::registries is final but shadow is not decorated with @Final
+[23:58:13] [modloading-worker-0/INFO] [mixin/]: Mixing LuceneVectorizationMixin from guideme.optional.mixins.json into guideme.internal.shaded.lucene.internal.vectorization.VectorizationProvider
+[23:58:13] [modloading-worker-0/WARN] [mixin/]: guideme.optional.mixins.json:LuceneVectorizationMixin from mod guideme: Class version 69 required is higher than the class version supported by the current version of Mixin (JAVA_11 supports class version 55)
+[23:58:13] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.MinecraftAccessor from emi.mixins.json into net.minecraft.client.Minecraft
+[23:58:13] [modloading-worker-0/INFO] [mixin/]: Mixing MinecraftClientMixin from emi.mixins.json into net.minecraft.client.Minecraft
+[23:58:13] [modloading-worker-0/INFO] [mixin/]: Renaming synthetic method lambda$reloadResources$0()V to mdc9d51d$emi$lambda$reloadResources$0$0 in emi.mixins.json:MinecraftClientMixin from mod emi
+[23:58:13] [modloading-worker-0/INFO] [mixin/]: Mixing client.PickColorMixin from ae2.mixins.json into net.minecraft.client.Minecraft
+[23:58:15] [modloading-worker-0/INFO] [Tesseract API/MIMixinPlugin/]: Starting MI hook entrypoint loader
+[23:58:15] [modloading-worker-0/INFO] [Tesseract API/MIMixinPlugin/]: Registered entrypoint for mod tesseract_api: net.swedz.tesseract.neoforge.compat.mi.hook.builtin.TesseractMIHookListener
+[23:58:15] [modloading-worker-0/INFO] [Tesseract API/MIMixinPlugin/]: Registered entrypoint for mod industrialization_overdrive: dev.wp.industrialization_overdrive.compat.mi.IOMIHookListener
+[23:58:15] [modloading-worker-0/INFO] [Tesseract API/MIMixinPlugin/]: Registered entrypoint for mod industrialization_overdrive: dev.wp.industrialization_overdrive.compat.mi.IOMIHookRegistry
+[23:58:15] [modloading-worker-0/INFO] [Tesseract API/MIMixinPlugin/]: Done MI hook entrypoint loader
+[23:58:15] [modloading-worker-0/INFO] [mixin/]: Mixing FixSteelUpgradeItemMixin from tesseract_api_mi.mixins.json into aztech.modern_industrialization.items.SteelUpgradeItem
+[23:58:15] [modloading-worker-0/INFO] [mixin/]: Mixing ConfigurableScreenHandlerMEHatchMixin from industrialization_overdrive.mixins.json into aztech.modern_industrialization.inventory.ConfigurableScreenHandler
+[23:58:15] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.MachineCasingAccessor from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.models.MachineCasing
+[23:58:15] [modloading-worker-0/INFO] [mixin/]: Renaming @Invoker method init(Lnet/minecraft/resources/Identifier;Ljava/util/function/Supplier;)Laztech/modern_industrialization/machines/models/MachineCasing; to init$tesseract_api_$md$c9d51d$0 in tesseract_api_mi.mixins.json:accessor.MachineCasingAccessor from mod tesseract_api
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.MIMachineRecipeTypesAccessor from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.init.MIMachineRecipeTypes
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Renaming @Accessor method getRecipeTypes()Ljava/util/List; to getRecipeTypes$tesseract_api_$md$c9d51d$0 in tesseract_api_mi.mixins.json:accessor.MIMachineRecipeTypesAccessor from mod tesseract_api
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing hook.efficiency.RecipeEfficiencyBarEfficiencyHookMixin from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.guicomponents.RecipeEfficiencyBar
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing hook.efficiency.CrafterComponentBehaviorEfficiencyHookMixin from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.components.CrafterComponent$Behavior
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing HatchFlagsMixin from industrialization_overdrive.mixins.json into aztech.modern_industrialization.machines.multiblocks.HatchFlags
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.SteamCraftingMultiblockBlockEntityAccessor from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.blockentities.multiblocks.SteamCraftingMultiblockBlockEntity
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing hook.efficiency.EBFEfficiencyHookMixin from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.blockentities.multiblocks.ElectricBlastFurnaceBlockEntity
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing hook.listener.BlastFurnaceTierHookMixin from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.blockentities.multiblocks.ElectricBlastFurnaceBlockEntity
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Renaming synthetic method lambda$clinit$0(Ljava/util/List;Lnet/swedz/tesseract/neoforge/compat/mi/hook/MIHook;Lnet/swedz/tesseract/neoforge/compat/mi/hook/MIHookListener;)V to mdc9d51d$tesseract_api$lambda$clinit$0$0 in tesseract_api_mi.mixins.json:hook.listener.BlastFurnaceTierHookMixin from mod tesseract_api
+[23:58:16] [modloading-worker-0/INFO] [Modern Industrialization/]: Modern Industrialization setup done!
+[23:58:16] [modloading-worker-0/INFO] [Modern Industrialization/]: Modern Industrialization client setup done!
+[23:58:16] [modloading-worker-0/INFO] [Tesseract API/Proxies/]: Starting proxy manager entrypoint loader
+[23:58:16] [modloading-worker-0/INFO] [Tesseract API/Proxies/]: Loaded proxy entrypoint net.swedz.tesseract.neoforge.proxy.builtin.TesseractProxy (TesseractClientProxy)
+[23:58:16] [modloading-worker-0/INFO] [Tesseract API/Proxies/]: Loaded proxy entrypoint net.swedz.tesseract.neoforge.compat.mi.proxy.TesseractMIProxy (TesseractMILoadedProxy)
+[23:58:16] [modloading-worker-0/INFO] [Tesseract API/Proxies/]: Done proxy manager entrypoint loader
+[23:58:16] [modloading-worker-0/INFO] [Tesseract API/]: Tesseract API has completed initialization!
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing AbstractElectricMultipliedCraftingMultiblockMixin from industrialization_overdrive.mixins.json into net.swedz.tesseract.neoforge.compat.mi.machine.blockentity.multiblock.multiplied.AbstractElectricMultipliedCraftingMultiblockBlockEntity
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.AbstractMultipliedCraftingMultiblockAccessor from industrialization_overdrive.mixins.json into net.swedz.tesseract.neoforge.compat.mi.machine.blockentity.multiblock.multiplied.AbstractMultipliedCraftingMultiblockBlockEntity
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.ConfigurableStackAccessor from tesseract_api_mi.mixins.json into aztech.modern_industrialization.inventory.AbstractConfigurableStack
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.AbstractConfigurableStackAccessor from industrialization_overdrive.mixins.json into aztech.modern_industrialization.inventory.AbstractConfigurableStack
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing ConfigurableStackPlayerLockMixin from industrialization_overdrive.mixins.json into aztech.modern_industrialization.inventory.AbstractConfigurableStack
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.ConfigurableItemStackAccessor from industrialization_overdrive.mixins.json into aztech.modern_industrialization.inventory.ConfigurableItemStack
+[23:58:16] [modloading-worker-0/INFO] [mixin/]: Mixing ConfigurableItemStackCapacityMixin from industrialization_overdrive.mixins.json into aztech.modern_industrialization.inventory.ConfigurableItemStack
+[23:58:17] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.SlotPanelAccessor from industrialization_overdrive.mixins.json into aztech.modern_industrialization.machines.guicomponents.SlotPanel
+[23:58:19] [Render thread/INFO] [mixin/]: Mixing accessor.AbstractRecipeBookScreenAccessor from emi.mixins.json into net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen
+[23:58:19] [Render thread/INFO] [mixin/]: Mixing RecipeBookScreenMixin from emi.mixins.json into net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen
+[23:58:19] [Render thread/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[23:58:19] [Render thread/INFO] [minecraft/Minecraft]: Setting user: Dev
+[23:58:19] [Render thread/INFO] [mixin/]: Mixing ToastManagerMixin from emi.mixins.json into net.minecraft.client.gui.components.toasts.ToastManager
+[23:58:20] [Render thread/INFO] [minecraft/Minecraft]: Backend library: LWJGL version 3.4.1+2
+[23:58:21] [Render thread/INFO] [mixin/]: Mixing MouseMixin from emi.mixins.json into net.minecraft.client.MouseHandler
+[23:58:21] [Render thread/INFO] [mixin/]: Mixing KeyboardMixin from emi.mixins.json into net.minecraft.client.KeyboardHandler
+[23:58:21] [Render thread/INFO] [minecraft/Minecraft]: Using optional rendering extensions: GL_ARB_buffer_storage, GL_KHR_debug, GL_ARB_vertex_attrib_binding, GL_ARB_direct_state_access, GL_EXT_texture_filter_anisotropic
+[23:58:23] [Render thread/INFO] [mixin/]: Mixing accessor.ItemStackRenderStateAccessor from emi.mixins.json into net.minecraft.client.renderer.item.ItemStackRenderState
+[23:58:23] [Render thread/INFO] [mixin/]: Mixing accessor.GameRendererAccessor from emi.mixins.json into net.minecraft.client.renderer.GameRenderer
+[23:58:23] [Render thread/INFO] [mixin/]: Mixing accessor.GuiGraphicsAccessor from emi.mixins.json into net.minecraft.client.gui.GuiGraphicsExtractor
+[23:58:23] [Render thread/INFO] [mixin/]: Mixing DrawContextMixin from emi.mixins.json into net.minecraft.client.gui.GuiGraphicsExtractor
+[23:58:23] [Render thread/INFO] [mixin/]: Mixing client.GuiGraphicsMixin from ae2.mixins.json into net.minecraft.client.gui.GuiGraphicsExtractor
+[23:58:23] [Render thread/INFO] [mixin/]: Mixing GuiGraphicsExtractorExtensionMixin from tesseract_api.mixins.json into net.minecraft.client.gui.GuiGraphicsExtractor
+[23:58:23] [Render thread/INFO] [mixin/]: Renaming synthetic method lambda$setTooltipForNextFrameInternal$0(Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/swedz/tesseract/neoforge/gui/ExtendedClientTooltipPositioner;Lnet/minecraft/resources/Identifier;Lnet/minecraft/world/item/ItemStack;)V to mdc9d51d$tesseract_api$lambda$setTooltipForNextFrameInternal$0$0 in tesseract_api.mixins.json:GuiGraphicsExtractorExtensionMixin from mod tesseract_api
+[23:58:23] [Render thread/INFO] [mixin/]: Renaming synthetic method lambda$tesseractapi$tooltip$0(Ljava/util/List;Lnet/minecraft/world/inventory/tooltip/TooltipComponent;)V to mdc9d51d$tesseract_api$lambda$tesseractapi$tooltip$0$1 in tesseract_api.mixins.json:GuiGraphicsExtractorExtensionMixin from mod tesseract_api
+[23:58:23] [Render thread/INFO] [mixin/]: Renaming synthetic method lambda$tesseractapi$itemTinted$2(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String; to mdc9d51d$tesseract_api$lambda$tesseractapi$itemTinted$2$2 in tesseract_api.mixins.json:GuiGraphicsExtractorExtensionMixin from mod tesseract_api
+[23:58:23] [Render thread/INFO] [mixin/]: Renaming synthetic method lambda$tesseractapi$itemTinted$1(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String; to mdc9d51d$tesseract_api$lambda$tesseractapi$itemTinted$1$3 in tesseract_api.mixins.json:GuiGraphicsExtractorExtensionMixin from mod tesseract_api
+[23:58:23] [Render thread/INFO] [mixin/]: Renaming synthetic method lambda$tesseractapi$itemTinted$0(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String; to mdc9d51d$tesseract_api$lambda$tesseractapi$itemTinted$0$4 in tesseract_api.mixins.json:GuiGraphicsExtractorExtensionMixin from mod tesseract_api
+[23:58:23] [Render thread/INFO] [mixin/]: Renaming synthetic method lambda$tesseractapi$item$2(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String; to mdc9d51d$tesseract_api$lambda$tesseractapi$item$2$5 in tesseract_api.mixins.json:GuiGraphicsExtractorExtensionMixin from mod tesseract_api
+[23:58:23] [Render thread/INFO] [mixin/]: Renaming synthetic method lambda$tesseractapi$item$1(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String; to mdc9d51d$tesseract_api$lambda$tesseractapi$item$1$6 in tesseract_api.mixins.json:GuiGraphicsExtractorExtensionMixin from mod tesseract_api
+[23:58:23] [Render thread/INFO] [mixin/]: Renaming synthetic method lambda$tesseractapi$item$0(Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String; to mdc9d51d$tesseract_api$lambda$tesseractapi$item$0$7 in tesseract_api.mixins.json:GuiGraphicsExtractorExtensionMixin from mod tesseract_api
+[23:58:23] [Render thread/INFO] [mixin/]: Mixing RecipeBookWidgetMixin from emi.mixins.json into net.minecraft.client.gui.screens.recipebook.RecipeBookComponent
+[23:58:23] [Render thread/INFO] [mixin/]: Mixing client.MachineScreenMEHatchMixin from industrialization_overdrive.mixins.json into aztech.modern_industrialization.client.machines.gui.MachineScreen
+[23:58:24] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.data.EmiData
+[23:58:24] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.render.EmiRenderable
+[23:58:24] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiRecipe
+[23:58:24] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.EmiIngredient
+[23:58:24] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.data.RecipeDefaultLoader
+[23:58:24] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.data.EmiTagExclusionsLoader
+[23:58:24] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.data.EmiDataLoader
+[23:58:24] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.data.EmiDataLoader$DataConsumer
+[23:58:25] [modloading-worker-0/INFO] [mixin/]: Mixing hook.listener.TooltipsHookMixin from tesseract_api_mi.mixins.json into aztech.modern_industrialization.MITooltips
+[23:58:25] [modloading-worker-0/INFO] [mixin/]: Renaming synthetic method lambda$clinit$0(Lnet/swedz/tesseract/neoforge/compat/mi/hook/MIHook;Lnet/swedz/tesseract/neoforge/compat/mi/hook/MIHookListener;)V to mdc9d51d$tesseract_api$lambda$clinit$0$0 in tesseract_api_mi.mixins.json:hook.listener.TooltipsHookMixin from mod tesseract_api
+[23:58:25] [modloading-worker-0/INFO] [Tesseract API/NativeMaterialItemSanityCheck/]: Starting validation process...
+[23:58:25] [modloading-worker-0/INFO] [Tesseract API/NativeMaterialItemSanityCheck/]: Successfully validated 0 item ids.
+[23:58:25] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.StackBatcher
+[23:58:25] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.EmiConfig
+[23:58:25] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.CheatMode
+[23:58:25] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.ConfigEnum
+[23:58:25] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.HelpLevel
+[23:58:25] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.IndexSource
+[23:58:25] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.SidebarSide
+[23:58:25] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.RecipeBookAction
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.EffectLocation
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.platform.EmiAgnos
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.platform.neoforge.EmiAgnosNeoForge
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.FluidUnit
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.SidebarType
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.ButtonVisibility
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.SidebarPages
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.SidebarPages$SidebarPage
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.SidebarSettings
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.SidebarSubpanels
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.IntGroup
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.Margins
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.ScreenAlign
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.HeaderType
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.SidebarTheme
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.ScreenAlign$Horizontal
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.ScreenAlign$Vertical
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.input.EmiBind
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.input.EmiBind$ModifiedKey
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.com.unascribed.qdcss.QDCSS
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.com.unascribed.qdcss.QDCSS$SyntaxErrorException
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.com.unascribed.qdcss.QDCSS$QDCSSException
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.com.unascribed.qdcss.QDCSS$BadValueException
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.com.unascribed.qdcss.QDCSS$BlameString
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.com.unascribed.qdcss.QDCSS$1
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.config.SidebarSubpanels$Subpanel
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing ActiveRecipeHolderMixin from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.components.CrafterComponent
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.CrafterComponentAccessor from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.components.CrafterComponent
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing hook.efficiency.CrafterComponentEfficiencyHookMixin from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.components.CrafterComponent
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Renaming synthetic method lambda$tickRecipeReset$0(JLnet/swedz/tesseract/neoforge/compat/mi/hook/MIHookEfficiency;Lnet/swedz/tesseract/neoforge/compat/mi/hook/context/machine/EfficiencyMIHookContext;)V to mdc9d51d$tesseract_api$lambda$tickRecipeReset$0$0 in tesseract_api_mi.mixins.json:hook.efficiency.CrafterComponentEfficiencyHookMixin from mod tesseract_api
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.CrafterRecipeEnergyAccessor from industrialization_overdrive.mixins.json into aztech.modern_industrialization.machines.components.CrafterComponent
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing CrafterComponentUncappedOutputMixin from industrialization_overdrive.mixins.json into aztech.modern_industrialization.machines.components.CrafterComponent
+[23:58:26] [modloading-worker-0/INFO] [mixin/]: Mixing CrafterOutputLockCheckMixin from industrialization_overdrive.mixins.json into aztech.modern_industrialization.machines.components.CrafterComponent
+[23:58:26] [modloading-worker-0/WARN] [mixin/]: Method overwrite conflict for getActiveRecipe in tesseract_api_mi.mixins.json:accessor.CrafterComponentAccessor from mod tesseract_api, previously written by net.swedz.tesseract.neoforge.compat.mi.mixin.ActiveRecipeHolderMixin. Skipping method.
+[23:58:27] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.RedstoneControlComponentAccessor from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.components.RedstoneControlComponent
+[23:58:27] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.CasingComponentAccessor from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.components.CasingComponent
+[23:58:27] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.UpgradeComponentAccessor from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.components.UpgradeComponent
+[23:58:27] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.OverdriveComponentAccessor from tesseract_api_mi.mixins.json into aztech.modern_industrialization.machines.components.OverdriveComponent
+[23:58:27] [modloading-worker-0/INFO] [mixin/]: Mixing SlotPanelUpgradeStackerMixin from industrialization_overdrive.mixins.json into aztech.modern_industrialization.machines.guicomponents.SlotPanel$1
+[23:58:27] [modloading-worker-0/INFO] [mixin/]: Mixing MultipliedCrafterComponentRecipeLockMixin from industrialization_overdrive.mixins.json into net.swedz.tesseract.neoforge.compat.mi.component.craft.multiplied.MultipliedCrafterComponent
+[23:58:27] [modloading-worker-0/INFO] [mixin/]: Renaming synthetic method lambda$io_lockRecipeForFullBatch$0(Lcom/llamalad7/mixinextras/injector/wrapoperation/Operation;Lnet/minecraft/resources/Identifier;Lnet/minecraft/world/entity/player/Inventory;)V to mdc9d51d$industrialization_overdrive$lambda$io_lockRecipeForFullBatch$0$0 in industrialization_overdrive.mixins.json:MultipliedCrafterComponentRecipeLockMixin from mod industrialization_overdrive
+[23:58:27] [modloading-worker-0/INFO] [mixin/]: Mixing accessor.CrafterRecipeEnergyAccessor from industrialization_overdrive.mixins.json into net.swedz.tesseract.neoforge.compat.mi.component.craft.AbstractModularCrafterComponent
+[23:58:27] [modloading-worker-0/INFO] [mixin/]: Mixing CrafterOutputLockCheckMixin from industrialization_overdrive.mixins.json into net.swedz.tesseract.neoforge.compat.mi.component.craft.AbstractModularCrafterComponent
+[23:58:28] [modloading-sync-worker/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.network.FillRecipeC2SPacket
+[23:58:28] [modloading-sync-worker/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.network.CreateItemC2SPacket
+[23:58:28] [modloading-sync-worker/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.network.PingS2CPacket
+[23:58:28] [modloading-sync-worker/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.network.CommandS2CPacket
+[23:58:28] [modloading-sync-worker/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.network.EmiChessPacket$C2S
+[23:58:28] [modloading-sync-worker/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.network.EmiChessPacket
+[23:58:28] [Render thread/INFO] [minecraft/ReloadableResourceManager]: Reloading ResourceManager: vanilla, mod_resources, mod/emi, mod/guideme, mod/neoforge, mod/ae2, mod/modern_industrialization, mod/tesseract_api, mod/industrialization_overdrive
+[23:58:28] [Render thread/INFO] [mixin/]: Mixing client.PartModelLoaderMixin from ae2.mixins.json into net.minecraft.client.resources.model.BlockStateModelLoader
+[23:58:28] [Render thread/INFO] [mixin/]: Renaming synthetic method lambda$loadBlockStates$0(Ljava/lang/Void;Lnet/minecraft/client/resources/model/BlockStateModelLoader$LoadedModels;)Lnet/minecraft/client/resources/model/BlockStateModelLoader$LoadedModels; to mdc9d51d$ae2$lambda$loadBlockStates$0$0 in ae2.mixins.json:client.PartModelLoaderMixin from mod ae2
+[23:58:30] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_pua-17.0.01.hex, loading
+[23:58:30] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_all_no_pua-17.0.01.hex, loading
+[23:58:31] [resourceLoad/INFO] [minecraft/UnihexProvider]: Found unifont_jp_patch-17.0.01.hex, loading
+[23:58:31] [resourceLoad/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.data.RecipeDefaults
+[23:58:31] [resourceLoad/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.data.TagExclusions
+[23:58:31] [resourceLoad/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.data.EmiRecipeCategoryProperties
+[23:58:31] [resourceLoad/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.data.EmiAlias
+[23:58:36] [resourceLoad/WARN] [minecraft/ModelManager]: Missing model for variant: 'Block{industrialization_overdrive:me_item_input_hatch}'
+[23:58:36] [resourceLoad/WARN] [minecraft/ModelManager]: Missing model for variant: 'Block{industrialization_overdrive:me_item_output_hatch}'
+[23:58:36] [resourceLoad/WARN] [minecraft/ModelManager]: Missing model for variant: 'Block{industrialization_overdrive:me_fluid_input_hatch}'
+[23:58:36] [resourceLoad/WARN] [minecraft/ModelManager]: Missing model for variant: 'Block{industrialization_overdrive:me_fluid_output_hatch}'
+[23:58:36] [resourceLoad/WARN] [minecraft/ModelManager]: Missing model for variant: 'Block{industrialization_overdrive:me_mixed_input_hatch}'
+[23:58:36] [resourceLoad/WARN] [minecraft/ModelManager]: Missing model for variant: 'Block{industrialization_overdrive:me_mixed_output_hatch}'
+[23:58:37] [Render thread/WARN] [mojang/GlProgram]: neoforge:pipeline/item_translucent_unlit shader program does not use sampler Sampler2 defined in the pipeline. This might be a bug.
+[23:58:37] [Render thread/WARN] [mojang/GlProgram]: neoforge:pipeline/item_cutout_unlit shader program does not use sampler Sampler2 defined in the pipeline. This might be a bug.
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+[23:58:37] [Render thread/ERROR] [minecraft/SoundEngine]: Error starting SoundSystem. Turning off sounds & music
+java.lang.IllegalStateException: Failed to open OpenAL device
+	at TRANSFORMER/minecraft@26.1.2/com.mojang.blaze3d.audio.Library.openDeviceOrFallback(Library.java:183) ~[neoforge-26.1.2.126.jar:?] {}
+	at TRANSFORMER/minecraft@26.1.2/com.mojang.blaze3d.audio.Library.init(Library.java:66) ~[neoforge-26.1.2.126.jar:?] {}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.client.sounds.SoundEngine.loadLibrary(SoundEngine.java:111) [neoforge-26.1.2.126.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.client.sounds.SoundEngine.reload(SoundEngine.java:102) [neoforge-26.1.2.126.jar:?] {neoforge:access_transformer}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.client.sounds.SoundManager.apply(SoundManager.java:121) [neoforge-26.1.2.126.jar:?] {}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.client.sounds.SoundManager.apply(SoundManager.java:44) [neoforge-26.1.2.126.jar:?] {}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) [neoforge-26.1.2.126.jar:?] {}
+	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:739) [?:?] {}
+	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:503) [?:?] {}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$prepareTasks$3(SimpleReloadInstance.java:75) [neoforge-26.1.2.126.jar:?] {}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:163) [neoforge-26.1.2.126.jar:?] {neoforge:access_transformer,neoforge:access_transformer}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) [neoforge-26.1.2.126.jar:?] {}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:137) [neoforge-26.1.2.126.jar:?] {neoforge:access_transformer,neoforge:access_transformer}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.util.thread.BlockableEventLoop.runAllTasks(BlockableEventLoop.java:121) [neoforge-26.1.2.126.jar:?] {neoforge:access_transformer,neoforge:access_transformer}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.client.Minecraft.runTick(Minecraft.java:1293) [neoforge-26.1.2.126.jar:?] {neoforge:access_transformer,neoforge:access_transformer,neoforge:mixin[APP:emi.mixins.json:accessor.MinecraftAccessor from mod emi,APP:emi.mixins.json:MinecraftClientMixin from mod emi,APP:ae2.mixins.json:client.PickColorMixin from mod ae2]}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.client.Minecraft.run(Minecraft.java:937) [neoforge-26.1.2.126.jar:?] {neoforge:access_transformer,neoforge:access_transformer,neoforge:mixin[APP:emi.mixins.json:accessor.MinecraftAccessor from mod emi,APP:emi.mixins.json:MinecraftClientMixin from mod emi,APP:ae2.mixins.json:client.PickColorMixin from mod ae2]}
+	at TRANSFORMER/minecraft@26.1.2/net.minecraft.client.main.Main.main(Main.java:246) [neoforge-26.1.2.126.jar:?] {}
+	at net.neoforged.fml.startup.Client.main(Client.java:19) [loader-11.0.15.jar:11.0] {}
+[23:58:37] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[23:58:37] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x128x0 minecraft:textures/atlas/decorated_pot.png-atlas
+[23:58:37] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 2048x1024x0 minecraft:textures/atlas/armor_trims.png-atlas
+[23:58:37] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[23:58:37] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/shield_patterns.png-atlas
+[23:58:37] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 4096x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[23:58:38] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/chest.png-atlas
+[23:58:38] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 256x128x0 minecraft:textures/atlas/celestials.png-atlas
+[23:58:38] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x512x0 minecraft:textures/atlas/banner_patterns.png-atlas
+[23:58:38] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/beds.png-atlas
+[23:58:38] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x1024x0 minecraft:textures/atlas/items.png-atlas
+[23:58:38] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 1024x1024x0 minecraft:textures/atlas/gui.png-atlas
+[23:58:38] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 128x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[23:58:38] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x256x0 minecraft:textures/atlas/signs.png-atlas
+[23:58:38] [Render thread/INFO] [minecraft/TextureAtlas]: Created: 512x512x0 minecraft:textures/atlas/shulker_boxes.png-atlas
+[23:58:38] [Render thread/INFO] [ne.ne.ne.cl.en.an.js.AnimationLoader/]: Loaded 0 entity animations
+[23:58:39] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.bom.BoM
+[23:58:39] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiTags
+[23:58:39] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.util.InheritanceMap
+[23:58:39] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiTags$Snapshot
+[23:58:39] [Render thread/INFO] [gu.in.GuideReloadListener/]: Data driven guides: []
+[23:58:39] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.EmiApi
+[23:58:39] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.RecipeScreen
+[23:58:39] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.BoMScreen
+[23:58:42] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiDrawContext
+ALSA lib confmisc.c:855:(parse_card) cannot find card '0'
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) error evaluating strings
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) error evaluating name
+ALSA lib conf.c:5208:(_snd_config_evaluate) function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5731:(snd_config_expand) Evaluate error: No such file or directory
+ALSA lib pcm.c:2721:(snd_pcm_open_noupdate) Unknown PCM default
+audio_open_alsa: failed to open audio device default. No such file or directory
+[23:59:33] [Render thread/ERROR] [mojang/Window]: ########## GL ERROR ##########
+[23:59:33] [Render thread/ERROR] [mojang/Window]: @ Render
+[23:59:33] [Render thread/ERROR] [mojang/Window]: 65547: X11: Standard cursor shape unavailable
+[23:59:39] [Worker-Main-6/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiCommands
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AnnihilationPlaneTests for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.AutoCraftingTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ChannelTests for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.CraftingTerminalTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.CrystalResonanceGeneratorTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ExternalEnergyTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.GuidebookPlot for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.IOPortTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InscriberTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InterfaceTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InternalInventoryTransactionTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.InvalidPatternTestPlot for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.ItemP2PTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.MemoryCardTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.P2PCrossDomainSecurityPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.P2PTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderLockModePlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.PatternProviderPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.QnbTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.QuantumPairTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.QuantumRoutingControllerTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.Round25MachineSecurityPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.Round28PhysicalSecurityPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.Round30RegistryLifecyclePlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.Round31PartRegistryPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.Round321RestartPersistencePlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.Round32ChunkUnloadPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpatialTestPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SpawnExtraGridTestTools for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.SubnetPlots for plots
+[23:59:39] [Worker-Main-6/INFO] [AE2:C/]: Scanning class appeng.server.testplots.TestPlots for plots
+[23:59:51] [Render thread/INFO] [minecraft/RecipeManager]: Loaded 5205 recipes
+[23:59:51] [Render thread/INFO] [minecraft/AdvancementTree]: Loaded 2409 advancements
+[23:59:51] [Render thread/INFO] [ne.ne.ne.co.cr.RecipePriorityManager/]: Loaded 0 recipe priority overrides
+[23:59:51] [Render thread/WARN] [minecraft/ModelManager]: Missing item model for location industrialization_overdrive:me_item_input_hatch
+[23:59:51] [Render thread/WARN] [minecraft/ModelManager]: Missing item model for location industrialization_overdrive:me_item_output_hatch
+[23:59:51] [Render thread/WARN] [minecraft/ModelManager]: Missing item model for location industrialization_overdrive:me_fluid_input_hatch
+[23:59:51] [Render thread/WARN] [minecraft/ModelManager]: Missing item model for location industrialization_overdrive:me_fluid_output_hatch
+[23:59:51] [Render thread/WARN] [minecraft/ModelManager]: Missing item model for location industrialization_overdrive:me_mixed_input_hatch
+[23:59:51] [Render thread/WARN] [minecraft/ModelManager]: Missing item model for location industrialization_overdrive:me_mixed_output_hatch
+[23:59:52] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiLog
+[23:59:52] [Render thread/INFO] [EMI/]: [EMI] Disconnecting from server, EMI data cleared
+[23:59:52] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiReloadManager
+[23:59:52] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiReloadManager$ReloadWorker
+[23:59:52] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.EmiPlugin
+[23:59:52] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.EmiInitRegistry
+[23:59:52] [Render thread/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.EmiRegistry
+[23:59:52] [Thread-4/INFO] [EMI/]: [EMI] Clearing data
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiRecipes
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiRecipeManager
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiRecipes$Manager
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiStackList$ComparisonHashStrategy
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.ProxyRecipeManager
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiStackList
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiStackList$StrictHashStrategy
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiIngredientSerializers
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiExclusionAreas
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiDragDropHandlers
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiStackProviders
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiRecipeFiller
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.handler.EmiRecipeHandler
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiHidden
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.EmiScreenBase
+[23:59:52] [Thread-4/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.widget.Bounds
+[23:59:52] [Render thread/INFO] [mixin/]: Mixing accessor.BrewingRecipeRegistryAccessor from emi.mixins.json into net.minecraft.world.item.alchemy.PotionBrewing
+[23:59:52] [Server thread/INFO] [minecraft/IntegratedServer]: Starting integrated minecraft server version 26.1.2
+[23:59:52] [Server thread/INFO] [minecraft/MinecraftServer]: Generating keypair
+[23:59:53] [Server thread/INFO] [mixin/]: Mixing chunkloading.ChunkMapMixin from ae2.mixins.json into net.minecraft.server.level.ChunkMap
+[23:59:54] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 0 persistent chunks...
+[23:59:54] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[23:59:54] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11062238]'/minecraft:overworld
+[23:59:54] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11062238]'/minecraft:the_nether
+[23:59:54] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11062238]'/minecraft:the_end
+[23:59:54] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11062238]'/ae2:spatial_storage
+[23:59:54] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[23:59:54] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[23:59:54] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[23:59:54] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[23:59:54] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[23:59:54] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 48 chunks for player spawn...
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:03] [worldgen/INFO] [mixin/]: Mixing StructureTemplateMixin from ae2.mixins.json into net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate
+[00:00:04] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 16%
+[00:00:04] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 18%
+[00:00:05] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 18%
+[00:00:05] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 18%
+[00:00:06] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 18%
+[00:00:06] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 18%
+[00:00:07] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 18%
+[00:00:07] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 18%
+[00:00:08] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 30%
+[00:00:08] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 30%
+[00:00:09] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 30%
+[00:00:09] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 30%
+[00:00:10] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 30%
+[00:00:10] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 30%
+[00:00:11] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 35%
+[00:00:11] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 42%
+[00:00:12] [Server thread/INFO] [mixin/]: Mixing EnchantmentHelperMixin from ae2.mixins.json into net.minecraft.world.item.enchantment.EnchantmentHelper
+[00:00:12] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 58%
+[00:00:12] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 58%
+[00:00:13] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 58%
+[00:00:13] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 58%
+[00:00:14] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 58%
+[00:00:14] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 58%
+[00:00:15] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 58%
+[00:00:15] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 58%
+[00:00:16] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 58%
+[00:00:16] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 58%
+[00:00:17] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 61%
+[00:00:17] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 98%
+[00:00:17] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Time elapsed: 23579 ms
+[00:00:18] [Render thread/INFO] [EMI/]: [EMI] Tags synchronized, waiting for recipes to reload EMI...
+[00:00:19] [Server thread/INFO] [minecraft/PlayerList]: Dev[local:E:95c4c0de] logged in with entity id 11 at (6.5, 69.0, 7.5)
+[00:00:19] [Server thread/INFO] [minecraft/MinecraftServer]: Dev joined the game
+[00:00:19] [Server thread/INFO] [minecraft/IntegratedServer]: Changing view distance to 16, from 10
+[00:00:19] [Server thread/INFO] [minecraft/IntegratedServer]: Changing simulation distance to 12, from 0
+[00:00:31] [Render thread/INFO] [EMI/]: [EMI] Recipes synchronized, reloading EMI
+[00:00:31] [Render thread/INFO] [EMI/]: [EMI] Starting Reload
+[00:00:31] [Thread-15/INFO] [EMI/]: [EMI] Starting EMI reload...
+[00:00:31] [Thread-15/INFO] [EMI/]: [EMI] Clearing data
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.EmiEntrypoint
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.VanillaPlugin
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.serializer.EmiIngredientSerializer
+[00:00:31] [Render thread/WARN] [minecraft/ClientPacketListener]: Ignoring chat session from Dev due to missing Services public key
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.widget.SlotWidget
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.widget.Widget
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.widget.GeneratedSlotWidget
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiRecipeCategory
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.EmiStack
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.EmptyEmiStack
+[00:00:31] [Render thread/INFO] [minecraft/AdvancementTree]: Loaded 10 advancements
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.ItemEmiStack
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.StackBatcher$Batchable
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.FluidEmiStack
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.Comparison
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.Comparison$Predicate
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.Comparison$HashFunction
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiRecipeSorting
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.VanillaEmiRecipeCategories
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiPluginContainer
+[00:00:31] [Worker-Main-5/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.search.EmiSearch
+[00:00:31] [Worker-Main-5/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.EmiUtil
+[00:00:31] [Worker-Main-5/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.EmiUtil$1
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.EmiExclusionArea
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.EmiStackProvider
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.EmiDragDropHandler
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiInitRegistryImpl
+[00:00:31] [Thread-15/INFO] [EMI/]: [EMI] Initializing plugin from emi
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.stack.serializer.ItemEmiStackSerializer
+[00:00:31] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.serializer.EmiStackSerializer
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.stack.serializer.FluidEmiStackSerializer
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.TagEmiIngredient
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.stack.serializer.TagEmiIngredientSerializer
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.ListEmiIngredient
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.stack.serializer.ListEmiIngredientSerializer
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.EmiRegistryAdapter$StackConstructor
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.EmiRegistryAdapter
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.EmiRegistryAdapter$1
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI] Initialized plugin from emi in 161ms
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI] Initializing plugin from ae2
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI] Initialized plugin from ae2 in 0ms
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI] Initializing plugin from modern_industrialization
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI] Initialized plugin from modern_industrialization in 0ms
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI] Initializing plugin from modern_industrialization
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI] Initialized plugin from modern_industrialization in 0ms
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.data.IndexStackData
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI] Processing tags
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiTags$TagIconLayer
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiTags$TagIcon
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiTagKey
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiReloadLog
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:all_certus_quartz
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:all_fluix
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:all_nether_quartz
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:all_quartz
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:all_quartz_dust
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:can_remove_color
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:covered_cable
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:covered_dense_cable
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:glass_cable
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:illuminated_panel
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:inscriber_presses
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:interface
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:knife
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:lumen_paint_balls
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:metal_ingots
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:p2p_attunements/fe_p2p_tunnel
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:p2p_attunements/fluid_p2p_tunnel
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:p2p_attunements/item_p2p_tunnel
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:p2p_attunements/light_p2p_tunnel
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:p2p_attunements/me_p2p_tunnel
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:p2p_attunements/redstone_p2p_tunnel
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:paint_balls
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:pattern_provider
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:quartz_axe
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:quartz_hoe
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:quartz_pickaxe
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:quartz_shovel
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:quartz_sword
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:quartz_wrench
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:smart_cable
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #ae2:smart_dense_cable
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #c:dusts/certus_quartz
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #c:dusts/ender_pearl
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #c:dusts/fluix
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #c:dusts/sky_stone
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #c:gems/certus_quartz
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #c:gems/fluix
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #c:silicon
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #c:storage_blocks/certus_quartz
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #curios:curio
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #modern_industrialization:p2p_attunements/energy_p2p_tunnel
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #modern_industrialization:repairs_rubber_armor
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI]  Tag warning can be disabled in the config, EMI docs describe how to add a translation or exclude tags.
+[00:00:32] [Thread-15/ERROR] [EMI/]: [EMI] Untranslated tag #modern_industrialization:replicator_blacklist
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI]  Tag warning can be disabled in the config, EMI docs describe how to add a translation or exclude tags.
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI] Constructing index
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiComparisonDefaults
+[00:00:32] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiStackList$IndexGroup
+[00:00:32] [Thread-15/INFO] [EMI/]: [EMI] Reloading item groups on client thread...
+[00:00:32] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 2 reached during a single frame. New capacity will be 4.
+[00:00:32] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 4 reached during a single frame. New capacity will be 8.
+[00:00:33] [Thread-15/INFO] [EMI/]: [EMI] Reloading item groups on client thread took 1443ms
+[00:00:33] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiRegistryImpl
+[00:00:33] [Thread-15/INFO] [EMI/]: [EMI] Loading plugin from emi
+[00:00:33] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.handler.InventoryRecipeHandler
+[00:00:33] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.handler.StandardRecipeHandler
+[00:00:33] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.handler.CraftingRecipeHandler
+[00:00:33] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.handler.CookingRecipeHandler
+[00:00:33] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.handler.StonecuttingRecipeHandler
+[00:00:33] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.EmiPortClient
+[00:00:33] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.EmiShapedRecipe
+[00:00:33] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiCraftingRecipe
+[00:00:33] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.EmiShapelessRecipe
+[00:00:33] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiBannerDuplicateRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiPatternCraftingRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiBookCloningRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiBookCloningRecipe$Template
+[00:00:34] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Dynamic Transforms UBO, capacity limit of 8 reached during a single frame. New capacity will be 16.
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiFireworkRocketRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiFireworkStarRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiFireworkStarFadeRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiArmorDyeRecipe
+[00:00:34] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 2 reached during a single frame. New capacity will be 8.
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiRepairItemRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiBannerShieldRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiTippedArrowRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.EmiCookingRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiSmithingTrimRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.EmiSmithingRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.EmiStonecuttingRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiWorldInteractionRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiWorldInteractionRecipe$Builder
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiWorldInteractionRecipe$WorldIngredient
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiAnvilRepairItemRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.EmiGrindstoneRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.EmiAnvilRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiAnvilEnchantRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiGrindstoneDisenchantingRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.special.EmiGrindstoneDisenchantingBookRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.EmiBrewingRecipe
+[00:00:34] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.EmiFuelRecipe
+[00:00:35] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.EmiCompostingRecipe
+[00:00:35] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.recipe.EmiTagRecipe
+[00:00:35] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiIngredientRecipe
+[00:00:35] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiIngredientRecipe$PageSlotWidget
+[00:00:35] [Thread-15/INFO] [EMI/]: [EMI] Reloaded plugin from emi in 1225ms
+[00:00:35] [Thread-15/INFO] [EMI/]: [EMI] Loading plugin from ae2
+[00:00:35] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiInfoRecipe
+[00:00:35] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.BasicEmiRecipe
+[00:00:35] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.render.EmiTexture
+[00:00:35] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.EmiRenderHelper
+[00:00:35] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.widget.WidgetHolder
+[00:00:35] [Thread-15/INFO] [EMI/]: [EMI] Reloaded plugin from ae2 in 68ms
+[00:00:35] [Thread-15/INFO] [EMI/]: [EMI] Loading plugin from modern_industrialization
+[00:00:35] [Thread-15/INFO] [EMI/]: [EMI] Reloaded plugin from modern_industrialization in 4ms
+[00:00:35] [Thread-15/INFO] [EMI/]: [EMI] Loading plugin from modern_industrialization
+[00:00:35] [Thread-15/INFO] [mixin/]: Mixing hook.listener.ViewerSetupHookMixin from tesseract_api_mi.mixins.json into aztech.modern_industrialization.client.compat.viewer.usage.ViewerSetup
+[00:00:35] [Thread-15/INFO] [mixin/]: Renaming synthetic method lambda$clinit$0(Ljava/util/List;Lnet/swedz/tesseract/neoforge/compat/mi/hook/MIHook;Lnet/swedz/tesseract/neoforge/compat/mi/hook/MIHookListener;)V to mdc9d51d$tesseract_api$lambda$clinit$0$0 in tesseract_api_mi.mixins.json:hook.listener.ViewerSetupHookMixin from mod tesseract_api
+[00:00:35] [Thread-15/INFO] [EMI/]: [EMI] Reloaded plugin from modern_industrialization in 159ms
+[00:00:35] [Thread-15/INFO] [EMI/]: [EMI] Baking index
+[00:00:35] [Thread-15/INFO] [EMI/]: [EMI] Registering late recipes
+[00:00:35] [Thread-15/INFO] [EMI/]: [EMI] Baking recipes
+[00:00:36] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.dev.EmiDev
+[00:00:36] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiRecipes$Worker
+[00:00:36] [Thread-15/INFO] [EMI/]: [EMI] Baked 8972 recipes in 416ms
+[00:00:36] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiPersistentData
+[00:00:36] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 8 reached during a single frame. New capacity will be 16.
+[00:00:36] [Thread-16/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.registry.EmiRecipeSorter
+[00:00:36] [Thread-15/INFO] [EMI/]: [EMI] Baking search
+[00:00:36] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.search.SearchStack
+[00:00:36] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.search.NameQuery
+[00:00:36] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.search.Query
+[00:00:36] [Thread-16/INFO] [EMI/]: [EMI] Baked recipes after reload in 334ms
+[00:00:36] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 16 reached during a single frame. New capacity will be 32.
+[00:00:37] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 32 reached during a single frame. New capacity will be 64.
+[00:00:37] [Thread-15/INFO] [EMI/]: [EMI] Finishing up
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.EmiScreenManager
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.stack.EmiStackInteraction
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.EmiScreenManager$SidebarEmiStackInteraction
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.widget.EmiSearchWidget
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.StackBatcher$ClaimedCollection
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.EmiScreenManager$SidebarPanel
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.widget.SizedButtonWidget
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.screen.widget.SidebarButtonWidget
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.search.EmiSearch$SearchWorker
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiSidebars
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiSidebars$1
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.api.recipe.EmiPlayerInventory
+[00:00:37] [Thread-17/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.search.EmiSearch$CompiledQuery
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiFavorites
+[00:00:37] [Thread-17/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.search.LogicalOrQuery
+[00:00:37] [Thread-15/INFO] [mixin/]: Mixing GlobalMixin from emi.mixins.json into dev.emi.emi.runtime.EmiFavorites$CompoundList
+[00:00:37] [Thread-15/INFO] [EMI/]: [EMI] Reloaded EMI in 6306ms
+[00:00:39] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 64 reached during a single frame. New capacity will be 128.
+[00:00:39] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 2008ms or 40 ticks behind
+[00:00:42] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 128 reached during a single frame. New capacity will be 256.
+[00:00:56] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 2470ms or 49 ticks behind
+[00:00:57] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 256 reached during a single frame. New capacity will be 512.
+[00:01:14] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 2005ms or 40 ticks behind
+[00:01:31] [Server thread/WARN] [minecraft/MinecraftServer]: Can't keep up! Is the server overloaded? Running 2099ms or 41 ticks behind
+[00:01:47] [Render thread/INFO] [minecraft/DynamicUniformStorage]: Resizing Chunk Sections UBO, capacity limit of 512 reached during a single frame. New capacity will be 1024.
+[00:11:02] [Server thread/INFO] [minecraft/IntegratedServer]: Saving and pausing game...
+[00:11:02] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11062238]'/minecraft:overworld
+[00:11:02] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11062238]'/minecraft:the_nether
+[00:11:02] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11062238]'/minecraft:the_end
+[00:11:02] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11062238]'/ae2:spatial_storage
+[00:12:11] [Server thread/WARN] [AE2:S/]: Exceeded time limit of 25 ms after processing 0 queued tick callbacks (0 remain)
+2026-11-06T21:13:08.650211547Z Server thread WARN Unable to register Log4j shutdown hook because JVM is shutting down. Using SimpleLogger
+
+> Task :runClient FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':runClient'.
+> Process 'command '/usr/lib/jvm/java-25-openjdk-amd64/bin/java'' finished with non-zero exit value 143
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to generate a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 16m 24s
+18 actionable tasks: 1 executed, 17 up-to-date
+RUN-EXIT=1

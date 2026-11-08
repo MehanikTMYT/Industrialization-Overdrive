@@ -16,9 +16,11 @@ import aztech.modern_industrialization.machines.multiblocks.ShapeMatcher;
 import aztech.modern_industrialization.util.Simulation;
 import dev.wp.industrialization_overdrive.IO;
 import dev.wp.industrialization_overdrive.IOComponents;
+import dev.wp.industrialization_overdrive.IOItems;
 import dev.wp.industrialization_overdrive.IOUtil;
 import dev.wp.industrialization_overdrive.compat.AE2Integration;
 import dev.wp.industrialization_overdrive.machines.components.craft.MultiProcessingArrayMachineComponent;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenCustomHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -33,6 +35,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackLinkedSet;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -197,7 +200,7 @@ public final class MultiblockBuilder extends Item {
         Rotation rotation = getPasteRotation(template.get(BlockPos.ZERO).settings(), player.getDirection().getOpposite());
         BlockPos pastePos = pastePosition(pos, template, rotation);
 
-        Map<Item, Integer> requiredBlocks = new HashMap<>();
+        Map<ItemStack, Integer> requiredBlocks = stackCounts();
         for (var entry : template.entrySet()) {
             BlockPos targetPos = pastePos.offset(rotateOffset(entry.getKey(), rotation));
             BlockState state = level.getBlockState(targetPos);
@@ -209,7 +212,7 @@ public final class MultiblockBuilder extends Item {
                 player.sendSystemMessage(IO.text().multiblockBuilderBlockCannotBeReplaced(targetPos));
                 return InteractionResult.SUCCESS;
             }
-            requiredBlocks.merge(item, 1, Integer::sum);
+            requiredBlocks.merge(new ItemStack(item), 1, Integer::sum);
         }
 
         // Check for optional modules/upgrades in settings and add to required blocks if player is not in creative
@@ -220,36 +223,37 @@ public final class MultiblockBuilder extends Item {
                 if (settings.contains("upgradesItemStack")) {
                     ItemStack upgrades = ItemStack.OPTIONAL_CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), settings.getCompoundOrEmpty("upgradesItemStack")).result().orElse(ItemStack.EMPTY);
                     if (!upgrades.isEmpty()) {
-                        requiredBlocks.merge(upgrades.getItem(), upgrades.getCount(), Integer::sum);
+                        requiredBlocks.merge(upgrades.copyWithCount(1), upgrades.getCount(), Integer::sum);
                     }
                 }
                 if (settings.contains("redstoneModuleStack")) {
                     ItemStack redstone = ItemStack.OPTIONAL_CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), settings.getCompoundOrEmpty("redstoneModuleStack")).result().orElse(ItemStack.EMPTY);
                     if (!redstone.isEmpty()) {
-                        requiredBlocks.merge(redstone.getItem(), redstone.getCount(), Integer::sum);
+                        requiredBlocks.merge(redstone.copyWithCount(1), redstone.getCount(), Integer::sum);
                     }
                 }
                 if (settings.contains("overdriveModuleStack")) {
                     ItemStack overdrive = ItemStack.OPTIONAL_CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), settings.getCompoundOrEmpty("overdriveModuleStack")).result().orElse(ItemStack.EMPTY);
                     if (!overdrive.isEmpty()) {
-                        requiredBlocks.merge(overdrive.getItem(), overdrive.getCount(), Integer::sum);
+                        requiredBlocks.merge(overdrive.copyWithCount(1), overdrive.getCount(), Integer::sum);
                     }
                 }
                 if (settings.contains("machinesStack")) {
                     ItemStack machines = ItemStack.OPTIONAL_CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), settings.getCompoundOrEmpty("machinesStack")).result().orElse(ItemStack.EMPTY);
                     if (!machines.isEmpty()) {
-                        requiredBlocks.merge(machines.getItem(), machines.getCount(), Integer::sum);
+                        requiredBlocks.merge(machines.copyWithCount(1), machines.getCount(), Integer::sum);
                     }
                 }
                 if (settings.contains("casing")) {
                     ItemStack casing = ItemStack.OPTIONAL_CODEC.parse(registries.createSerializationContext(net.minecraft.nbt.NbtOps.INSTANCE), settings.getCompoundOrEmpty("casing")).result().orElse(ItemStack.EMPTY);
                     if (!casing.isEmpty()) {
-                        requiredBlocks.merge(casing.getItem(), casing.getCount(), Integer::sum);
+                        requiredBlocks.merge(casing.copyWithCount(1), casing.getCount(), Integer::sum);
                     }
                 }
             }
         }
 
+        if (!player.isCreative()) topUpUpgradeStackers(player, level, requiredBlocks);
         if (player.isCreative() || checkAndConsumeInventory(player, level, requiredBlocks)) {
             for (var entry : template.entrySet()) {
                 BlockPos targetPos = pastePos.offset(rotateOffset(entry.getKey(), rotation));
@@ -430,7 +434,7 @@ public final class MultiblockBuilder extends Item {
     }
 
     private InteractionResult handleSurvivalBuild(Level level, BlockPos pos, Player player, ShapeMatcher shapeMatcher) {
-        Map<Item, Integer> requiredBlocks = new HashMap<>();
+        Map<ItemStack, Integer> requiredBlocks = stackCounts();
         boolean obstructionFound = false;
         for (BlockPos checkPos : shapeMatcher.getPositions()) {
             if (isAlreadyValid(shapeMatcher, level, checkPos)) continue;
@@ -443,7 +447,7 @@ public final class MultiblockBuilder extends Item {
             }
             if (state.canBeReplaced()) {
                 Item block = previewState.getBlock().asItem();
-                requiredBlocks.merge(block, 1, Integer::sum);
+                requiredBlocks.merge(new ItemStack(block), 1, Integer::sum);
             }
         }
         if (obstructionFound) return InteractionResult.SUCCESS;
@@ -454,13 +458,13 @@ public final class MultiblockBuilder extends Item {
         return InteractionResult.SUCCESS;
     }
 
-    private boolean checkAndConsumeInventory(Player player, Level level, Map<Item, Integer> requiredBlocks) {
-        Map<Item, Integer> inventoryCount = countInventory(player);
-        Map<Item, Integer> meProvided = IOUtil.isAE2Loaded ? AE2Integration.getMissingFromME(player, level, inventoryCount, requiredBlocks) : new HashMap<>();
+    private boolean checkAndConsumeInventory(Player player, Level level, Map<ItemStack, Integer> requiredBlocks) {
+        Map<ItemStack, Integer> inventoryCount = countInventory(player);
+        Map<ItemStack, Integer> meProvided = IOUtil.isAE2Loaded ? AE2Integration.getMissingFromME(player, level, inventoryCount, requiredBlocks) : stackCounts();
 
         boolean anyMissing = false;
         for (var entry : requiredBlocks.entrySet()) {
-            Item item = entry.getKey();
+            ItemStack item = entry.getKey();
             int required = entry.getValue();
             int totalAvailable = inventoryCount.getOrDefault(item, 0) + meProvided.getOrDefault(item, 0);
 
@@ -473,7 +477,7 @@ public final class MultiblockBuilder extends Item {
         if (anyMissing) {
             player.sendSystemMessage(IO.text().multiblockBuilderRequiredItems());
             for (var entry : requiredBlocks.entrySet()) {
-                Item item = entry.getKey();
+                ItemStack item = entry.getKey();
                 int required = entry.getValue();
                 int totalAvailable = inventoryCount.getOrDefault(item, 0) + meProvided.getOrDefault(item, 0);
 
@@ -491,18 +495,17 @@ public final class MultiblockBuilder extends Item {
         return true;
     }
 
-    private static Map<Item, Integer> countInventory(Player player) {
-        Map<Item, Integer> inventoryCount = new HashMap<>();
+    private static Map<ItemStack, Integer> countInventory(Player player) {
+        Map<ItemStack, Integer> inventoryCount = stackCounts();
         for (ItemStack stack : player.getInventory().getNonEquipmentItems()) {
-            Item id = stack.getItem();
-            inventoryCount.merge(id, stack.getCount(), Integer::sum);
+            if (!stack.isEmpty()) inventoryCount.merge(stack.copyWithCount(1), stack.getCount(), Integer::sum);
         }
         return inventoryCount;
     }
 
-    private static void consumeFromInventory(Player player, Map<Item, Integer> requiredBlocks, Map<Item, Integer> meProvided) {
+    private static void consumeFromInventory(Player player, Map<ItemStack, Integer> requiredBlocks, Map<ItemStack, Integer> meProvided) {
         for (var entry : requiredBlocks.entrySet()) {
-            Item item = entry.getKey();
+            ItemStack item = entry.getKey();
             int totalRequired = entry.getValue();
             int fromMe = meProvided.getOrDefault(item, 0);
             int remainingToConsume = totalRequired - fromMe;
@@ -510,7 +513,7 @@ public final class MultiblockBuilder extends Item {
             if (remainingToConsume <= 0) continue;
 
             for (ItemStack stack : player.getInventory().getNonEquipmentItems()) {
-                if (stack.getItem().equals(item)) {
+                if (ItemStack.isSameItemSameComponents(stack, item)) {
                     int amountToShrink = Math.min(remainingToConsume, stack.getCount());
                     stack.shrink(amountToShrink);
                     remainingToConsume -= amountToShrink;
@@ -527,8 +530,58 @@ public final class MultiblockBuilder extends Item {
         return be instanceof HatchBlockEntity hatch && hatchFlags != null && hatchFlags.allows(hatch.getHatchType());
     }
 
-    private static Component formatItemLine(Item item, int count, int color) {
-        String name = item.getDefaultInstance().getHoverName().getString();
+    /** Keyed by item and components, so a filled Upgrade Stacker is only paid for by an identical stack. */
+    public static Map<ItemStack, Integer> stackCounts() {
+        return new Object2ObjectOpenCustomHashMap<>(ItemStackLinkedSet.TYPE_AND_TAG);
+    }
+
+    /** Pays for a copied filled Upgrade Stacker with one the player has (identical first, then fullest) plus loose upgrades; one holding more than the copy is never used, as installing would lose its surplus. */
+    private static void topUpUpgradeStackers(Player player, Level level, Map<ItemStack, Integer> requiredBlocks) {
+        Item stackerItem = IOItems.UPGRADE_STACKER.get();
+        var contentsType = IOComponents.UPGRADE_STACKER_CONTENTS.get();
+        Map<ItemStack, Integer> available = stackCounts();
+        countInventory(player).forEach((stack, count) -> {
+            if (stack.is(stackerItem)) available.merge(stack, count, Integer::sum);
+        });
+        if (IOUtil.isAE2Loaded) {
+            AE2Integration.countInME(player, level, stackerItem).forEach((stack, count) -> available.merge(stack, count, Integer::sum));
+        }
+
+        for (ItemStack wanted : List.copyOf(requiredBlocks.keySet())) {
+            IOComponents.UpgradeStackerContents copied = wanted.get(contentsType);
+            if (!wanted.is(stackerItem) || copied == null) continue;
+            int needed = requiredBlocks.get(wanted);
+            int identical = Math.min(needed, available.getOrDefault(wanted, 0));
+            if (identical == needed) continue;
+            if (identical > 0) requiredBlocks.put(wanted, identical);
+            else requiredBlocks.remove(wanted);
+
+            for (int missing = needed - identical; missing > 0; missing--) {
+                ItemStack best = null;
+                int bestCount = -1;
+                for (var entry : available.entrySet()) {
+                    IOComponents.UpgradeStackerContents held = entry.getKey().get(contentsType);
+                    int heldCount = held == null ? 0 : held.count();
+                    boolean usable = heldCount == 0 || (held.upgradeType() == copied.upgradeType() && heldCount < copied.count());
+                    boolean free = entry.getValue() > requiredBlocks.getOrDefault(entry.getKey(), 0);
+                    if (usable && free && heldCount > bestCount) {
+                        best = entry.getKey();
+                        bestCount = heldCount;
+                    }
+                }
+                if (best == null) {
+                    // Nothing to top up: ask for the copied stacker itself, so the missing-items list names it.
+                    requiredBlocks.merge(wanted, missing, Integer::sum);
+                    break;
+                }
+                requiredBlocks.merge(best, 1, Integer::sum);
+                requiredBlocks.merge(new ItemStack(copied.upgradeType()), copied.count() - bestCount, Integer::sum);
+            }
+        }
+    }
+
+    private static Component formatItemLine(ItemStack item, int count, int color) {
+        String name = item.getHoverName().getString();
         return IO.text().multiblockBuilderRequiredItem(count, name).withColor(color);
     }
 }

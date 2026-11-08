@@ -1,0 +1,963 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/root/.gradle/wrapper/dists/gradle-9.2.1-bin/2t0n5ozlw9xmuyvbp7dnzaxug/gradle-9.2.1/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Enabling dist annotations on PMJ
+
+> Task :neoFormListLibraries UP-TO-DATE
+> Task :neoFormListTransformLibraries UP-TO-DATE
+> Task :cacheVersionManifest26.1.2 UP-TO-DATE
+> Task :cacheVersionExecutableClient26.1.2 UP-TO-DATE
+> Task :cacheVersionExecutableServer26.1.2 UP-TO-DATE
+> Task :neoFormSetup UP-TO-DATE
+> Task :neoFormDecompile UP-TO-DATE
+> Task :neoFormPatch UP-TO-DATE
+> Task :neoFormPatchUserDev UP-TO-DATE
+> Task :neoFormTransformSource UP-TO-DATE
+> Task :neoFormRecompile UP-TO-DATE
+> Task :supplyRawJarForneoFormJoined26.1.2-1 UP-TO-DATE
+> Task :selectRawArtifactNg_dummy_ng.net.neoforged_neoforge_26.1.2.126 UP-TO-DATE
+
+> Task :compileJava
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:912: error: cannot find symbol
+    public static void onBreak(BlockEvent.BreakEvent event) {
+                                         ^
+  symbol:   class BreakEvent
+  location: class BlockEvent
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:3: error: cannot find symbol
+import appeng.api.client.AEKeyRendering;
+                        ^
+  symbol:   class AEKeyRendering
+  location: package appeng.api.client
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:26: error: cannot find symbol
+import net.minecraft.client.renderer.RenderType;
+                                    ^
+  symbol:   class RenderType
+  location: package net.minecraft.client.renderer
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:33: error: cannot find symbol
+import net.minecraft.client.gui.GuiGraphics;
+                               ^
+  symbol:   class GuiGraphics
+  location: package net.minecraft.client.gui
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:601: error: cannot find symbol
+        public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+                                 ^
+  symbol:   class GuiGraphics
+  location: class IntervalField
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:449: error: cannot find symbol
+    public static void renderSlot(GuiGraphics graphics, @Nullable AbstractContainerMenu menu, Slot slot) {
+                                  ^
+  symbol:   class GuiGraphics
+  location: class MEHatchGuiClient
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:473: error: cannot find symbol
+    public static void renderSlotHighlight(GuiGraphics graphics, Slot slot) {
+                                           ^
+  symbol:   class GuiGraphics
+  location: class MEHatchGuiClient
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:488: error: cannot find symbol
+    private static void renderLockFrame(GuiGraphics graphics, @Nullable AbstractContainerMenu menu, Slot slot) {
+                                        ^
+  symbol:   class GuiGraphics
+  location: class MEHatchGuiClient
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/ConfigurableScreenHandlerMEHatchMixin.java:7: error: cannot find symbol
+import net.minecraft.world.inventory.ClickType;
+                                    ^
+  symbol:   class ClickType
+  location: package net.minecraft.world.inventory
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/ConfigurableScreenHandlerMEHatchMixin.java:18: error: cannot find symbol
+    private void io_handleMEHatchConfigClick(int slotIndex, int button, ClickType actionType,
+                                                                        ^
+  symbol:   class ClickType
+  location: class ConfigurableScreenHandlerMEHatchMixin
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:5: error: cannot find symbol
+import aztech.modern_industrialization.client.screen.MIHandledScreen;
+                                                    ^
+  symbol:   class MIHandledScreen
+  location: package aztech.modern_industrialization.client.screen
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:10: error: cannot find symbol
+import net.minecraft.client.gui.GuiGraphics;
+                               ^
+  symbol:   class GuiGraphics
+  location: package net.minecraft.client.gui
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:22: error: cannot find symbol
+public abstract class MachineScreenMEHatchMixin extends MIHandledScreen<MachineMenuClient> {
+                                                        ^
+  symbol: class MIHandledScreen
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:28: error: cannot find symbol
+    protected void renderSlotHighlight(GuiGraphics guiGraphics, Slot slot, int mouseX, int mouseY, float partialTick) {
+                                       ^
+  symbol:   class GuiGraphics
+  location: class MachineScreenMEHatchMixin
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:36: error: cannot find symbol
+    private void io_renderMEHatchSlot(GuiGraphics guiGraphics, Slot slot, CallbackInfo ci) {
+                                      ^
+  symbol:   class GuiGraphics
+  location: class MachineScreenMEHatchMixin
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/item/Vajra.java:128: warning: [removal] ItemHandlerHelper in net.neoforged.neoforge.items has been deprecated and marked for removal
+                    if (!itemEntity.isRemoved()) ItemHandlerHelper.giveItemToPlayer(player, itemEntity.getItem());
+                                                 ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/item/Vajra.java:128: warning: [removal] giveItemToPlayer(Player,ItemStack) in ItemHandlerHelper has been deprecated and marked for removal
+                    if (!itemEntity.isRemoved()) ItemHandlerHelper.giveItemToPlayer(player, itemEntity.getItem());
+                                                                  ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/item/MultiblockBuilder.java:459: error: incompatible types: Map<Item,Integer> cannot be converted to Map<ItemStack,Integer>
+        Map<Item, Integer> meProvided = IOUtil.isAE2Loaded ? AE2Integration.getMissingFromME(player, level, inventoryCount, requiredBlocks) : new HashMap<>();
+                                                                                                            ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/item/MultiblockBuilder.java:489: error: incompatible types: Map<Item,Integer> cannot be converted to Map<ItemStack,Integer>
+        if (IOUtil.isAE2Loaded && !meProvided.isEmpty()) AE2Integration.extractFromME(player, level, meProvided);
+                                                                                                     ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/datagen/server/provider/recipes/CommonRecipesServerDatagenProvider.java:42: error: constructor ShapedRecipeBuilder in class ShapedRecipeBuilder cannot be applied to given types;
+        ShapedRecipeBuilder builder = new ShapedRecipeBuilder();
+                                      ^
+  required: Provider
+  found:    no arguments
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/datagen/server/provider/recipes/CommonRecipesServerDatagenProvider.java:87: warning: [removal] itemIn(String,int) in MIRecipeJson has been deprecated and marked for removal
+                        .itemIn("modern_industrialization:sodium_battery", 1)
+                        ^
+  where T is a type-variable:
+    T extends MIRecipeJson<?> declared in class MIRecipeJson
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/datagen/server/provider/recipes/CommonRecipesServerDatagenProvider.java:103: error: constructor ShapelessRecipeBuilder in class ShapelessRecipeBuilder cannot be applied to given types;
+        ShapelessRecipeBuilder mixedInput = new ShapelessRecipeBuilder();
+                                            ^
+  required: Provider
+  found:    no arguments
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/datagen/server/provider/recipes/CommonRecipesServerDatagenProvider.java:109: error: constructor ShapelessRecipeBuilder in class ShapelessRecipeBuilder cannot be applied to given types;
+        ShapelessRecipeBuilder mixedOutput = new ShapelessRecipeBuilder();
+                                             ^
+  required: Provider
+  found:    no arguments
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchConfigSlot.java:176: warning: [removal] FluidUtil in net.neoforged.neoforge.fluids has been deprecated and marked for removal
+            FluidStack contained = FluidUtil.getFluidContained(carried).orElse(FluidStack.EMPTY);
+                                   ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchConfigSlot.java:176: warning: [removal] getFluidContained(ItemStack) in FluidUtil has been deprecated and marked for removal
+            FluidStack contained = FluidUtil.getFluidContained(carried).orElse(FluidStack.EMPTY);
+                                            ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:221: error: bad operand types for binary operator '>'
+        if (!simulate && tag.getInt(MEHatchConfigComponent.TRANSFER_INTERVAL_KEY) > 0) {
+                                                                                  ^
+  first type:  Optional<Integer>
+  second type: int
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:224: error: method contains in class CompoundTag cannot be applied to given types;
+        if (!simulate && tag.contains(MEHatchConfigComponent.SMART_PULL_KEY, Tag.TAG_BYTE)) {
+                            ^
+  required: String
+  found:    String,byte
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:227: error: method contains in class CompoundTag cannot be applied to given types;
+        if (!simulate && tag.contains(MEHatchConfigComponent.STORAGE_MODE_KEY, Tag.TAG_BYTE)) {
+                            ^
+  required: String
+  found:    String,byte
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:383: error: incompatible types: possible lossy conversion from long to int
+        slot.setCapacity(capacity);
+                         ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:925: error: cannot find symbol
+        player.displayClientMessage(IO.text().meHatchBreakWouldLoseStock(), false);
+              ^
+  symbol:   method displayClientMessage(MutableComponent,boolean)
+  location: variable player of type Player
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:974: error: cannot find symbol
+            if (stack.isResourceBlank()) {
+                     ^
+  symbol:   method isResourceBlank()
+  location: variable stack of type ConfigurableItemStack
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:992: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEGridNodeHolder.java:31: error: MEGridNodeHolder is not abstract and does not override abstract method readNbt(ValueInput,boolean) in MachineComponent
+public final class MEGridNodeHolder implements MachineComponent.ServerOnly {
+             ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEGridNodeHolder.java:126: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEGridNodeHolder.java:128: error: cannot find symbol
+        node.saveToNBT(tag);
+            ^
+  symbol:   method saveToNBT(CompoundTag)
+  location: variable node of type IManagedGridNode
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEGridNodeHolder.java:131: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEGridNodeHolder.java:133: error: cannot find symbol
+        node.loadFromNBT(tag);
+            ^
+  symbol:   method loadFromNBT(CompoundTag)
+  location: variable node of type IManagedGridNode
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:13: error: MEHatchConfigComponent is not abstract and does not override abstract method readNbt(ValueInput,boolean) in MachineComponent
+public final class MEHatchConfigComponent implements MachineComponent.ServerOnly {
+             ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:86: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:96: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:98: error: method getList in class CompoundTag cannot be applied to given types;
+        readConfigs(false, itemConfigs, tag.getList(ITEM_CONFIGS_KEY, Tag.TAG_COMPOUND), registries);
+                                           ^
+  required: String
+  found:    String,byte
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:99: error: method getList in class CompoundTag cannot be applied to given types;
+        readConfigs(true, fluidConfigs, tag.getList(FLUID_CONFIGS_KEY, Tag.TAG_COMPOUND), registries);
+                                           ^
+  required: String
+  found:    String,byte
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:104: error: method contains in class CompoundTag cannot be applied to given types;
+        if (tag.contains(SMART_PULL_KEY, Tag.TAG_BYTE)) {
+               ^
+  required: String
+  found:    String,byte
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:105: error: incompatible types: Optional<Boolean> cannot be converted to boolean
+            smartPull = tag.getBoolean(SMART_PULL_KEY);
+                                      ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:108: error: incompatible types: Optional<Integer> cannot be converted to int
+        priority = tag.getInt(PRIORITY_KEY);
+                             ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:134: error: incompatible types: Provider cannot be converted to ValueOutput
+            list.add(GenericStack.writeTag(registries, config));
+                                           ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:144: error: incompatible types: Optional<CompoundTag> cannot be converted to CompoundTag
+                CompoundTag configTag = stored.getCompound(i);
+                                                          ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:147: error: method readTag in record GenericStack cannot be applied to given types;
+                        config = GenericStack.readTag(registries, configTag);
+                                             ^
+  required: ValueInput
+  found:    Provider,CompoundTag
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchCellHost.java:126: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchCellHost.java:129: error: method writeNbt in class SimpleItemStackComponent cannot be applied to given types;
+        super.writeNbt(tag, registries);
+             ^
+  required: ValueOutput
+  found:    CompoundTag,Provider
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchCellHost.java:132: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchCellHost.java:134: error: method readNbt in class SimpleItemStackComponent cannot be applied to given types;
+        super.readNbt(tag, registries, isUpgradingMachine);
+             ^
+  required: ValueInput,boolean
+  found:    CompoundTag,Provider,boolean
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MENetworkTransfer.java:245: error: cannot find symbol
+            return !slot.isEmpty() && !slot.isResourceBlank() && slot.getAmount() > 0;
+                                           ^
+  symbol:   method isResourceBlank()
+  location: variable slot of type AbstractConfigurableStack<?,?>
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MENetworkTransfer.java:253: error: incompatible types: possible lossy conversion from long to int
+            slot.decrement(amount);
+                           ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MENetworkTransfer.java:292: error: cannot find symbol
+            if (slot.isEmpty() || slot.isResourceBlank()) {
+                                      ^
+  symbol:   method isResourceBlank()
+  location: variable slot of type ConfigurableItemStack
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MENetworkTransfer.java:295: error: incompatible types: possible lossy conversion from long to int
+            slot.increment(amount);
+                           ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MENetworkTransfer.java:327: error: incompatible types: possible lossy conversion from long to int
+            slot.increment(amount);
+                           ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:45: error: cannot find symbol
+            int step = Screen.hasShiftDown() ? 20 : 1;
+                             ^
+  symbol:   method hasShiftDown()
+  location: class Screen
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:62: error: incompatible types: int cannot be converted to MouseButtonEvent
+        if (Minecraft.getInstance().options.keyPickItem.matchesMouse(event.getButton())) {
+                                                                                    ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:75: error: method keyPressed in class AETextField cannot be applied to given types;
+                field.keyPressed(event.getKeyCode(), event.getScanCode(), event.getModifiers());
+                     ^
+  required: KeyEvent
+  found:    int,int,int
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:79: error: method matches in class KeyMapping cannot be applied to given types;
+        if (Minecraft.getInstance().options.keyPickItem.matches(event.getKeyCode(), event.getScanCode())) {
+                                                       ^
+  required: KeyEvent
+  found:    int,int
+  reason: actual and formal argument lists differ in length
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:105: warning: [removal] getSlotUnderMouse() in AbstractContainerScreen has been deprecated and marked for removal
+        Slot hovered = containerScreen.getSlotUnderMouse();
+                                      ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:127: error: cannot find symbol
+                target(current.amount(), isFluid, Screen.hasShiftDown(), Screen.hasControlDown(), scrollDelta > 0.0D),
+                                                        ^
+  symbol:   method hasShiftDown()
+  location: class Screen
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:127: error: cannot find symbol
+                target(current.amount(), isFluid, Screen.hasShiftDown(), Screen.hasControlDown(), scrollDelta > 0.0D),
+                                                                               ^
+  symbol:   method hasControlDown()
+  location: class Screen
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:255: error: cannot find symbol
+            public void renderBackground(GuiGraphics graphics, int leftPos, int topPos) {
+                                         ^
+  symbol: class GuiGraphics
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:273: error: cannot find symbol
+            public boolean renderTooltip(MachineScreen screen, Font font, GuiGraphics graphics,
+                                                                          ^
+  symbol: class GuiGraphics
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:321: error: cannot find symbol
+            private boolean showTooltip(GuiGraphics graphics, Font font,
+                                        ^
+  symbol: class GuiGraphics
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:139: error: <anonymous dev.wp.industrialization_overdrive.machines.guicomponents.mehatch.MEHatchGuiClient$1> is not abstract and does not override abstract method extractBackground(GuiGraphicsExtractor,int,int) in ClientComponentRenderer
+        return new ClientComponentRenderer() {
+                                             ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:188: error: cannot find symbol
+                            graphics.drawString(font, label, x + SMART_PULL_BOX + SMART_PULL_LABEL_GAP,
+                                    ^
+  symbol:   method drawString(Font,Component,int,int,int,boolean)
+  location: variable graphics of type GuiGraphicsExtractor
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:222: error: cannot find symbol
+                            (button.isHoveredOrFocused() ? Icon.TAB_BUTTON_BACKGROUND_FOCUS : Icon.TAB_BUTTON_BACKGROUND)
+                                                           ^
+  symbol: variable Icon
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:222: error: cannot find symbol
+                            (button.isHoveredOrFocused() ? Icon.TAB_BUTTON_BACKGROUND_FOCUS : Icon.TAB_BUTTON_BACKGROUND)
+                                                                                              ^
+  symbol: variable Icon
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:245: error: cannot find symbol
+                                        (button.isHoveredOrFocused() ? Icon.COG : Icon.COG_DISABLED).getBlitter()
+                                                                       ^
+  symbol: variable Icon
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:245: error: cannot find symbol
+                                        (button.isHoveredOrFocused() ? Icon.COG : Icon.COG_DISABLED).getBlitter()
+                                                                                  ^
+  symbol: variable Icon
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:254: error: method does not override or implement a method from a supertype
+            @Override
+            ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:342: error: cannot find symbol
+                if (!Screen.hasShiftDown()) {
+                           ^
+  symbol:   method hasShiftDown()
+  location: class Screen
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:416: error: cannot find symbol
+        if (amount < 100_000L || Screen.hasShiftDown()) {
+                                       ^
+  symbol:   method hasShiftDown()
+  location: class Screen
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:427: error: cannot find symbol
+        if (max < 100_000L || Screen.hasShiftDown()) {
+                                    ^
+  symbol:   method hasShiftDown()
+  location: class Screen
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:461: error: cannot find symbol
+                AEKeyRendering.drawInGui(minecraft, graphics, slot.x, slot.y, ghost);
+                ^
+  symbol:   variable AEKeyRendering
+  location: class MEHatchGuiClient
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:468: error: cannot find symbol
+        AEKeyRendering.drawInGui(minecraft, graphics, slot.x, slot.y, what);
+        ^
+  symbol:   variable AEKeyRendering
+  location: class MEHatchGuiClient
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:480: error: cannot find symbol
+        graphics.fillGradient(RenderType.guiOverlay(), x, y, x + 16, y + 16, 0x669CD3FF, 0x669CD3FF, 0);
+                              ^
+  symbol:   variable RenderType
+  location: class MEHatchGuiClient
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:600: error: method does not override or implement a method from a supertype
+        @Override
+        ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchAmountMenu.java:49: error: method registerClientAction in class AEBaseMenu cannot be applied to given types;
+        registerClientAction(ACTION_SET_AMOUNT, Long.class, this::confirm);
+        ^
+  required: ClientActionKey<T>,StreamCodec<? super RegistryFriendlyByteBuf,T>,Consumer<T>
+  found:    String,Class<Long>,this::confirm
+  reason: cannot infer type-variable(s) T
+    (argument mismatch; String cannot be converted to ClientActionKey<T>)
+  where T is a type-variable:
+    T extends Object declared in method <T>registerClientAction(ClientActionKey<T>,StreamCodec<? super RegistryFriendlyByteBuf,T>,Consumer<T>)
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchAmountMenu.java:72: error: method sendClientAction in class AEBaseMenu cannot be applied to given types;
+            sendClientAction(ACTION_SET_AMOUNT, amount);
+            ^
+  required: ClientActionKey<T>,T
+  found:    String,long
+  reason: cannot infer type-variable(s) T
+    (argument mismatch; String cannot be converted to ClientActionKey<T>)
+  where T is a type-variable:
+    T extends Object declared in method <T>sendClientAction(ClientActionKey<T>,T)
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/InertMEHatchBlockEntity.java:47: error: Passthrough is not abstract and does not override abstract method readNbt(ValueInput,boolean) in MachineComponent
+    private static final class Passthrough implements MachineComponent.ServerOnly {
+                         ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/InertMEHatchBlockEntity.java:50: error: method does not override or implement a method from a supertype
+        @Override
+        ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/InertMEHatchBlockEntity.java:52: error: cannot find symbol
+            for (String key : kept.getAllKeys()) {
+                                  ^
+  symbol:   method getAllKeys()
+  location: variable kept of type CompoundTag
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/InertMEHatchBlockEntity.java:57: error: method does not override or implement a method from a supertype
+        @Override
+        ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchInventories.java:75: error: incompatible types: possible lossy conversion from long to int
+                        ? ConfigurableFluidStack.standardInputSlot(UNCONFIGURED_FLUID_CAPACITY)
+                                                                   ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchInventories.java:76: error: incompatible types: possible lossy conversion from long to int
+                        : ConfigurableFluidStack.standardOutputSlot(OUTPUT_FLUID_CAPACITY), input));
+                                                                    ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchInventories.java:121: error: cannot find symbol
+        if (!stack.isResourceBlank() && stack.getResource().getObject() != instance) {
+                  ^
+  symbol:   method isResourceBlank()
+  location: variable stack of type AbstractConfigurableStack<?,?>
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchInventories.java:121: error: cannot find symbol
+        if (!stack.isResourceBlank() && stack.getResource().getObject() != instance) {
+                                                           ^
+  symbol:   method getObject()
+  location: interface DataComponentHolderResource<CAP#1>
+  where CAP#1 is a fresh type-variable:
+    CAP#1 extends Object from capture of ?
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/multiblock/MultiProcessingArrayBlockEntity.java:99: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/compat/AE2Integration.java:59: error: cannot find symbol
+        Map<ItemStack, Integer> meProvided = MultiblockBuilder.stackCounts();
+                                                              ^
+  symbol:   method stackCounts()
+  location: class MultiblockBuilder
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/compat/AE2Integration.java:80: error: cannot find symbol
+        Map<ItemStack, Integer> found = MultiblockBuilder.stackCounts();
+                                                         ^
+  symbol:   method stackCounts()
+  location: class MultiblockBuilder
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/compat/mi/IOMIHookListener.java:38: error: cannot find symbol
+        IOMachines.hatches(hook);
+                  ^
+  symbol:   method hatches(HatchMIHookContext)
+  location: class IOMachines
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/ConfigurableScreenHandlerMEHatchMixin.java:38: error: cannot find symbol
+        if (button == 1 && actionType == ClickType.PICKUP) {
+                                         ^
+  symbol:   variable ClickType
+  location: class ConfigurableScreenHandlerMEHatchMixin
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/ConfigurableScreenHandlerMEHatchMixin.java:40: error: cannot find symbol
+        } else if (button == 0 && actionType == ClickType.PICKUP) {
+                                                ^
+  symbol:   variable ClickType
+  location: class ConfigurableScreenHandlerMEHatchMixin
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:27: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:29: error: cannot find symbol
+        if (MEHatchGuiClient.isMEHatchMenu(getMenu())) {
+                                           ^
+  symbol:   method getMenu()
+  location: class MachineScreenMEHatchMixin
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:32: error: cannot find symbol
+            super.renderSlotHighlight(guiGraphics, slot, mouseX, mouseY, partialTick);
+            ^
+  symbol:   variable super
+  location: class MachineScreenMEHatchMixin
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/IOMixinPlugin.java:28: warning: [removal] get() in LoadingModList has been deprecated and marked for removal
+    private static final boolean AE2_PRESENT = LoadingModList.get().getModFileById("ae2") != null;
+                                                             ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/IO.java:89: error: cannot find symbol
+        if (IOUtil.isAE2Loaded) NeoForge.EVENT_BUS.addListener(BlockEvent.BreakEvent.class, MEHatchBlockEntity::onBreak);
+                                                                         ^
+  symbol:   class BreakEvent
+  location: class BlockEvent
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/IOClient.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+95 errors
+7 warnings
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///root/home/forks/mi-stack/Industrialization-Overdrive/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/datagen/server/provider/recipes/CommonRecipesServerDatagenProvider.java:42: error: constructor ShapedRecipeBuilder in class ShapedRecipeBuilder cannot be applied to given types;
+          ShapedRecipeBuilder builder = new ShapedRecipeBuilder();
+                                        ^
+    required: Provider
+    found:    no arguments
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/datagen/server/provider/recipes/CommonRecipesServerDatagenProvider.java:103: error: constructor ShapelessRecipeBuilder in class ShapelessRecipeBuilder cannot be applied to given types;
+          ShapelessRecipeBuilder mixedInput = new ShapelessRecipeBuilder();
+                                              ^
+    required: Provider
+    found:    no arguments
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/datagen/server/provider/recipes/CommonRecipesServerDatagenProvider.java:109: error: constructor ShapelessRecipeBuilder in class ShapelessRecipeBuilder cannot be applied to given types;
+          ShapelessRecipeBuilder mixedOutput = new ShapelessRecipeBuilder();
+                                               ^
+    required: Provider
+    found:    no arguments
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:224: error: method contains in class CompoundTag cannot be applied to given types;
+          if (!simulate && tag.contains(MEHatchConfigComponent.SMART_PULL_KEY, Tag.TAG_BYTE)) {
+                              ^
+    required: String
+    found:    String,byte
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:227: error: method contains in class CompoundTag cannot be applied to given types;
+          if (!simulate && tag.contains(MEHatchConfigComponent.STORAGE_MODE_KEY, Tag.TAG_BYTE)) {
+                              ^
+    required: String
+    found:    String,byte
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:98: error: method getList in class CompoundTag cannot be applied to given types;
+          readConfigs(false, itemConfigs, tag.getList(ITEM_CONFIGS_KEY, Tag.TAG_COMPOUND), registries);
+                                             ^
+    required: String
+    found:    String,byte
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:99: error: method getList in class CompoundTag cannot be applied to given types;
+          readConfigs(true, fluidConfigs, tag.getList(FLUID_CONFIGS_KEY, Tag.TAG_COMPOUND), registries);
+                                             ^
+    required: String
+    found:    String,byte
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:104: error: method contains in class CompoundTag cannot be applied to given types;
+          if (tag.contains(SMART_PULL_KEY, Tag.TAG_BYTE)) {
+                 ^
+    required: String
+    found:    String,byte
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:147: error: method readTag in record GenericStack cannot be applied to given types;
+                          config = GenericStack.readTag(registries, configTag);
+                                               ^
+    required: ValueInput
+    found:    Provider,CompoundTag
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchCellHost.java:129: error: method writeNbt in class SimpleItemStackComponent cannot be applied to given types;
+          super.writeNbt(tag, registries);
+               ^
+    required: ValueOutput
+    found:    CompoundTag,Provider
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchCellHost.java:134: error: method readNbt in class SimpleItemStackComponent cannot be applied to given types;
+          super.readNbt(tag, registries, isUpgradingMachine);
+               ^
+    required: ValueInput,boolean
+    found:    CompoundTag,Provider,boolean
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:75: error: method keyPressed in class AETextField cannot be applied to given types;
+                  field.keyPressed(event.getKeyCode(), event.getScanCode(), event.getModifiers());
+                       ^
+    required: KeyEvent
+    found:    int,int,int
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:79: error: method matches in class KeyMapping cannot be applied to given types;
+          if (Minecraft.getInstance().options.keyPickItem.matches(event.getKeyCode(), event.getScanCode())) {
+                                                         ^
+    required: KeyEvent
+    found:    int,int
+    reason: actual and formal argument lists differ in length
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchAmountMenu.java:49: error: method registerClientAction in class AEBaseMenu cannot be applied to given types;
+          registerClientAction(ACTION_SET_AMOUNT, Long.class, this::confirm);
+          ^
+    required: ClientActionKey<T>,StreamCodec<? super RegistryFriendlyByteBuf,T>,Consumer<T>
+    found:    String,Class<Long>,this::confirm
+    reason: cannot infer type-variable(s) T
+      (argument mismatch; String cannot be converted to ClientActionKey<T>)
+    where T is a type-variable:
+      T extends Object declared in method <T>registerClientAction(ClientActionKey<T>,StreamCodec<? super RegistryFriendlyByteBuf,T>,Consumer<T>)
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchAmountMenu.java:72: error: method sendClientAction in class AEBaseMenu cannot be applied to given types;
+              sendClientAction(ACTION_SET_AMOUNT, amount);
+              ^
+    required: ClientActionKey<T>,T
+    found:    String,long
+    reason: cannot infer type-variable(s) T
+      (argument mismatch; String cannot be converted to ClientActionKey<T>)
+    where T is a type-variable:
+      T extends Object declared in method <T>sendClientAction(ClientActionKey<T>,T)
+  Note: Recompile with -Xlint:deprecation for details.
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:912: error: cannot find symbol
+      public static void onBreak(BlockEvent.BreakEvent event) {
+                                           ^
+    symbol:   class BreakEvent
+    location: class BlockEvent
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:3: error: cannot find symbol
+  import appeng.api.client.AEKeyRendering;
+                          ^
+    symbol:   class AEKeyRendering
+    location: package appeng.api.client
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:26: error: cannot find symbol
+  import net.minecraft.client.renderer.RenderType;
+                                      ^
+    symbol:   class RenderType
+    location: package net.minecraft.client.renderer
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:33: error: cannot find symbol
+  import net.minecraft.client.gui.GuiGraphics;
+                                 ^
+    symbol:   class GuiGraphics
+    location: package net.minecraft.client.gui
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:601: error: cannot find symbol
+          public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+                                   ^
+    symbol:   class GuiGraphics
+    location: class IntervalField
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:449: error: cannot find symbol
+      public static void renderSlot(GuiGraphics graphics, @Nullable AbstractContainerMenu menu, Slot slot) {
+                                    ^
+    symbol:   class GuiGraphics
+    location: class MEHatchGuiClient
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:473: error: cannot find symbol
+      public static void renderSlotHighlight(GuiGraphics graphics, Slot slot) {
+                                             ^
+    symbol:   class GuiGraphics
+    location: class MEHatchGuiClient
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:488: error: cannot find symbol
+      private static void renderLockFrame(GuiGraphics graphics, @Nullable AbstractContainerMenu menu, Slot slot) {
+                                          ^
+    symbol:   class GuiGraphics
+    location: class MEHatchGuiClient
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/ConfigurableScreenHandlerMEHatchMixin.java:7: error: cannot find symbol
+  import net.minecraft.world.inventory.ClickType;
+                                      ^
+    symbol:   class ClickType
+    location: package net.minecraft.world.inventory
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/ConfigurableScreenHandlerMEHatchMixin.java:18: error: cannot find symbol
+      private void io_handleMEHatchConfigClick(int slotIndex, int button, ClickType actionType,
+                                                                          ^
+    symbol:   class ClickType
+    location: class ConfigurableScreenHandlerMEHatchMixin
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:5: error: cannot find symbol
+  import aztech.modern_industrialization.client.screen.MIHandledScreen;
+                                                      ^
+    symbol:   class MIHandledScreen
+    location: package aztech.modern_industrialization.client.screen
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:10: error: cannot find symbol
+  import net.minecraft.client.gui.GuiGraphics;
+                                 ^
+    symbol:   class GuiGraphics
+    location: package net.minecraft.client.gui
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:28: error: cannot find symbol
+      protected void renderSlotHighlight(GuiGraphics guiGraphics, Slot slot, int mouseX, int mouseY, float partialTick) {
+                                         ^
+    symbol:   class GuiGraphics
+    location: class MachineScreenMEHatchMixin
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:36: error: cannot find symbol
+      private void io_renderMEHatchSlot(GuiGraphics guiGraphics, Slot slot, CallbackInfo ci) {
+                                        ^
+    symbol:   class GuiGraphics
+    location: class MachineScreenMEHatchMixin
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:461: error: cannot find symbol
+                  AEKeyRendering.drawInGui(minecraft, graphics, slot.x, slot.y, ghost);
+                  ^
+    symbol:   variable AEKeyRendering
+    location: class MEHatchGuiClient
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:468: error: cannot find symbol
+          AEKeyRendering.drawInGui(minecraft, graphics, slot.x, slot.y, what);
+          ^
+    symbol:   variable AEKeyRendering
+    location: class MEHatchGuiClient
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:480: error: cannot find symbol
+          graphics.fillGradient(RenderType.guiOverlay(), x, y, x + 16, y + 16, 0x669CD3FF, 0x669CD3FF, 0);
+                                ^
+    symbol:   variable RenderType
+    location: class MEHatchGuiClient
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/ConfigurableScreenHandlerMEHatchMixin.java:38: error: cannot find symbol
+          if (button == 1 && actionType == ClickType.PICKUP) {
+                                           ^
+    symbol:   variable ClickType
+    location: class ConfigurableScreenHandlerMEHatchMixin
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/ConfigurableScreenHandlerMEHatchMixin.java:40: error: cannot find symbol
+          } else if (button == 0 && actionType == ClickType.PICKUP) {
+                                                  ^
+    symbol:   variable ClickType
+    location: class ConfigurableScreenHandlerMEHatchMixin
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:32: error: cannot find symbol
+              super.renderSlotHighlight(guiGraphics, slot, mouseX, mouseY, partialTick);
+              ^
+    symbol:   variable super
+    location: class MachineScreenMEHatchMixin
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/IO.java:89: error: cannot find symbol
+          if (IOUtil.isAE2Loaded) NeoForge.EVENT_BUS.addListener(BlockEvent.BreakEvent.class, MEHatchBlockEntity::onBreak);
+                                                                           ^
+    symbol:   class BreakEvent
+    location: class BlockEvent
+  Note: Recompile with -Xlint:unchecked for details.
+  Note: Some input files use or override a deprecated API.
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:992: error: method does not override or implement a method from a supertype
+      @Override
+      ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEGridNodeHolder.java:126: error: method does not override or implement a method from a supertype
+      @Override
+      ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEGridNodeHolder.java:131: error: method does not override or implement a method from a supertype
+      @Override
+      ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:86: error: method does not override or implement a method from a supertype
+      @Override
+      ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:96: error: method does not override or implement a method from a supertype
+      @Override
+      ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchCellHost.java:126: error: method does not override or implement a method from a supertype
+      @Override
+      ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchCellHost.java:132: error: method does not override or implement a method from a supertype
+      @Override
+      ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:254: error: method does not override or implement a method from a supertype
+              @Override
+              ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:600: error: method does not override or implement a method from a supertype
+          @Override
+          ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/InertMEHatchBlockEntity.java:50: error: method does not override or implement a method from a supertype
+          @Override
+          ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/InertMEHatchBlockEntity.java:57: error: method does not override or implement a method from a supertype
+          @Override
+          ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/multiblock/MultiProcessingArrayBlockEntity.java:99: error: method does not override or implement a method from a supertype
+      @Override
+      ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:27: error: method does not override or implement a method from a supertype
+      @Override
+      ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/item/Vajra.java:128: warning: [removal] ItemHandlerHelper in net.neoforged.neoforge.items has been deprecated and marked for removal
+                      if (!itemEntity.isRemoved()) ItemHandlerHelper.giveItemToPlayer(player, itemEntity.getItem());
+                                                   ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/item/Vajra.java:128: warning: [removal] giveItemToPlayer(Player,ItemStack) in ItemHandlerHelper has been deprecated and marked for removal
+                      if (!itemEntity.isRemoved()) ItemHandlerHelper.giveItemToPlayer(player, itemEntity.getItem());
+                                                                    ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/datagen/server/provider/recipes/CommonRecipesServerDatagenProvider.java:87: warning: [removal] itemIn(String,int) in MIRecipeJson has been deprecated and marked for removal
+                          .itemIn("modern_industrialization:sodium_battery", 1)
+                          ^
+    where T is a type-variable:
+      T extends MIRecipeJson<?> declared in class MIRecipeJson
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchConfigSlot.java:176: warning: [removal] FluidUtil in net.neoforged.neoforge.fluids has been deprecated and marked for removal
+              FluidStack contained = FluidUtil.getFluidContained(carried).orElse(FluidStack.EMPTY);
+                                     ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchConfigSlot.java:176: warning: [removal] getFluidContained(ItemStack) in FluidUtil has been deprecated and marked for removal
+              FluidStack contained = FluidUtil.getFluidContained(carried).orElse(FluidStack.EMPTY);
+                                              ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:105: warning: [removal] getSlotUnderMouse() in AbstractContainerScreen has been deprecated and marked for removal
+          Slot hovered = containerScreen.getSlotUnderMouse();
+                                        ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/IOMixinPlugin.java:28: warning: [removal] get() in LoadingModList has been deprecated and marked for removal
+      private static final boolean AE2_PRESENT = LoadingModList.get().getModFileById("ae2") != null;
+                                                               ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:925: error: cannot find symbol
+          player.displayClientMessage(IO.text().meHatchBreakWouldLoseStock(), false);
+                ^
+    symbol:   method displayClientMessage(MutableComponent,boolean)
+    location: variable player of type Player
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:974: error: cannot find symbol
+              if (stack.isResourceBlank()) {
+                       ^
+    symbol:   method isResourceBlank()
+    location: variable stack of type ConfigurableItemStack
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEGridNodeHolder.java:128: error: cannot find symbol
+          node.saveToNBT(tag);
+              ^
+    symbol:   method saveToNBT(CompoundTag)
+    location: variable node of type IManagedGridNode
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEGridNodeHolder.java:133: error: cannot find symbol
+          node.loadFromNBT(tag);
+              ^
+    symbol:   method loadFromNBT(CompoundTag)
+    location: variable node of type IManagedGridNode
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MENetworkTransfer.java:245: error: cannot find symbol
+              return !slot.isEmpty() && !slot.isResourceBlank() && slot.getAmount() > 0;
+                                             ^
+    symbol:   method isResourceBlank()
+    location: variable slot of type AbstractConfigurableStack<?,?>
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MENetworkTransfer.java:292: error: cannot find symbol
+              if (slot.isEmpty() || slot.isResourceBlank()) {
+                                        ^
+    symbol:   method isResourceBlank()
+    location: variable slot of type ConfigurableItemStack
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:45: error: cannot find symbol
+              int step = Screen.hasShiftDown() ? 20 : 1;
+                               ^
+    symbol:   method hasShiftDown()
+    location: class Screen
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:127: error: cannot find symbol
+                  target(current.amount(), isFluid, Screen.hasShiftDown(), Screen.hasControlDown(), scrollDelta > 0.0D),
+                                                          ^
+    symbol:   method hasShiftDown()
+    location: class Screen
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:127: error: cannot find symbol
+                  target(current.amount(), isFluid, Screen.hasShiftDown(), Screen.hasControlDown(), scrollDelta > 0.0D),
+                                                                                 ^
+    symbol:   method hasControlDown()
+    location: class Screen
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:188: error: cannot find symbol
+                              graphics.drawString(font, label, x + SMART_PULL_BOX + SMART_PULL_LABEL_GAP,
+                                      ^
+    symbol:   method drawString(Font,Component,int,int,int,boolean)
+    location: variable graphics of type GuiGraphicsExtractor
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:342: error: cannot find symbol
+                  if (!Screen.hasShiftDown()) {
+                             ^
+    symbol:   method hasShiftDown()
+    location: class Screen
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:416: error: cannot find symbol
+          if (amount < 100_000L || Screen.hasShiftDown()) {
+                                         ^
+    symbol:   method hasShiftDown()
+    location: class Screen
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:427: error: cannot find symbol
+          if (max < 100_000L || Screen.hasShiftDown()) {
+                                      ^
+    symbol:   method hasShiftDown()
+    location: class Screen
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/InertMEHatchBlockEntity.java:52: error: cannot find symbol
+              for (String key : kept.getAllKeys()) {
+                                    ^
+    symbol:   method getAllKeys()
+    location: variable kept of type CompoundTag
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchInventories.java:121: error: cannot find symbol
+          if (!stack.isResourceBlank() && stack.getResource().getObject() != instance) {
+                    ^
+    symbol:   method isResourceBlank()
+    location: variable stack of type AbstractConfigurableStack<?,?>
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchInventories.java:121: error: cannot find symbol
+          if (!stack.isResourceBlank() && stack.getResource().getObject() != instance) {
+                                                             ^
+    symbol:   method getObject()
+    location: interface DataComponentHolderResource<CAP#1>
+    where CAP#1 is a fresh type-variable:
+      CAP#1 extends Object from capture of ?
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/compat/AE2Integration.java:59: error: cannot find symbol
+          Map<ItemStack, Integer> meProvided = MultiblockBuilder.stackCounts();
+                                                                ^
+    symbol:   method stackCounts()
+    location: class MultiblockBuilder
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/compat/AE2Integration.java:80: error: cannot find symbol
+          Map<ItemStack, Integer> found = MultiblockBuilder.stackCounts();
+                                                           ^
+    symbol:   method stackCounts()
+    location: class MultiblockBuilder
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/compat/mi/IOMIHookListener.java:38: error: cannot find symbol
+          IOMachines.hatches(hook);
+                    ^
+    symbol:   method hatches(HatchMIHookContext)
+    location: class IOMachines
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:29: error: cannot find symbol
+          if (MEHatchGuiClient.isMEHatchMenu(getMenu())) {
+                                             ^
+    symbol:   method getMenu()
+    location: class MachineScreenMEHatchMixin
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEGridNodeHolder.java:31: error: MEGridNodeHolder is not abstract and does not override abstract method readNbt(ValueInput,boolean) in MachineComponent
+  public final class MEGridNodeHolder implements MachineComponent.ServerOnly {
+               ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:13: error: MEHatchConfigComponent is not abstract and does not override abstract method readNbt(ValueInput,boolean) in MachineComponent
+  public final class MEHatchConfigComponent implements MachineComponent.ServerOnly {
+               ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:139: error: <anonymous dev.wp.industrialization_overdrive.machines.guicomponents.mehatch.MEHatchGuiClient$1> is not abstract and does not override abstract method extractBackground(GuiGraphicsExtractor,int,int) in ClientComponentRenderer
+          return new ClientComponentRenderer() {
+                                               ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/InertMEHatchBlockEntity.java:47: error: Passthrough is not abstract and does not override abstract method readNbt(ValueInput,boolean) in MachineComponent
+      private static final class Passthrough implements MachineComponent.ServerOnly {
+                           ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/item/MultiblockBuilder.java:459: error: incompatible types: Map<Item,Integer> cannot be converted to Map<ItemStack,Integer>
+          Map<Item, Integer> meProvided = IOUtil.isAE2Loaded ? AE2Integration.getMissingFromME(player, level, inventoryCount, requiredBlocks) : new HashMap<>();
+                                                                                                              ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/item/MultiblockBuilder.java:489: error: incompatible types: Map<Item,Integer> cannot be converted to Map<ItemStack,Integer>
+          if (IOUtil.isAE2Loaded && !meProvided.isEmpty()) AE2Integration.extractFromME(player, level, meProvided);
+                                                                                                       ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:383: error: incompatible types: possible lossy conversion from long to int
+          slot.setCapacity(capacity);
+                           ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:105: error: incompatible types: Optional<Boolean> cannot be converted to boolean
+              smartPull = tag.getBoolean(SMART_PULL_KEY);
+                                        ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:108: error: incompatible types: Optional<Integer> cannot be converted to int
+          priority = tag.getInt(PRIORITY_KEY);
+                               ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:134: error: incompatible types: Provider cannot be converted to ValueOutput
+              list.add(GenericStack.writeTag(registries, config));
+                                             ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/components/MEHatchConfigComponent.java:144: error: incompatible types: Optional<CompoundTag> cannot be converted to CompoundTag
+                  CompoundTag configTag = stored.getCompound(i);
+                                                            ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MENetworkTransfer.java:253: error: incompatible types: possible lossy conversion from long to int
+              slot.decrement(amount);
+                             ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MENetworkTransfer.java:295: error: incompatible types: possible lossy conversion from long to int
+              slot.increment(amount);
+                             ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MENetworkTransfer.java:327: error: incompatible types: possible lossy conversion from long to int
+              slot.increment(amount);
+                             ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:62: error: incompatible types: int cannot be converted to MouseButtonEvent
+          if (Minecraft.getInstance().options.keyPickItem.matchesMouse(event.getButton())) {
+                                                                                      ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchInventories.java:75: error: incompatible types: possible lossy conversion from long to int
+                          ? ConfigurableFluidStack.standardInputSlot(UNCONFIGURED_FLUID_CAPACITY)
+                                                                     ^
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchInventories.java:76: error: incompatible types: possible lossy conversion from long to int
+                          : ConfigurableFluidStack.standardOutputSlot(OUTPUT_FLUID_CAPACITY), input));
+                                                                      ^
+  Note: /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/IOClient.java uses unchecked or unsafe operations.
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/blockentities/hatches/MEHatchBlockEntity.java:221: error: bad operand types for binary operator '>'
+          if (!simulate && tag.getInt(MEHatchConfigComponent.TRANSFER_INTERVAL_KEY) > 0) {
+                                                                                    ^
+    first type:  Optional<Integer>
+    second type: int
+  Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/mixin/client/MachineScreenMEHatchMixin.java:22: error: cannot find symbol
+  public abstract class MachineScreenMEHatchMixin extends MIHandledScreen<MachineMenuClient> {
+                                                          ^
+    symbol: class MIHandledScreen
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:255: error: cannot find symbol
+              public void renderBackground(GuiGraphics graphics, int leftPos, int topPos) {
+                                           ^
+    symbol: class GuiGraphics
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:273: error: cannot find symbol
+              public boolean renderTooltip(MachineScreen screen, Font font, GuiGraphics graphics,
+                                                                            ^
+    symbol: class GuiGraphics
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:321: error: cannot find symbol
+              private boolean showTooltip(GuiGraphics graphics, Font font,
+                                          ^
+    symbol: class GuiGraphics
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:222: error: cannot find symbol
+                              (button.isHoveredOrFocused() ? Icon.TAB_BUTTON_BACKGROUND_FOCUS : Icon.TAB_BUTTON_BACKGROUND)
+                                                             ^
+    symbol: variable Icon
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:222: error: cannot find symbol
+                              (button.isHoveredOrFocused() ? Icon.TAB_BUTTON_BACKGROUND_FOCUS : Icon.TAB_BUTTON_BACKGROUND)
+                                                                                                ^
+    symbol: variable Icon
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:245: error: cannot find symbol
+                                          (button.isHoveredOrFocused() ? Icon.COG : Icon.COG_DISABLED).getBlitter()
+                                                                         ^
+    symbol: variable Icon
+  /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchGuiClient.java:245: error: cannot find symbol
+                                          (button.isHoveredOrFocused() ? Icon.COG : Icon.COG_DISABLED).getBlitter()
+                                                                                    ^
+    symbol: variable Icon
+  95 errors
+  7 warnings
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to generate a Build Scan (powered by Develocity).
+
+BUILD FAILED in 1m 13s
+14 actionable tasks: 1 executed, 13 up-to-date

@@ -1,0 +1,133 @@
++ date -Is
+2026-11-06T08:49:47+03:00
++ tail -35 .port-tools/qa-out/overdrive-smoke/server.log
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/root/.gradle/wrapper/dists/gradle-9.2.1-bin/2t0n5ozlw9xmuyvbp7dnzaxug/gradle-9.2.1/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
++ ps -eo pid,ppid,stat,etime,pcpu,args
++ rg '[G]radleDaemon|[G]radleWrapperMain'
+3250214 3250211 Sl         00:23 17.3 /usr/lib/jvm/java-25-openjdk-amd64/bin/java -Xmx64m -Xms64m -Dorg.gradle.appname=gradlew -classpath /root/home/forks/mi-stack/Industrialization-Overdrive/gradle/wrapper/gradle-wrapper.jar org.gradle.wrapper.GradleWrapperMain runServer --no-daemon -Dorg.gradle.jvmargs=-Xmx768m --console=plain
+3250321 3250214 Ssl        00:21  222 /usr/lib/jvm/java-25-openjdk-amd64/bin/java --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.prefs/java.util.prefs=ALL-UNNAMED --add-opens=java.base/java.nio.charset=ALL-UNNAMED --add-opens=java.base/java.net=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED --add-opens=java.xml/javax.xml.namespace=ALL-UNNAMED --add-opens=java.base/java.time=ALL-UNNAMED --enable-native-access=ALL-UNNAMED -Xmx768m -Dfile.encoding=UTF-8 -Duser.country -Duser.language=en -Duser.variant -cp /root/.gradle/wrapper/dists/gradle-9.2.1-bin/2t0n5ozlw9xmuyvbp7dnzaxug/gradle-9.2.1/lib/gradle-daemon-main-9.2.1.jar -javaagent:/root/.gradle/wrapper/dists/gradle-9.2.1-bin/2t0n5ozlw9xmuyvbp7dnzaxug/gradle-9.2.1/lib/agents/gradle-instrumentation-agent-9.2.1.jar org.gradle.launcher.daemon.bootstrap.GradleDaemon 9.2.1
++ free -m
+               total        used        free      shared  buff/cache   available
+Mem:           15991        7316        3954          75        5135        8675
+Swap:            511         511           0
+		Name Version (Mod Id)
+
+		Applied Energistics 2 26.1.12-SNAPSHOT (ae2)
+		GuideME 26.1.14-beta (guideme)
+		Industrialization Overdrive 1.14.0-port.2+26.1.2 (industrialization_overdrive)
+		Minecraft 26.1.2 (minecraft)
+		Modern Industrialization 2.6.0-26.1.2-fleet01 (modern_industrialization)
+		NeoForge 26.1.2.126 (neoforge)
+		SEMI 1.1.24-semi151a6c88+26.1.2+neoforge (emi)
+		Tesseract API 1.13.7-26.1.2-fleet.1 (tesseract_api)
+[08:50:09] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/root/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/5f66cc9f59b8efaa942155a3d5a30599bf6640dd/sponge-mixin-0.17.4+mixin.0.8.7.jar Service=FML Env=SERVER
+[08:50:09] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
+[08:50:09] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /root/.gradle/caches/modules-2/files-2.1/net.neoforged/neoforge/26.1.2.126/e03e444b0e0793b0fa76b967d944af6fa855516e/neoforge-26.1.2.126-universal.jar > net.neoforged.neoforge-coremods-26.1.2.126.jar
+[08:50:09] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
+ - ae2 (jar(/root/build-farm/build-farm/m2/repository/org/appliedenergistics/appliedenergistics2/26.1.12-SNAPSHOT/appliedenergistics2-26.1.12-SNAPSHOT.jar))
+ - emi (jar(/root/build-farm/build-farm/m2/repository/dev/emi/emi-neoforge/1.1.24-semi151a6c88+26.1.2/emi-neoforge-1.1.24-semi151a6c88+26.1.2.jar))
+ - guideme (jar(/root/.gradle/caches/modules-2/files-2.1/org.appliedenergistics/guideme/26.1.14-beta/abe3222d6c8303a49f3fa468267c2a1d3371c699/guideme-26.1.14-beta.jar))
+ - industrialization_overdrive (composite(folder(/root/home/forks/mi-stack/Industrialization-Overdrive/build/resources/main), folder(/root/home/forks/mi-stack/Industrialization-Overdrive/build/classes/java/main)))
+ - minecraft (composite(filtered(jar(/root/home/forks/mi-stack/Industrialization-Overdrive/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/26.1.2.126/neoforge-26.1.2.126.jar)), filtered(jar(/root/home/forks/mi-stack/Industrialization-Overdrive/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/26.1.2.126/neoforge-26.1.2.126.jar))))
+ - mixinextras.neoforge (jar(/root/.gradle/caches/modules-2/files-2.1/io.github.llamalad7/mixinextras-neoforge/0.5.5/26f2905a37afd203c3da1d6a2e164472a7531b41/mixinextras-neoforge-0.5.5.jar))
+ - modern_industrialization (jar(/root/build-farm/build-farm/m2/repository/aztech/Modern-Industrialization/2.6.0-26.1.2-fleet01/Modern-Industrialization-2.6.0-26.1.2-fleet01.jar))
+ - neoforge (composite(filtered(jar(/root/.gradle/caches/modules-2/files-2.1/net.neoforged/neoforge/26.1.2.126/e03e444b0e0793b0fa76b967d944af6fa855516e/neoforge-26.1.2.126-universal.jar))))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+ - tesseract.api (jar(/root/.gradle/caches/modules-2/files-2.1/net.swedz/tesseract-api/1.0.2/2885b77e564eb154f6f169e707c8d533c5ab0473/tesseract-api-1.0.2.jar))
+ - tesseract_api (jar(/root/build-farm/build-farm/m2/repository/net/swedz/tesseract-api-neoforge/1.13.7-26.1.2-fleet.1/tesseract-api-neoforge-1.13.7-26.1.2-fleet.1.jar))
+[08:50:07] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: /root/home/forks/mi-stack/Industrialization-Overdrive/run/server
+[08:50:07] [main/INFO] [ne.ne.fm.lo.EarlyServiceDiscovery/]: Found 2 early service jars (out of 103) in 45ms
+[08:50:07] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Early Services:
+[08:50:07] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /root/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/earlydisplay/11.0.15/b254aa4ec40828f8ce65411dcb7fb9f6ce008064/earlydisplay-11.0.15.jar
+[08:50:07] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /root/.gradle/caches/modules-2/files-2.1/net.neoforged.fancymodloader/loader/11.0.15/69ddd98736a6b095783523404d1af8992842722/loader-11.0.15.jar
+[08:50:07] [main/INFO] [ne.ne.fm.lo.ImmediateWindowHandler/]: Not loading early display in headless mode.
+[08:50:07] [main/INFO] [ne.ne.fm.lo.mo.lo.GameLocator/]: Detected a joined NeoForge and Minecraft configuration. Applying filtering...
+[08:50:08] [main/INFO] [ne.ne.fm.lo.mo.lo.InDevFolderLocator/CORE]: Got mod coordinates Industrialization-Overdrive%%/root/home/forks/mi-stack/Industrialization-Overdrive/build/resources/main:Industrialization-Overdrive%%/root/home/forks/mi-stack/Industrialization-Overdrive/build/classes/java/main from env
+[08:50:08] [main/WARN] [ne.ne.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: library:mixinextras.neoforge. Using jar(/root/.gradle/caches/modules-2/files-2.1/io.github.llamalad7/mixinextras-neoforge/0.5.5/26f2905a37afd203c3da1d6a2e164472a7531b41/mixinextras-neoforge-0.5.5.jar)
+[08:50:08] [main/WARN] [ne.ne.ja.se.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: library:tesseract.api. Using jar(/root/.gradle/caches/modules-2/files-2.1/net.swedz/tesseract-api/1.0.2/2885b77e564eb154f6f169e707c8d533c5ab0473/tesseract-api-1.0.2.jar)
+[08:50:08] [main/INFO] [ne.ne.fm.lo.mo.lo.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[08:50:08] [main/INFO] [ne.ne.fm.lo.mo.ModDiscoverer/]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Applied Energistics 2 26.1.12-SNAPSHOT (ae2)
+		GuideME 26.1.14-beta (guideme)
+		Industrialization Overdrive 1.14.0-port.2+26.1.2 (industrialization_overdrive)
+		Minecraft 26.1.2 (minecraft)
+		Modern Industrialization 2.6.0-26.1.2-fleet01 (modern_industrialization)
+		NeoForge 26.1.2.126 (neoforge)
+		SEMI 1.1.24-semi151a6c88+26.1.2+neoforge (emi)
+		Tesseract API 1.13.7-26.1.2-fleet.1 (tesseract_api)
+[08:50:09] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/root/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.17.4+mixin.0.8.7/5f66cc9f59b8efaa942155a3d5a30599bf6640dd/sponge-mixin-0.17.4+mixin.0.8.7.jar Service=FML Env=SERVER
+[08:50:09] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Loading FML Plugins:
+[08:50:09] [main/INFO] [ne.ne.fm.lo.FMLLoader/]:  - /root/.gradle/caches/modules-2/files-2.1/net.neoforged/neoforge/26.1.2.126/e03e444b0e0793b0fa76b967d944af6fa855516e/neoforge-26.1.2.126-universal.jar > net.neoforged.neoforge-coremods-26.1.2.126.jar
+[08:50:09] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Building game content classloader:
+ - ae2 (jar(/root/build-farm/build-farm/m2/repository/org/appliedenergistics/appliedenergistics2/26.1.12-SNAPSHOT/appliedenergistics2-26.1.12-SNAPSHOT.jar))
+ - emi (jar(/root/build-farm/build-farm/m2/repository/dev/emi/emi-neoforge/1.1.24-semi151a6c88+26.1.2/emi-neoforge-1.1.24-semi151a6c88+26.1.2.jar))
+ - guideme (jar(/root/.gradle/caches/modules-2/files-2.1/org.appliedenergistics/guideme/26.1.14-beta/abe3222d6c8303a49f3fa468267c2a1d3371c699/guideme-26.1.14-beta.jar))
+ - industrialization_overdrive (composite(folder(/root/home/forks/mi-stack/Industrialization-Overdrive/build/resources/main), folder(/root/home/forks/mi-stack/Industrialization-Overdrive/build/classes/java/main)))
+ - minecraft (composite(filtered(jar(/root/home/forks/mi-stack/Industrialization-Overdrive/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/26.1.2.126/neoforge-26.1.2.126.jar)), filtered(jar(/root/home/forks/mi-stack/Industrialization-Overdrive/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/26.1.2.126/neoforge-26.1.2.126.jar))))
+ - mixinextras.neoforge (jar(/root/.gradle/caches/modules-2/files-2.1/io.github.llamalad7/mixinextras-neoforge/0.5.5/26f2905a37afd203c3da1d6a2e164472a7531b41/mixinextras-neoforge-0.5.5.jar))
+ - modern_industrialization (jar(/root/build-farm/build-farm/m2/repository/aztech/Modern-Industrialization/2.6.0-26.1.2-fleet01/Modern-Industrialization-2.6.0-26.1.2-fleet01.jar))
+ - neoforge (composite(filtered(jar(/root/.gradle/caches/modules-2/files-2.1/net.neoforged/neoforge/26.1.2.126/e03e444b0e0793b0fa76b967d944af6fa855516e/neoforge-26.1.2.126-universal.jar))))
+ - net.neoforged.fml.generated (empty(VirtualJar/net.neoforged.fml.generated))
+ - tesseract.api (jar(/root/.gradle/caches/modules-2/files-2.1/net.swedz/tesseract-api/1.0.2/2885b77e564eb154f6f169e707c8d533c5ab0473/tesseract-api-1.0.2.jar))
+ - tesseract_api (jar(/root/build-farm/build-farm/m2/repository/net/swedz/tesseract-api-neoforge/1.13.7-26.1.2-fleet.1/tesseract-api-neoforge-1.13.7-26.1.2-fleet.1.jar))
+[08:50:10] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Built game content classloader in 99ms
+[08:50:15] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+[08:50:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[08:50:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[08:50:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[08:50:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[08:50:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [time, set, time] and [time, set, timemarker] with inputs: [0, 0s, 0d, 0t]
+[08:50:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [time, set, timemarker] and [time, set, time] with inputs: [012]
+[08:50:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [time, of, clock, set, time] and [time, of, clock, set, timemarker] with inputs: [0, 0s, 0d, 0t]
+[08:50:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [time, of, clock, set, timemarker] and [time, of, clock, set, time] with inputs: [012]
+[08:50:29] [main/WARN] [minecraft/Commands]: Ambiguity between arguments [waypoint, modify, waypoint, color, reset] and [waypoint, modify, waypoint, color, color] with inputs: [reset]
+[08:50:30] [modloading-worker-0/INFO] [ne.ne.ne.co.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 26.1.2.126, for MC 26.1.2
+[08:50:30] [modloading-worker-0/INFO] [Tesseract API/MIMixinPlugin/]: Starting MI hook entrypoint loader
+[08:50:30] [modloading-worker-0/INFO] [Tesseract API/MIMixinPlugin/]: Registered entrypoint for mod tesseract_api: net.swedz.tesseract.neoforge.compat.mi.hook.builtin.TesseractMIHookListener
+[08:50:30] [modloading-worker-0/INFO] [Tesseract API/MIMixinPlugin/]: Registered entrypoint for mod industrialization_overdrive: dev.wp.industrialization_overdrive.compat.mi.IOMIHookListener
+[08:50:30] [modloading-worker-0/INFO] [Tesseract API/MIMixinPlugin/]: Registered entrypoint for mod industrialization_overdrive: dev.wp.industrialization_overdrive.compat.mi.IOMIHookRegistry
+[08:50:30] [modloading-worker-0/INFO] [Tesseract API/MIMixinPlugin/]: Done MI hook entrypoint loader
+[08:50:31] [modloading-worker-0/INFO] [Modern Industrialization/]: Modern Industrialization setup done!
+[08:50:31] [modloading-worker-0/INFO] [Tesseract API/Proxies/]: Starting proxy manager entrypoint loader
+[08:50:32] [modloading-worker-0/INFO] [Tesseract API/Proxies/]: Loaded proxy entrypoint net.swedz.tesseract.neoforge.proxy.builtin.TesseractProxy (TesseractProxy)
+[08:50:32] [modloading-worker-0/INFO] [Tesseract API/Proxies/]: Loaded proxy entrypoint net.swedz.tesseract.neoforge.compat.mi.proxy.TesseractMIProxy (TesseractMILoadedProxy)
+[08:50:32] [modloading-worker-0/INFO] [Tesseract API/Proxies/]: Done proxy manager entrypoint loader
+[08:50:32] [modloading-worker-0/INFO] [Tesseract API/]: Tesseract API has completed initialization!
+[08:50:33] [modloading-worker-0/INFO] [Tesseract API/NativeMaterialItemSanityCheck/]: Starting validation process...
+[08:50:33] [modloading-worker-0/INFO] [Tesseract API/NativeMaterialItemSanityCheck/]: Successfully validated 0 item ids.
+[08:50:34] [main/INFO] [mojang/YggdrasilAuthenticationService]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]
+[08:50:41] [Worker-Main-5/INFO] [minecraft/Main]: No existing world data, creating new world
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[08:50:55] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[08:51:04] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Stopping the server]
+[08:51:04] [RCON Client /127.0.0.1 #2/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/minecraft:overworld
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/minecraft:the_end
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/minecraft:the_nether
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/ae2:spatial_storage
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[08:51:04] [Server thread/INFO] [minecraft/GenericThread]: Thread RCON Listener stopped
+[08:51:04] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Closing FML Loader 52bf5c51
+[08:51:04] [main/INFO] [ne.ne.fm.ModLoader/]: Clearing ModLoader
+
+BUILD SUCCESSFUL in 1m 41s
+18 actionable tasks: 1 executed, 17 up-to-date

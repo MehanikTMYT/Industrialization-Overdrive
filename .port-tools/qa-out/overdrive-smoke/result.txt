@@ -1,0 +1,10 @@
+STARTED saved=yes errors=0 (qa_server.sh filtered summary)
+Our errors: 0 (Overdrive / Tesseract / Modern Industrialization)
+External errors: 1 Log4j DebugFile appender / Netty kqueue Native on Linux; Only supported on OSX/BSD (server.log:140-189). Not hidden: full stack in server.log and external-errors.txt.
+No OnlyIn/OpenAL/PluginCaller/JEI errors observed.
+Evidence server.log:200 Done (6.951s); :215 Rcon: Stopping the server; :217 Stopping server; :228 All dimensions are saved; :233 BUILD SUCCESSFUL in 1m 41s.
+Single Gradle invocation, gate CLEAR, 9289 MiB available. Three agents total (root and two static reviewers), reviewers ran no Gradle.
+Used local safe copy of qa_server.sh: free ports checked, RCON implemented in this tree, fallback kill disabled. No opcScript needed. Game port 47085, RCON 52493; listeners absent after exit.
+Runtime mod list confirms Overdrive 1.14.0-port.2+26.1.2, MI 2.6.0-26.1.2-fleet01, Tesseract 1.13.7-26.1.2-fleet.1, AE2 26.1.12-SNAPSHOT, GuideME 26.1.14-beta, SEMI/EMI 1.1.24-semi151a6c88+26.1.2+neoforge.
+Started from port/26.1.2 f8b9e59. Commit 4e24b14 changes build.gradle only: explicit run/server workingDirectory and no fixed port override. git diff --check passed. Only untracked QA logs remain.
+One attempt. No give/setblock commands. Userdev source smoke; packaged JAR not independently launched. Client QA remains.

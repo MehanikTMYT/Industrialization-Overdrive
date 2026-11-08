@@ -1,0 +1,64 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/root/.gradle/wrapper/dists/gradle-9.2.1-bin/2t0n5ozlw9xmuyvbp7dnzaxug/gradle-9.2.1/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Enabling dist annotations on PMJ
+
+> Task :clean
+> Task :neoFormListLibraries FROM-CACHE
+> Task :neoFormListTransformLibraries FROM-CACHE
+> Task :cacheVersionManifest26.1.2 UP-TO-DATE
+> Task :cacheVersionExecutableClient26.1.2 UP-TO-DATE
+> Task :cacheVersionExecutableServer26.1.2 UP-TO-DATE
+> Task :neoFormSetup FROM-CACHE
+> Task :neoFormDecompile FROM-CACHE
+> Task :neoFormPatch FROM-CACHE
+> Task :neoFormPatchUserDev FROM-CACHE
+> Task :neoFormTransformSource FROM-CACHE
+> Task :neoFormRecompile FROM-CACHE
+> Task :supplyRawJarForneoFormJoined26.1.2-1
+> Task :selectRawArtifactNg_dummy_ng.net.neoforged_neoforge_26.1.2.126 UP-TO-DATE
+The message received from the daemon indicates that the daemon has disappeared.
+Build request sent: Build{id=0c880311-11f4-4f66-a005-7892cbdee7a1, currentDir=/root/home/forks/mi-stack/Industrialization-Overdrive}
+Attempting to read last messages from the daemon log...
+Daemon pid: 3864351
+  log file: /root/.gradle/daemon/9.2.1/daemon-3864351.out.log
+----- Last 20 lines from daemon log file - daemon-3864351.out.log -----
+2026-11-06T17:11:03.940+0300 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [d29b66a6-9893-421c-ad82-9c09f30e5374 port:46059, addresses:[localhost/127.0.0.1]]
+2026-11-06T17:11:03.940+0300 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [d29b66a6-9893-421c-ad82-9c09f30e5374 port:46059, addresses:[localhost/127.0.0.1]]
+2026-11-06T17:11:03.941+0300 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2026-11-06T17:11:03.941+0300 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2026-11-06T17:11:03.943+0300 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2026-11-06T17:11:03.943+0300 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2026-11-06T17:11:03.943+0300 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2026-11-06T17:11:03.949+0300 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=0c880311-11f4-4f66-a005-7892cbdee7a1, currentDir=/root/home/forks/mi-stack/Industrialization-Overdrive}. Dispatching build started information...
+2026-11-06T17:11:03.950+0300 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 39: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@7dcf13bf
+2026-11-06T17:11:03.954+0300 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: [PATH, NO_PROXY, LESSCLOSE, XDG_DATA_DIRS, OPENCODE_SESSION_ID, OPENCODE_TERMINAL, TERM, LANG, DBUS_SESSION_BUS_ADDRESS, XDG_SESSION_ID, XDG_SESSION_TYPE, AGENT, LOGNAME, PWD, XDG_SESSION_CLASS, _, no_proxy, SHELL, LESSOPEN, SSH_CLIENT, SSH_TTY, AI_AGENT, OLDPWD, USER, OPENCODE, SSH_CONNECTION, LS_COLORS, XDG_RUNTIME_DIR, SHLVL, HOME]
+2026-11-06T17:11:03.961+0300 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2026-11-06T17:11:03.970+0300 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 3864351). The daemon log file: /root/.gradle/daemon/9.2.1/daemon-3864351.out.log
+2026-11-06T17:11:03.985+0300 [DEBUG] [org.gradle.launcher.daemon.server.exec.RequestStopIfSingleUsedDaemon] Requesting daemon stop after processing Build{id=0c880311-11f4-4f66-a005-7892cbdee7a1, currentDir=/root/home/forks/mi-stack/Industrialization-Overdrive}
+2026-11-06T17:11:03.985+0300 [LIFECYCLE] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Daemon will be stopped at the end of the build 
+2026-11-06T17:11:03.986+0300 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Stop as soon as idle requested. The daemon is busy
+2026-11-06T17:11:03.996+0300 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon stop has been requested. Sleeping until state changes.
+2026-11-06T17:11:04.002+0300 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2026-11-06T17:11:04.003+0300 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=63d244df-c4d5-4cde-aec9-ae6d3a2d4525,javaHome=/usr/lib/jvm/java-25-openjdk-amd64,javaVersion=25,javaVendor=Ubuntu,daemonRegistryDir=/root/.gradle/daemon,pid=3864351,idleTimeout=120000,priority=NORMAL,applyInstrumentationAgent=true,nativeServicesMode=ENABLED,daemonOpts=-Xmx1G,-Dfile.encoding=UTF-8,-Duser.country=US,-Duser.language=en,-Duser.variant]
+Enabling dist annotations on PMJ
+Daemon vm is shutting down... The daemon has exited normally or was terminated in response to a user interrupt.----- End of the daemon log -----
+
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Gradle build daemon disappeared unexpectedly (it may have been killed or may have crashed)
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to generate a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+> Task :compileJava

@@ -1,0 +1,76 @@
++ cat .port-tools/qa-out/overdrive-smoke/summary.txt .port-tools/qa-out/overdrive-smoke/errors.txt .port-tools/qa-out/overdrive-smoke/cmds.txt
+overdrive-qa: STARTED saved=yes errors=0
+Selected available ports: game=47085 rcon=52493
+
+Stopping the server
+
++ rg -n 'Done \(|Stopping|All dimensions are saved|BUILD SUCCESSFUL|ERROR|FATAL|Exception|Caused by|OnlyIn|OpenAL|PluginCaller|JEI|Game directory|Tesseract API has completed|Modern Industrialization setup' .port-tools/qa-out/overdrive-smoke/server.log
+35:[08:50:07] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Game directory: /root/home/forks/mi-stack/Industrialization-Overdrive/run/server
+91:[08:50:31] [modloading-worker-0/INFO] [Modern Industrialization/]: Modern Industrialization setup done!
+96:[08:50:32] [modloading-worker-0/INFO] [Tesseract API/]: Tesseract API has completed initialization!
+140:2026-11-06T05:50:48.068333950Z Server thread ERROR An exception occurred processing Appender DebugFile
+141:org.apache.logging.log4j.core.appender.AppenderLoggingException: java.lang.NoClassDefFoundError: Could not initialize class io.netty.channel.kqueue.Native
+162:Caused by: java.lang.NoClassDefFoundError: Could not initialize class io.netty.channel.kqueue.Native
+185:Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.IllegalStateException: Only supported on OSX/BSD [in thread "Server thread"]
+200:[08:50:55] [Server thread/INFO] [minecraft/DedicatedServer]: Done (6.951s)! For help, type "help"
+212:[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+215:[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Stopping the server]
+217:[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+228:[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+233:BUILD SUCCESSFUL in 1m 41s
++ tail -45 .port-tools/qa-out/overdrive-smoke/server.log
+
+[08:50:48] [Server thread/WARN] [minecraft/DedicatedServer]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[08:50:48] [Server thread/WARN] [minecraft/DedicatedServer]: The server will make no attempt to authenticate usernames. Beware.
+[08:50:48] [Server thread/WARN] [minecraft/DedicatedServer]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[08:50:48] [Server thread/WARN] [minecraft/DedicatedServer]: To change this, set "online-mode" to "true" in the server.properties file.
+[08:50:48] [Server thread/INFO] [minecraft/DedicatedServer]: Preparing level "qa-11060849"
+[08:50:49] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Selecting global world spawn...
+[08:50:55] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Loading 0 persistent chunks...
+[08:50:55] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Preparing spawn area: 100%
+[08:50:55] [Server thread/INFO] [minecraft/LoggingLevelLoadListener]: Time elapsed: 6128 ms
+[08:50:55] [Server thread/INFO] [minecraft/DedicatedServer]: Done (6.951s)! For help, type "help"
+[08:50:55] [Server thread/INFO] [minecraft/DedicatedServer]: Starting remote control listener
+[08:50:55] [Server thread/INFO] [minecraft/GenericThread]: Thread RCON Listener started
+[08:50:55] [Server thread/INFO] [minecraft/RconThread]: RCON running on 0.0.0.0:52493
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/minecraft:overworld
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/minecraft:the_end
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/minecraft:the_nether
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/ae2:spatial_storage
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[08:50:55] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[08:50:55] [Server thread/INFO] [ne.ne.ne.se.pe.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[08:51:04] [RCON Listener #1/INFO] [minecraft/GenericThread]: Thread RCON Client /127.0.0.1 started
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: [Rcon: Stopping the server]
+[08:51:04] [RCON Client /127.0.0.1 #2/INFO] [minecraft/RconClient]: Thread RCON Client /127.0.0.1 shutting down
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Stopping server
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving players
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving worlds
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/minecraft:overworld
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/minecraft:the_end
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/minecraft:the_nether
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: Saving chunks for level 'ServerLevel[qa-11060849]'/ae2:spatial_storage
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (world): All chunks are saved
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage (spatial_storage): All chunks are saved
+[08:51:04] [Server thread/INFO] [minecraft/MinecraftServer]: ThreadedAnvilChunkStorage: All dimensions are saved
+[08:51:04] [Server thread/INFO] [minecraft/GenericThread]: Thread RCON Listener stopped
+[08:51:04] [main/INFO] [ne.ne.fm.lo.FMLLoader/]: Closing FML Loader 52bf5c51
+[08:51:04] [main/INFO] [ne.ne.fm.ModLoader/]: Clearing ModLoader
+
+BUILD SUCCESSFUL in 1m 41s
+18 actionable tasks: 1 executed, 17 up-to-date
++ git diff --check
++ git status --short
+ M build.gradle
+?? .port-tools/qa-out/
++ ss -ltnp
++ rg ':47085|:52493'
++ true
++ rg '[G]radleDaemon|[G]radleWrapperMain|[n]eoforge.*server'
++ ps -eo pid,ppid,stat,etime,args
++ true

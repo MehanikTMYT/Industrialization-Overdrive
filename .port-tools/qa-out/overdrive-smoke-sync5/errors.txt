@@ -1,0 +1,15 @@
+      2 org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: @Inject annotation on io_uncappedRemainingCapacity, has invalid target descriptor: Invalid descriptor: (Lnet.neoforged.neoforge.transfer.item/ItemResource
+      1 		org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: @Inject annotation on io_uncappedRemainingCapacity, has invalid target descriptor: Invalid descriptor: (Lnet.neoforged.neoforge.transfer.item/ItemResour
+      1 	  org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: @Inject annotation on io_uncappedRemainingCapacity, has invalid target descriptor: Invalid descriptor: (Lnet.neoforged.neoforge.transfer.item/ItemResou
+      1 net.neoforged.neoforge.logging.CrashReportExtender$ModLoadingCrashException: Mod loading has failed
+      1 net.neoforged.fml.ModLoadingException: Loading errors encountered:
+      1 [modloading-worker-0/FATAL] [mixin/]: Mixin apply for mod industrialization_overdrive failed industrialization_overdrive.mixins.json:ConfigurableItemStackCapacityMixin from mod industrialization_overdrive -> aztech.modern_industri
+      1 [modloading-worker-0/ERROR] [ne.ne.fm.ja.FMLModContainer/LOADING]: Failed to apply mixin. Mixin Class: dev.wp.industrialization_overdrive.mixin.ConfigurableItemStackCapacityMixin, ModID: industrialization_overdrive
+      1 [main/FATAL] [ne.ne.ne.se.lo.ServerModLoader/]: Crash report saved to ./crash-reports/crash-2026-11-06_22.35.13-fml.txt
+      1 [main/FATAL] [ne.ne.ne.co.NeoForgeMod/]: Preparing crash report with UUID 83c4431f-7f45-4cba-9e47-68f5a788a12d
+      1 [main/FATAL] [ne.ne.ne.co.NeoForgeMod/]: Preparing crash report with UUID 1578b6ac-7358-4551-80b9-0f03daf19e4a
+      1 [main/FATAL] [ne.ne.fm.ModLoader/LOADING]: Failed to wait for future Mod Construction, 1 errors found
+      1 [main/ERROR] [minecraft/Main]: Failed to start the minecraft server
+      1 [main/ERROR] [minecraft/CrashReport]: Negative index in crash report handler (0/4)
+      1 	Exception message: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: @Inject annotation on io_uncappedRemainingCapacity, has invalid target descriptor: Invalid descriptor: (Lnet.neoforged.neoforge.transf
+      1 	at TRANSFORMER/tesseract_api@1.13.7-26.1.2-fleet.1/net.swedz.tesseract.neoforge.compat.mi.machine.builder.SpecialMachineBuilnet.neoforged.fml.startup.FatalStartupException: Couldn't find Minecraft server thread. Startup likely fa

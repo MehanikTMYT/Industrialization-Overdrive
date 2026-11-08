@@ -1,0 +1,154 @@
++ nl -ba build.gradle
++ sed -n 1,47p
+     1	plugins {
+     2	    id 'java-library'
+     3	    id 'maven-publish'
+     4	    id 'net.neoforged.gradle.userdev' version '7.1.38'
+     5	}
+     6	version = "${mod_version}+${minecraft_version}"
+     7	group = mod_group_id
+     8	base { archivesName = artifact_name }
+     9	java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+    10	repositories {
+    11	    mavenLocal()
+    12	    mavenCentral()
+    13	    maven { url = 'https://modmaven.dev' }
+    14	    maven { url = 'https://maven.appliedenergistics.org' }
+    15	}
+    16	dependencies {
+    17	    implementation "net.neoforged:neoforge:${neo_version}"
+    18	    implementation("aztech:Modern-Industrialization:${modern_industrialization_version}") { transitive = false }
+    19	    implementation "net.swedz:tesseract-api-neoforge:${tesseract_version}"
+    20	    compileOnly "net.swedz:tesseract-api:1.0.2"
+    21	    compileOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}:api"
+    22	    runtimeOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}"
+    23	    implementation('org.appliedenergistics:guideme:26.1.14-beta') { transitive = false }
+    24	    runtimeOnly 'dev.emi:emi-neoforge:1.1.24-semi151a6c88+26.1.2'
+    25	}
+    26	runs {
+    27	    configureEach { modSource project.sourceSets.main }
+    28	    client {}
+    29	    server {
+    30	        argument '--nogui'; argument '--port'; argument '25671'
+    31	    }
+    32	    serverData {
+    33	        argument '--mod'; argument mod_id
+    34	        argument '--all'
+    35	        argument '--output'; argument file('.port-tools/server-data').absolutePath
+    36	    }
+    37	    clientData {
+    38	        argument '--mod'; argument mod_id
+    39	        argument '--all'
+    40	        argument '--output'; argument file('src/generated/resources').absolutePath
+    41	        argument '--existing'; argument file('src/main/resources').absolutePath
+    42	    }
+    43	}
+    44	sourceSets.main.resources.srcDir 'src/generated/resources'
+    45	tasks.withType(JavaCompile).configureEach {
+    46	    options.encoding = 'UTF-8'
+    47	    options.compilerArgs += ['-Xmaxerrs', '1000']
++ nl -ba gradle.properties
++ tail -10
+    24	mod_description=Addon for Modern Industrialization that adds more machines.
+    25	mod_github=https://github.com/WhitePhant0m/Industrialization-Overdrive
+    26	mod_credits=Big thanks to Swedz for his mods, TesseractAPI and Extended-Industrialization, wouldn't have been able to make this otherwise.
+    27	
+    28	# Dependencies
+    29	modern_industrialization_version=2.6.0-26.1.2-fleet01
+    30	modern_industrialization_version_range=[2.6.0-,2.7-)
+    31	tesseract_version=1.13.7-26.1.2-fleet.1
+    32	tesseract_version_range=[1.13.7-,1.14-)
+    33	ae2_version=26.1.12-SNAPSHOT
++ nl -ba src/main/resources/META-INF/neoforge.mods.toml
++ tail -20
+    30	[[dependencies.${mod_id}]]
+    31	modId = "minecraft"
+    32	type = "required"
+    33	versionRange = "${minecraft_version_range}"
+    34	ordering = "NONE"
+    35	side = "BOTH"
+    36	
+    37	[[dependencies.${mod_id}]]
+    38	modId = "modern_industrialization"
+    39	type = "required"
+    40	versionRange = "${modern_industrialization_version_range}"
+    41	ordering = "AFTER"
+    42	side = "BOTH"
+    43	
+    44	[[dependencies.${mod_id}]]
+    45	modId = "tesseract_api"
+    46	type = "required"
+    47	versionRange = "${tesseract_version_range}"
+    48	ordering = "AFTER"
+    49	side = "BOTH"
++ ls -la runs run
+runs:
+total 20
+drwxr-xr-x  5 root root 4096 Nov  6 01:42 .
+drwxr-xr-x 11 root root 4096 Nov  6 01:07 ..
+drwxr-xr-x  7 root root 4096 Nov  6 01:34 clientData
+drwxr-xr-x  2 root root 4096 Nov  6 01:07 junit
+drwxr-xr-x  7 root root 4096 Nov  6 01:42 serverData
++ true
++ find . -path ./.git -prune -o '(' -name eula.txt -o -name server.properties ')' -print
++ set +x
+REVIEW FINDINGS:
+MI is implementation, transitive=false: present on runtime classpath; version 2.6.0-26.1.2-fleet01.
+Tesseract NeoForge is implementation, version 1.13.7-26.1.2-fleet.1, transitives enabled.
+Legacy tesseract-api:1.0.2 is compileOnly; bridge presence in NeoForge runtime artifact must be checked by parent in permitted mavenLocal/cache.
+AE2 API is compileOnly but complete AE2 26.1.12-SNAPSHOT is runtimeOnly.
+GuideME 26.1.14-beta is implementation (transitive=false), EMI 1.1.24-semi151a6c88+26.1.2 is runtimeOnly.
+runServer userdev configuration exists and main source is registered; no opcScript required.
+Server arguments hardcode --port 25671; qa_server.sh randomly generated server.properties port will be overridden by this argument. Parent must check 25671 availability or minimally remove hardcoded port so qa_server.sh properties can control it.
+Metadata requires MI and Tesseract on BOTH sides with AFTER ordering.
+No dependency scope repair is indicated by static config review. Actual resolved runtime and successful dedicated server startup remain authoritative.
++ head -60
++ rg -n 'workingDirectory|runs/server|run/server|gameDirectory|runServer' .gradle/configuration build .port-tools --glob '!*.log' --glob '!runtime-review.txt' --glob '!inspection.log'
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/HotbarManager.java:27:    public HotbarManager(Path workingDirectory, DataFixer fixerUpper) {
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/HotbarManager.java:28:        this.optionsFile = workingDirectory.resolve("hotbar.nbt");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/main/Main.java:241:            Minecraft.crash(newMinecraft, gameConfig.location.gameDirectory, report);
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/main/GameConfig.java:38:        public final File gameDirectory;
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/main/GameConfig.java:43:        public FolderData(File gameDirectory, File resourcePackDirectory, File assetDirectory, @Nullable String assetIndex) {
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/main/GameConfig.java:44:            this.gameDirectory = gameDirectory;
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/telemetry/ClientTelemetryManager.java:52:        this.logDirectory = minecraft.gameDirectory.toPath().resolve("logs/telemetry");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/server/MinecraftServer.java:300:        Thread thread = new Thread(net.neoforged.fml.util.thread.SidedThreadGroups.SERVER, () -> serverReference.get().runServer(), "Server thread");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/server/MinecraftServer.java:733:    protected void runServer() {
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/KeyboardHandler.java:279:                Path gameDirectory = this.minecraft.gameDirectory.toPath().toAbsolutePath();
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/KeyboardHandler.java:280:                Path debugTexturePath = TextureUtil.getDebugTexturePath(gameDirectory);
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/KeyboardHandler.java:282:                Component pathComponent = Component.literal(gameDirectory.relativize(debugTexturePath).toString())
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/KeyboardHandler.java:485:                        this.showDebugChat(this.minecraft.grabPanoramixScreenshot(this.minecraft.gameDirectory));
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/KeyboardHandler.java:488:                            this.minecraft.gameDirectory,
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Options.java:1406:    public Options(Minecraft minecraft, File workingDirectory) {
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Options.java:1409:        this.optionsFile = new File(workingDirectory, "options.txt");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/multiplayer/AccountProfileKeyPairManager.java:45:    public AccountProfileKeyPairManager(UserApiService userApiService, UUID profileId, Path gameDirectory) {
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/multiplayer/AccountProfileKeyPairManager.java:47:        this.profileKeyPairPath = gameDirectory.resolve(PROFILE_KEY_PAIR_DIR).resolve(profileId + ".json");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/multiplayer/ClientCommonPacketListenerImpl.java:139:        Path debugDir = this.minecraft.gameDirectory.toPath().resolve("debug");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/multiplayer/ProfileKeyPairManager.java:26:    static ProfileKeyPairManager create(UserApiService userApiService, User user, Path gameDirectory) {
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/multiplayer/ProfileKeyPairManager.java:27:        return new AccountProfileKeyPairManager(userApiService, user.getProfileId(), gameDirectory);
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/multiplayer/ServerList.java:37:            CompoundTag tag = NbtIo.read(this.minecraft.gameDirectory.toPath().resolve("servers.dat"));
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/multiplayer/ServerList.java:73:            Path gameDirectoryPath = this.minecraft.gameDirectory.toPath();
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/multiplayer/ServerList.java:74:            Path newFile = Files.createTempFile(gameDirectoryPath, "servers", ".dat");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/multiplayer/ServerList.java:76:            Path oldFile = gameDirectoryPath.resolve("servers.dat_old");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/multiplayer/ServerList.java:77:            Path currentFile = gameDirectoryPath.resolve("servers.dat");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:311:    public final File gameDirectory;
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:401:        this.gameDirectory = gameConfig.location.gameDirectory;
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:406:        Path gameDirPath = this.gameDirectory.toPath();
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:420:        this.services = Services.create(authenticationService, this.gameDirectory);
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:442:        this.options = new Options(this, this.gameDirectory);
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:443:        this.debugEntries = new DebugScreenEntryList(this.gameDirectory, this.fixerUpper);
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:510:                        ClientShutdownWatchdog.startShutdownWatchdog(Minecraft.this, gameConfig.location.gameDirectory, Minecraft.this.gameThread.threadId());
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:993:        int exitCode = saveReportAndShutdownSoundManager(this, this.gameDirectory, finalReport);
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:998:    public static int saveReport(File gameDirectory, CrashReport crash) {
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:999:        Path crashDir = gameDirectory.toPath().resolve("crash-reports");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:1025:    public static void crash(@Nullable Minecraft minecraft, File gameDirectory, CrashReport crash) {
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:1026:        int exitCode = saveReportAndShutdownSoundManager(minecraft, gameDirectory, crash);
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:1030:    private static int saveReportAndShutdownSoundManager(@Nullable Minecraft minecraft, File gameDirectory, CrashReport crash) {
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/Minecraft.java:1031:        int exitCode = saveReport(gameDirectory, crash);
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/quickplay/QuickPlayLog.java:42:        this.path = Minecraft.getInstance().gameDirectory.toPath().resolve(quickPlayPath);
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/gui/components/debug/DebugScreenEntryList.java:43:    public DebugScreenEntryList(File workingDirectory, DataFixer dataFixer) {
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/gui/components/debug/DebugScreenEntryList.java:44:        this.debugProfileFile = new File(workingDirectory, "debug-profile.json");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/net/minecraft/client/server/IntegratedServer.java:191:        return this.minecraft.gameDirectory.toPath();
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/com/mojang/realmsclient/gui/screens/RealmsUploadScreen.java:222:        Path worldFolder = this.minecraft.gameDirectory.toPath().resolve("saves").resolve(this.selectedLevel.getLevelId());
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/com/mojang/realmsclient/util/RealmsPersistence.java:58:        return Minecraft.getInstance().gameDirectory.toPath().resolve("realms_persistence.json");
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/com/mojang/blaze3d/platform/ClientShutdownWatchdog.java:15:    public static void startShutdownWatchdog(Minecraft minecraft, File gameDirectory, long mainThreadId) {
+build/neoForm/neoFormJoined26.1.2-1/steps/transformSource/transformed/com/mojang/blaze3d/platform/ClientShutdownWatchdog.java:25:            Minecraft.saveReport(gameDirectory, report);

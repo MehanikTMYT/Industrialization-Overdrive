@@ -1,0 +1,48 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/root/.gradle/wrapper/dists/gradle-9.2.1-bin/2t0n5ozlw9xmuyvbp7dnzaxug/gradle-9.2.1/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Enabling dist annotations on PMJ
+
+> Task :clean
+> Task :neoFormListLibraries FROM-CACHE
+> Task :neoFormListTransformLibraries FROM-CACHE
+> Task :cacheVersionManifest26.1.2 UP-TO-DATE
+> Task :cacheVersionExecutableClient26.1.2 UP-TO-DATE
+> Task :cacheVersionExecutableServer26.1.2 UP-TO-DATE
+> Task :neoFormSetup FROM-CACHE
+> Task :neoFormDecompile FROM-CACHE
+> Task :neoFormPatch FROM-CACHE
+> Task :neoFormPatchUserDev FROM-CACHE
+> Task :neoFormTransformSource FROM-CACHE
+> Task :neoFormRecompile FROM-CACHE
+> Task :supplyRawJarForneoFormJoined26.1.2-1
+> Task :selectRawArtifactNg_dummy_ng.net.neoforged_neoforge_26.1.2.126 UP-TO-DATE
+> Task :compileJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Could not resolve all files for configuration ':compileClasspath'.
+   > Could not resolve net.swedz:extended-industrialization:1.0.0-26.1.2.
+     Required by:
+         root project 'Industrialization-Overdrive'
+      > Could not resolve net.swedz:extended-industrialization:1.0.0-26.1.2.
+         > Could not get resource 'https://maven.appliedenergistics.org/net/swedz/extended-industrialization/1.0.0-26.1.2/extended-industrialization-1.0.0-26.1.2.pom'.
+            > Could not GET 'https://maven.appliedenergistics.org/net/swedz/extended-industrialization/1.0.0-26.1.2/extended-industrialization-1.0.0-26.1.2.pom'.
+               > maven.appliedenergistics.org: Name or service not known
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to generate a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 51s
+15 actionable tasks: 3 executed, 8 from cache, 4 up-to-date

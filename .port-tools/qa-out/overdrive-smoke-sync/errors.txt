@@ -1,0 +1,14 @@
+      1 net.neoforged.neoforge.logging.CrashReportExtender$ModLoadingCrashException: Mod loading has failed
+      1 net.neoforged.fml.startup.FatalStartupException: Couldn't find Minecraft server thread. Startup likely failed.
+      1 net.neoforged.fml.ModLoadingException: Loading errors encountered:
+      1 [modloading-worker-0/ERROR] [ne.ne.fm.lo.mo.lo.NeoForgeDevDistCleaner/DISTXFORM]: Attempted to load class net.minecraft.client.renderer.block.BlockAndTintGetter which is not present on the dedicated server
+      1 [modloading-worker-0/ERROR] [ne.ne.fm.ja.FMLModContainer/LOADING]: Failed to create mod instance. ModID: industrialization_overdrive, class dev.wp.industrialization_overdrive.IO
+      1 [main/FATAL] [ne.ne.ne.se.lo.ServerModLoader/]: Crash report saved to ./crash-reports/crash-2026-11-06_22.03.12-fml.txt
+      1 [main/FATAL] [ne.ne.ne.co.NeoForgeMod/]: Preparing crash report with UUID f9d4d90e-64c9-4479-a552-179c0135d843
+      1 [main/FATAL] [ne.ne.ne.co.NeoForgeMod/]: Preparing crash report with UUID ae1160ae-00d5-4245-b209-97d3d5ce9e72
+      1 [main/FATAL] [ne.ne.fm.ModLoader/LOADING]: Failed to wait for future Mod Construction, 1 errors found
+      1 [main/ERROR] [minecraft/Main]: Failed to start the minecraft server
+      1 [main/ERROR] [minecraft/CrashReport]: Negative index in crash report handler (0/4)
+      1 	Exception message: java.lang.ClassNotFoundException: Attempted to load class net.minecraft.client.renderer.block.BlockAndTintGetter which is not present on the dedicated server
+      1 Caused by: java.lang.ClassNotFoundException: Attempted to load class net.minecraft.client.renderer.block.BlockAndTintGetter which is not present on the dedicated server
+      1 	Caused by 0: java.lang.NoClassDefFoundError: net/minecraft/client/renderer/block/BlockAndTintGetter

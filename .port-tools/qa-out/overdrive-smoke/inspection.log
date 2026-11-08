@@ -1,0 +1,338 @@
++ pwd
+/root/home/forks/mi-stack/Industrialization-Overdrive
++ git status --short
+?? .port-tools/qa-out/
++ git branch --show-current
+port/26.1.2
++ git log -1 --oneline
+f8b9e59 Port Overdrive Java, mixins and generated data to Minecraft 26.1.2
++ rg --files -g AGENTS.md -g '*gradle*' -g server.properties -g eula.txt -g graph.json
+build.gradle
+gradle.properties
+gradlew.bat
+gradlew
+settings.gradle
+gradle/wrapper/gradle-wrapper.jar
+gradle/wrapper/gradle-wrapper.properties
++ for p in /AGENTS.md /root/AGENTS.md /root/home/AGENTS.md /root/home/forks/AGENTS.md /root/home/forks/mi-stack/AGENTS.md
++ '[' -f /AGENTS.md ']'
++ for p in /AGENTS.md /root/AGENTS.md /root/home/AGENTS.md /root/home/forks/AGENTS.md /root/home/forks/mi-stack/AGENTS.md
++ '[' -f /root/AGENTS.md ']'
++ for p in /AGENTS.md /root/AGENTS.md /root/home/AGENTS.md /root/home/forks/AGENTS.md /root/home/forks/mi-stack/AGENTS.md
++ '[' -f /root/home/AGENTS.md ']'
++ for p in /AGENTS.md /root/AGENTS.md /root/home/AGENTS.md /root/home/forks/AGENTS.md /root/home/forks/mi-stack/AGENTS.md
++ '[' -f /root/home/forks/AGENTS.md ']'
++ cat /root/home/forks/AGENTS.md
+# AGENTS.md — выбор агента/модели для портирования модов
+
+Рабочее дерево: `/root/home/forks` (Minecraft 26.1.2 / NeoForge, Java 25).
+Агенты регистрированы глобально в `~/.config/opencode/opencode.json` (режим `subagent`).
+
+Основные рабочие агенты (не подвергались этому тесту, используются по умолчанию):
+
+- **`codex`** — `chatgpt/gpt-6.1-sol` (reasoning low) через codex CLI; делегирование больших задач.
+- **`glm`** — `artemox/glm-5.3-flash` (artemox API, без лимитов ChatGPT).
+
+## Тест пригодности к портированию (aggregate.mehhost.ru, 2026-11-06)
+
+Условие: два вопроса из реального порта (замена `FMLClientSetupEvent` из Forge-пакета;
+эквивалент `ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION` в `useItemOn`),
+плюс проверка tool-calling и латентности. Оценка относительная: **любой ответ нужно
+верифицировать по дереву** (`graphify query`, grep, компиляция) — модели ошибаются.
+
+### Пригодны (с оговорками)
+
+| Агент | Модель | Плюсы | Минусы |
+|---|---|---|---|
+| `agg-orflint` | openrouter `recursive/flint-v1.0:free` | единственный безупречно точный ответ по обоим вопросам; tool-calling есть | медленный (~47 с) |
+| `agg-nemosupervl` | openrouter `nemotron-3.5-super-vl:free` | точный ответ по обоим вопросам; tool-calling есть | медленный (~33 с) |
+| `agg-commanda` | cohere `command-a-plus-05-2026` | быстрый (~9 с), вопрос 2 верный, вопрос 1 — нестандартный, но близкий | tool-calling есть; пакет события требует проверки |
+| `agg-gptoss` | groq `gpt-oss-120b` | очень быстрый (~1.5 с), подробный разбор, tool-calling есть | по вопросу 1 назвал неверный пакет (`neoforge.event.lifecycle` вместо `fml.event.lifecycle`) |
+| `agg-glm47` | cloudflare `glm-4.7-flash` | tool-calling есть, вопрос 2 верный | очень медленный (~53 с), многословный, по вопросу 1 уклонился от прямого ответа |
+| `agg-codestral` | mistral `codestral-2508` | самый быстрый (~0.6 с), tool-calling есть, хороший на механических правках кода | в тесте домена ответил не по теме (галлюцинация) — только под верификацией |
+
+### Не подходят
+
+- **`agg-nemolight`** (openrouter `nemotron-3.5-lightning:free`) — tool-calling сломан (модель пишет tool_calls текстом), ответ по вопросу 1 неверный («пакет Forge не меняется»).
+- **`gemini-api-free/*`** — в тесте недоступны (`model_capacity` / `proxy_unavailable`), стабильностью не отличаются.
+- Модели `opencodeFree/*` (agg-glm53, agg-deepseek, agg-mimo, agg-beam, agg-bigpickle, agg-flint40, agg-nemolight, agg-nemosuper) — по указанию не тестировались в этом раунде.
+
+### Раунд 2 — остальные модели aggregate без openrouter (2026-11-06)
+
+Условие: (1) знания порта — замена `RegistryObject<T>` (эталон: `DeferredHolder`,
+как в нашем `ModWidgetGroups.java`) и `PASS_TO_DEFAULT_BLOCK_INTERACTION`; (2) агентный
+цикл — model должна сделать `tool_call`, а по выданному выводу команды назвать первый
+модуль из `0.1.0.list` (grounded = реально извлечён `BlockUI`, а не выдуман).
+
+| Модель | Вопрос 1 (RegistryObject) | Вопрос 2 | Агентный цикл | Скорость |
+|---|---|---|---|---|
+| `mistral-free/codestral-2508` | ✅ DeferredHolder | ✅ PASS | ✅ grounded | 0.9 с / 0.6 с |
+| `gemini-api-free/gemini-3.1-flash-lite` | ✅ DeferredHolder | ✅ PASS | ✅ grounded | 7.7 с |
+| алиас `gemini-api-free` | ✅ DeferredHolder | ⚠️ путается, советует несуществующий enum | ✅ grounded | 3.0 с |
+| алиас `cloudflare-workers-ai-free` | ✅ DeferredHolder | ✅ PASS | ✅ grounded | 33 с |
+| `cloudflare…/glm-4.7-flash` | ⚠️ `Holder` (близко, но не то) | ✅ PASS | ✅ grounded | 57 с |
+| алиас `mistral-free` | ❌ в примере всё ещё `RegistryObject` + `ForgeRegistries` | ✅ PASS | ✅ grounded | 0.9 с |
+| `groq…/gpt-oss-120b` + алиас `groq-free` | ❌ `RegistrySupplier` (это architectury) | ✅ PASS | ⚠️ **не grounded** (алиас — grounded) | 1.7 с |
+| `cohere…/command-a-plus` + алиас `cohere-trial` | ❌ «RegistryObject работает как есть» / выдуманный `RegistrarManager` | ✅ PASS | ✅ grounded | 8–14 с |
+| `gemini-api-free/gemini-3.8-flash` | ❌ `model_capacity` (недоступна) | — | ⚠️ нестабильна | — |
+
+Выводы раунда 2:
+
+- **Лучшие для портирования:** `mistral-free/codestral-2508` (единственный безупречно и
+  по знаниям, и по агентному циклу, и по скорости) и `gemini-api-free/gemini-3.1-flash-lite`.
+- **Алиасы провайдеров работают и иногда стабильнее именованных моделей** (алиас
+  `gemini-api-free` ответил там, где `gemini-3.8-flash` упал; алиас `groq-free` был
+  grounded там, где именованная модель — нет). Алиас — корректный выбор для
+  `model` в запросе.
+- `gpt-oss-120b` и обе cohere-модели по вопросу 1 ошибаются уверенно и красиво —
+  для портирования не годятся без проверки; `gpt-oss` к тому же не извлёк данные
+  из вывода команды (неgrounded) — в агентном цикле ненадёжен.
+- `gemini-3.8-flash` — нестабильна (`model_capacity`/`proxy_unavailable`); предпочтителен
+  алиас или `gemini-3.1-flash-lite`.
+- Tool-calling есть у всех 11 проверенных (phase2a: `tool_call shell` у всех, включая
+  gemini-3.8); различия — в grounded-обработке результата.
+
+### Практика
+
+- Для портирования: **`agg-codestral`** (mistral codestral-2508) и `gemini-3.1-flash-lite`
+  (через алиас `gemini-api-free`) — единственные, прошедшие и доменный вопрос, и агентный
+  цикл. `agg-orflint`/`agg-nemosupervl` (openrouter) — по раунду 1, тоже точны, но медленны.
+- Альтернатива при недоступности именованной модели — **алиас провайдера** (`mistral-free`,
+  `groq-free`, `cloudflare-workers-ai-free`, `cohere-trial`, `gemini-api-free`): тот же
+  провайдер, часто стабильнее.
+- `gpt-oss-120b`, cohere `command-a` — только для механических правок с обязательной
+  проверкой; для доменных вопросов порта не использовать.
+- Свободные модели агрегатора перегружены: типичные ошибки `provider_busy`, `model_capacity`,
+  `proxy_unavailable` — это не поломка агента, повторить позже, взять алиас или другого `agg-*`.
+- Каталог/статусы моделей: `~/.config/opencode/opencode.json` → `providers.aggregate.models`
+  (недоступные помечены `disabled`).
+- Тестовые прогоны: `/tmp/opencode/port-test-results.json` (раунд 1, openrouter включён),
+  `/tmp/opencode/port-test2-results.json` (раунд 2, без openrouter/opencodeFree);
+  скрипты `/tmp/opencode/port-test{,2}.py`.
++ for p in /AGENTS.md /root/AGENTS.md /root/home/AGENTS.md /root/home/forks/AGENTS.md /root/home/forks/mi-stack/AGENTS.md
++ '[' -f /root/home/forks/mi-stack/AGENTS.md ']'
++ find . -name AGENTS.md -print
++ cat build.gradle gradle.properties
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'net.neoforged.gradle.userdev' version '7.1.38'
+}
+version = "${mod_version}+${minecraft_version}"
+group = mod_group_id
+base { archivesName = artifact_name }
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url = 'https://modmaven.dev' }
+    maven { url = 'https://maven.appliedenergistics.org' }
+}
+dependencies {
+    implementation "net.neoforged:neoforge:${neo_version}"
+    implementation("aztech:Modern-Industrialization:${modern_industrialization_version}") { transitive = false }
+    implementation "net.swedz:tesseract-api-neoforge:${tesseract_version}"
+    compileOnly "net.swedz:tesseract-api:1.0.2"
+    compileOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}:api"
+    runtimeOnly "org.appliedenergistics:appliedenergistics2:${ae2_version}"
+    implementation('org.appliedenergistics:guideme:26.1.14-beta') { transitive = false }
+    runtimeOnly 'dev.emi:emi-neoforge:1.1.24-semi151a6c88+26.1.2'
+}
+runs {
+    configureEach { modSource project.sourceSets.main }
+    client {}
+    server {
+        argument '--nogui'; argument '--port'; argument '25671'
+    }
+    serverData {
+        argument '--mod'; argument mod_id
+        argument '--all'
+        argument '--output'; argument file('.port-tools/server-data').absolutePath
+    }
+    clientData {
+        argument '--mod'; argument mod_id
+        argument '--all'
+        argument '--output'; argument file('src/generated/resources').absolutePath
+        argument '--existing'; argument file('src/main/resources').absolutePath
+    }
+}
+sourceSets.main.resources.srcDir 'src/generated/resources'
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs += ['-Xmaxerrs', '1000']
+}
+tasks.withType(ProcessResources).configureEach {
+    def resourceProperties = project.properties.findAll { k, v -> k.startsWith('mod_') || k.endsWith('_range') || k == 'minecraft_version' || k == 'neo_version' } + [mod_version: project.version.toString()]
+    inputs.properties(resourceProperties)
+    filesMatching('META-INF/neoforge.mods.toml') { expand resourceProperties }
+    duplicatesStrategy = 'exclude'
+    exclude('.cache')
+}
+jar {
+    from 'LICENSE.md'
+    exclude '**/datagen/**'
+    from('guidebook') { into 'assets/modern_industrialization/mi_guidebook' }
+}
+java.withSourcesJar()
+tasks.named('sourcesJar') { from 'LICENSE.md' }
+publishing { publications { mavenJava(MavenPublication) { from components.java; artifactId = project.artifact_name } } }
+# Gradle Configuration
+artifact_name=industrialization_overdrive
+
+# Sets default memory used for gradle commands. Can be overridden by user or command line properties.
+org.gradle.jvmargs=-Xmx1G
+org.gradle.daemon=false
+org.gradle.parallel=false
+org.gradle.caching=true
+org.gradle.configuration-cache=false
+
+minecraft_version=26.1.2
+minecraft_version_range=[26.1.2,26.2)
+neo_version=26.1.2.126
+neo_version_range=[26.1.2.122,26.2)
+loader_version_range=[1,)
+
+## Mod Properties
+mod_id=industrialization_overdrive
+mod_name=Industrialization Overdrive
+mod_license=MIT
+mod_version=1.14.0-port.2
+mod_group_id=dev.wp
+mod_authors=White_Phantom
+mod_description=Addon for Modern Industrialization that adds more machines.
+mod_github=https://github.com/WhitePhant0m/Industrialization-Overdrive
+mod_credits=Big thanks to Swedz for his mods, TesseractAPI and Extended-Industrialization, wouldn't have been able to make this otherwise.
+
+# Dependencies
+modern_industrialization_version=2.6.0-26.1.2-fleet01
+modern_industrialization_version_range=[2.6.0-,2.7-)
+tesseract_version=1.13.7-26.1.2-fleet.1
+tesseract_version_range=[1.13.7-,1.14-)
+ae2_version=26.1.12-SNAPSHOT
++ cat /root/home/forks/.port-tools/qa_server.sh
+#!/bin/bash
+# runServer smoke for a ported mod: new world, Done, optional RCON commands, stop, error summary.
+# Env: TASK (default runServer), RUNDIR (default run/server), CMDS (newline-separated server commands).
+REPO=$1; NAME=$2
+QD=${QA_OUT:-/root/home/forks/.port-tools/qa-out}; mkdir -p $QD
+mkdir -p $OUT; rm -f $OUT/server.log $OUT/cmds.txt
+cd "$REPO" || exit 1
+export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 PATH=/usr/lib/jvm/java-25-openjdk-amd64/bin:$PATH
+OPC=""; grep -q opcScript build.gradle 2>/dev/null && OPC="-PopcScript=/root/home/forks/OperaPublicaCreator/gradle/mod.gradle"
+TASK=${TASK:-runServer}; D=${RUNDIR:-run/server}; mkdir -p $D; echo "eula=true" > $D/eula.txt
+PORT=$((25600 + RANDOM % 300)); RPORT=$((PORT + 300)); PW=qa$RANDOM
+printf "level-name=qa-%s\nonline-mode=false\nserver-port=%s\nenable-rcon=true\nrcon.port=%s\nrcon.password=%s\n" "$(date +%m%d%H%M)" $PORT $RPORT $PW > $D/server.properties
+timeout 1200 ./gradlew $TASK --no-daemon $OPC -Dorg.gradle.jvmargs=-Xmx768m --console=plain < /dev/null > $OUT/server.log 2>&1 &
+GPID=$!
+for i in $(seq 1 220); do grep -qaE "Done \([0-9.]+s\)|BUILD FAILED|Crash report|Failed to start" $OUT/server.log && break; kill -0 $GPID 2>/dev/null || break; sleep 5; done
+sleep 5; RESULT=FAIL; grep -qa "Done (" $OUT/server.log && RESULT=STARTED
+if [ $RESULT = STARTED ]; then
+  for i in $(seq 1 12); do grep -qa "RCON running" $OUT/server.log && break; sleep 2; done
+  if [ -n "$CMDS" ]; then mapfile -t C < <(printf "%b\n" "$CMDS"); python3 /root/home/forks/.port-tools/rcon.py $RPORT $PW "${C[@]}" > $OUT/cmds.txt 2>&1; fi
+  python3 /root/home/forks/.port-tools/rcon.py $RPORT $PW stop >/dev/null 2>&1
+fi
+for i in $(seq 1 60); do kill -0 $GPID 2>/dev/null || break; sleep 2; done
+# Last resort: never leave a server behind (exact PIDs only: this gradle client and its descendants).
+if kill -0 $GPID 2>/dev/null; then
+  KIDS=$(pgrep -P $GPID); GK=$(for k in $KIDS; do pgrep -P $k; done); kill $GPID $KIDS $GK 2>/dev/null; echo "killed leftover run" >> $OUT/cmds.txt
+fi
+SAVED=no; sed -n '/Stopping the server/,$p' $OUT/server.log | grep -qa "All dimensions are saved" && SAVED=yes
+sed 's/\x1b\[[0-9;]*m//g' $OUT/server.log | grep -aE "/(ERROR|FATAL)\]|Exception|Caused by" | grep -vE "OnlyIn|OpenAL|PluginCaller|Ambiguity|kqueue|OSX/BSD" | sed -E 's/^\[[0-9:]+\] //' | cut -c1-230 | sort | uniq -c | sort -rn | head -25 > $OUT/errors.txt
+echo "$NAME: $RESULT saved=$SAVED errors=$(wc -l < $OUT/errors.txt)" | tee $OUT/summary.txt
++ ls -la runs/server run/server build/libs .port-tools
+.port-tools:
+total 44
+drwxr-xr-x  7 root root 4096 Nov  6 08:48 .
+drwxr-xr-x 11 root root 4096 Nov  6 01:07 ..
+drwxr-xr-x  2 root root 4096 Nov  6 01:27 deferred
+drwxr-xr-x  2 root root 4096 Nov  6 01:02 deps
+-rw-r--r--  1 root root 7583 Nov  6 01:04 java-inventory.md
+-rw-r--r--  1 root root  364 Nov  6 01:28 log-summary.py
+drwxr-xr-x  3 root root 4096 Nov  6 01:27 logs
+-rw-r--r--  1 root root 1587 Nov  6 01:02 missing-mi-bridge.txt
+drwxr-xr-x  3 root root 4096 Nov  6 08:48 qa-out
+drwxr-xr-x  3 root root 4096 Nov  6 01:43 server-data
+
+build/libs:
+total 292
+drwxr-xr-x  2 root root   4096 Nov  6 01:44 .
+drwxr-xr-x 10 root root   4096 Nov  6 01:44 ..
+-rw-r--r--  1 root root 106710 Nov  6 01:45 industrialization_overdrive-1.14.0-port.2+26.1.2-sources.jar
+-rw-r--r--  1 root root 179452 Nov  6 01:45 industrialization_overdrive-1.14.0-port.2+26.1.2.jar
++ rg -n 'workingDirectory|gameDirectory|runServer|eula' build .port-tools --glob '!qa-out/**' --glob '*.txt' --glob '*.json' --glob '*.gradle' --glob '*.sh' --max-count 5
++ head -60
++ pgrep -af GradleDaemon
+3249410 /bin/bash -c exec > >(tee -a .port-tools/qa-out/overdrive-smoke/inspection.log) 2>&1 set -x ls -la runs/server run/server build/libs .port-tools 2>/dev/null rg -n 'workingDirectory|gameDirectory|runServer|eula' build .port-tools --glob '!qa-out/**' --glob '*.txt' --glob '*.json' --glob '*.gradle' --glob '*.sh' --max-count 5 | head -60 pgrep -af GradleDaemon free -m ps -eo pid,ppid,stat,etime,pcpu,args | rg 'GradleDaemon|GradleWrapperMain|GradleMain|gradlew|ServerMain|BootstrapLauncher' ss -ltnp
++ free -m
+               total        used        free      shared  buff/cache   available
+Mem:           15991        6778        4656          75        4970        9213
+Swap:            511         511           0
++ ps -eo pid,ppid,stat,etime,pcpu,args
++ rg 'GradleDaemon|GradleWrapperMain|GradleMain|gradlew|ServerMain|BootstrapLauncher'
+3249410 3248529 Ss         00:01  1.0 /bin/bash -c exec > >(tee -a .port-tools/qa-out/overdrive-smoke/inspection.log) 2>&1 set -x ls -la runs/server run/server build/libs .port-tools 2>/dev/null rg -n 'workingDirectory|gameDirectory|runServer|eula' build .port-tools --glob '!qa-out/**' --glob '*.txt' --glob '*.json' --glob '*.gradle' --glob '*.sh' --max-count 5 | head -60 pgrep -af GradleDaemon free -m ps -eo pid,ppid,stat,etime,pcpu,args | rg 'GradleDaemon|GradleWrapperMain|GradleMain|gradlew|ServerMain|BootstrapLauncher' ss -ltnp
+3249444 3249410 S          00:00  0.0 rg GradleDaemon|GradleWrapperMain|GradleMain|gradlew|ServerMain|BootstrapLauncher
++ ss -ltnp
+State  Recv-Q Send-Q Local Address:Port  Peer Address:PortProcess                                                                                                                                                                                                                                                            
+LISTEN 0      511        127.0.0.1:3101       0.0.0.0:*    users:(("MainThread",pid=2033217,fd=23))                                                                                                                                                                                                                          
+LISTEN 0      511        127.0.0.1:3100       0.0.0.0:*    users:(("node /home/mult",pid=3233992,fd=24))                                                                                                                                                                                                                     
+LISTEN 0      511        127.0.0.1:3102       0.0.0.0:*    users:(("MainThread",pid=2033224,fd=23))                                                                                                                                                                                                                          
+LISTEN 0      4096       127.0.0.1:3306       0.0.0.0:*    users:(("mysqld",pid=861,fd=20))                                                                                                                                                                                                                                  
+LISTEN 0      511        127.0.0.1:3000       0.0.0.0:*    users:(("PM2 v7.1.1: God",pid=1142,fd=24))                                                                                                                                                                                                                        
+LISTEN 0      128        127.0.0.1:52146      0.0.0.0:*    users:(("sshd",pid=3176790,fd=5))                                                                                                                                                                                                                                 
+LISTEN 0      4096       127.0.0.1:18080      0.0.0.0:*    users:(("docker-proxy",pid=2271,fd=8))                                                                                                                                                                                                                            
+LISTEN 0      512        127.0.0.1:49374      0.0.0.0:*    users:(("opencode",pid=1062663,fd=8))                                                                                                                                                                                                                             
+LISTEN 0      4096      127.0.0.54:53         0.0.0.0:*    users:(("systemd-resolve",pid=686835,fd=17))                                                                                                                                                                                                                      
+LISTEN 0      1024       127.0.0.1:8388       0.0.0.0:*    users:(("ss-server",pid=832,fd=6))                                                                                                                                                                                                                                
+LISTEN 0      70         127.0.0.1:33060      0.0.0.0:*    users:(("mysqld",pid=861,fd=18))                                                                                                                                                                                                                                  
+LISTEN 0      4096       127.0.0.1:16756      0.0.0.0:*    users:(("HiddifyCli",pid=2862218,fd=26))                                                                                                                                                                                                                          
+LISTEN 0      4096       127.0.0.1:8885       0.0.0.0:*    users:(("xray",pid=855,fd=11))                                                                                                                                                                                                                                    
+LISTEN 0      4096       127.0.0.1:8884       0.0.0.0:*    users:(("xray",pid=855,fd=4))                                                                                                                                                                                                                                     
+LISTEN 0      4096       127.0.0.1:8887       0.0.0.0:*    users:(("xray",pid=855,fd=10))                                                                                                                                                                                                                                    
+LISTEN 0      4096       127.0.0.1:17078      0.0.0.0:*    users:(("HiddifyCli",pid=2862218,fd=9))                                                                                                                                                                                                                           
+LISTEN 0      4096       127.0.0.1:8886       0.0.0.0:*    users:(("xray",pid=855,fd=9))                                                                                                                                                                                                                                     
+LISTEN 0      5          127.0.0.1:8097       0.0.0.0:*    users:(("python3",pid=852,fd=3))                                                                                                                                                                                                                                  
+LISTEN 0      5          127.0.0.1:8096       0.0.0.0:*    users:(("python3",pid=2539180,fd=7))                                                                                                                                                                                                                              
+LISTEN 0      5          127.0.0.1:8098       0.0.0.0:*    users:(("python3",pid=2539979,fd=6))                                                                                                                                                                                                                              
+LISTEN 0      5          127.0.0.1:8095       0.0.0.0:*    users:(("python3",pid=2537549,fd=13))                                                                                                                                                                                                                             
+LISTEN 0      511        127.0.0.1:8080       0.0.0.0:*    users:(("MainThread",pid=2492620,fd=30))                                                                                                                                                                                                                          
+LISTEN 0      511        127.0.0.1:6380       0.0.0.0:*    users:(("redis-server",pid=830,fd=6))                                                                                                                                                                                                                             
+LISTEN 0      128        127.0.0.1:22230      0.0.0.0:*    users:(("sshd",pid=3175291,fd=5))                                                                                                                                                                                                                                 
+LISTEN 0      4096       127.0.0.1:12337      0.0.0.0:*    users:(("HiddifyCli",pid=2862218,fd=23))                                                                                                                                                                                                                          
+LISTEN 0      4096       127.0.0.1:12336      0.0.0.0:*    users:(("HiddifyCli",pid=2862218,fd=22))                                                                                                                                                                                                                          
+LISTEN 0      4096       127.0.0.1:12335      0.0.0.0:*    users:(("HiddifyCli",pid=2862218,fd=20))                                                                                                                                                                                                                          
+LISTEN 0      4096       127.0.0.1:12334      0.0.0.0:*    users:(("HiddifyCli",pid=2862218,fd=19))                                                                                                                                                                                                                          
+LISTEN 0      511          0.0.0.0:8444       0.0.0.0:*    users:(("nginx",pid=2540002,fd=27),("nginx",pid=2540001,fd=27),("nginx",pid=2540000,fd=27),("nginx",pid=2539999,fd=27),("nginx",pid=2539998,fd=27),("nginx",pid=2539996,fd=27),("nginx",pid=2539995,fd=27),("nginx",pid=2539994,fd=27),("nginx",pid=686851,fd=27))
+LISTEN 0      4096         0.0.0.0:22         0.0.0.0:*    users:(("sshd",pid=687080,fd=3),("systemd",pid=1,fd=307))                                                                                                                                                                                                         
+LISTEN 0      511          0.0.0.0:80         0.0.0.0:*    users:(("nginx",pid=2540002,fd=8),("nginx",pid=2540001,fd=8),("nginx",pid=2540000,fd=8),("nginx",pid=2539999,fd=8),("nginx",pid=2539998,fd=8),("nginx",pid=2539996,fd=8),("nginx",pid=2539995,fd=8),("nginx",pid=2539994,fd=8),("nginx",pid=686851,fd=8))         
+LISTEN 0      511          0.0.0.0:443        0.0.0.0:*    users:(("nginx",pid=2540002,fd=10),("nginx",pid=2540001,fd=10),("nginx",pid=2540000,fd=10),("nginx",pid=2539999,fd=10),("nginx",pid=2539998,fd=10),("nginx",pid=2539996,fd=10),("nginx",pid=2539995,fd=10),("nginx",pid=2539994,fd=10),("nginx",pid=686851,fd=10))
+LISTEN 0      4096   127.0.0.53%lo:53         0.0.0.0:*    users:(("systemd-resolve",pid=686835,fd=15))                                                                                                                                                                                                                      
+LISTEN 0      4096       127.0.0.1:5053       0.0.0.0:*    users:(("docker-proxy",pid=2335,fd=8))                                                                                                                                                                                                                            
+LISTEN 0      4096       127.0.0.1:5052       0.0.0.0:*    users:(("docker-proxy",pid=2491,fd=8))                                                                                                                                                                                                                            
+LISTEN 0      4096       127.0.0.1:5055       0.0.0.0:*    users:(("docker-proxy",pid=2367,fd=8))                                                                                                                                                                                                                            
+LISTEN 0      4096       127.0.0.1:5054       0.0.0.0:*    users:(("docker-proxy",pid=2460,fd=8))                                                                                                                                                                                                                            
+LISTEN 0      4096       127.0.0.1:5051       0.0.0.0:*    users:(("docker-proxy",pid=2397,fd=8))                                                                                                                                                                                                                            
+LISTEN 0      1024           [::1]:8388          [::]:*    users:(("ss-server",pid=832,fd=5))                                                                                                                                                                                                                                
+LISTEN 0      4096               *:45323            *:*    users:(("dnsproxy",pid=622479,fd=6))                                                                                                                                                                                                                              
+LISTEN 0      4096               *:18614            *:*    users:(("xray-mesh",pid=1069,fd=11))                                                                                                                                                                                                                              
+LISTEN 0      4096               *:18612            *:*    users:(("xray-mesh",pid=1069,fd=9))                                                                                                                                                                                                                               
+LISTEN 0      4096               *:18613            *:*    users:(("xray-mesh",pid=1069,fd=10))                                                                                                                                                                                                                              
+LISTEN 0      4096               *:18611            *:*    users:(("xray-mesh",pid=1069,fd=8))                                                                                                                                                                                                                               
+LISTEN 0      4096           [::1]:12336         [::]:*    users:(("HiddifyCli",pid=2862218,fd=16))                                                                                                                                                                                                                          
+LISTEN 0      4096           [::1]:12337         [::]:*    users:(("HiddifyCli",pid=2862218,fd=17))                                                                                                                                                                                                                          
+LISTEN 0      4096           [::1]:12334         [::]:*    users:(("HiddifyCli",pid=2862218,fd=13))                                                                                                                                                                                                                          
+LISTEN 0      4096           [::1]:12335         [::]:*    users:(("HiddifyCli",pid=2862218,fd=14))                                                                                                                                                                                                                          
+LISTEN 0      4096               *:2087             *:*    users:(("xray",pid=855,fd=7))                                                                                                                                                                                                                                     
+LISTEN 0      4096               *:18712            *:*    users:(("xray-mesh",pid=1069,fd=7))                                                                                                                                                                                                                               
+LISTEN 0      4096               *:18710            *:*    users:(("xray-mesh",pid=1069,fd=12))                                                                                                                                                                                                                              
+LISTEN 0      4096               *:18711            *:*    users:(("xray-mesh",pid=1069,fd=4))                                                                                                                                                                                                                               
+LISTEN 0      4096               *:9444             *:*    users:(("xray",pid=622501,fd=3))                                                                                                                                                                                                                                  
+LISTEN 0      50                 *:25919            *:*    users:(("java",pid=1098724,fd=158))                                                                                                                                                                                                                               
+LISTEN 0      511             [::]:8444          [::]:*    users:(("nginx",pid=2540002,fd=28),("nginx",pid=2540001,fd=28),("nginx",pid=2540000,fd=28),("nginx",pid=2539999,fd=28),("nginx",pid=2539998,fd=28),("nginx",pid=2539996,fd=28),("nginx",pid=2539995,fd=28),("nginx",pid=2539994,fd=28),("nginx",pid=686851,fd=28))
+LISTEN 0      4096               *:8443             *:*    users:(("xray",pid=855,fd=8))                                                                                                                                                                                                                                     
+LISTEN 0      4096            [::]:22            [::]:*    users:(("sshd",pid=687080,fd=4),("systemd",pid=1,fd=308))                                                                                                                                                                                                         
+LISTEN 0      511            [::1]:6380          [::]:*    users:(("redis-server",pid=830,fd=7))                                                                                                                                                                                                                             
+LISTEN 0      511             [::]:80            [::]:*    users:(("nginx",pid=2540002,fd=9),("nginx",pid=2540001,fd=9),("nginx",pid=2540000,fd=9),("nginx",pid=2539999,fd=9),("nginx",pid=2539998,fd=9),("nginx",pid=2539996,fd=9),("nginx",pid=2539995,fd=9),("nginx",pid=2539994,fd=9),("nginx",pid=686851,fd=9))         
+LISTEN 0      511             [::]:443           [::]:*    users:(("nginx",pid=2540002,fd=11),("nginx",pid=2540001,fd=11),("nginx",pid=2540000,fd=11),("nginx",pid=2539999,fd=11),("nginx",pid=2539998,fd=11),("nginx",pid=2539996,fd=11),("nginx",pid=2539995,fd=11),("nginx",pid=2539994,fd=11),("nginx",pid=686851,fd=11))
+LISTEN 0      4096               *:8853             *:*    users:(("dnsproxy",pid=622479,fd=8))                                                                                                                                                                                                                              
+LISTEN 0      4096               *:25592            *:*    users:(("java",pid=1098724,fd=142))                                                                                                                                                                                                                               
+LISTEN 0      4096               *:853              *:*    users:(("dnsproxy",pid=622479,fd=7))                                                                                                                                                                                                                              

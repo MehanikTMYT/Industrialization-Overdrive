@@ -1,0 +1,59 @@
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by net.rubygrapefruit.platform.internal.NativeLibraryLoader in an unnamed module (file:/root/.gradle/wrapper/dists/gradle-9.2.1-bin/2t0n5ozlw9xmuyvbp7dnzaxug/gradle-9.2.1/lib/native-platform-0.22-milestone-29.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.2.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Enabling dist annotations on PMJ
+
+> Task :neoFormListLibraries UP-TO-DATE
+> Task :neoFormListTransformLibraries UP-TO-DATE
+> Task :cacheVersionManifest26.1.2 UP-TO-DATE
+> Task :cacheVersionExecutableClient26.1.2 UP-TO-DATE
+> Task :cacheVersionExecutableServer26.1.2 UP-TO-DATE
+> Task :neoFormSetup UP-TO-DATE
+> Task :neoFormDecompile UP-TO-DATE
+> Task :neoFormPatch UP-TO-DATE
+> Task :neoFormPatchUserDev UP-TO-DATE
+> Task :neoFormTransformSource UP-TO-DATE
+> Task :neoFormRecompile UP-TO-DATE
+> Task :supplyRawJarForneoFormJoined26.1.2-1 UP-TO-DATE
+> Task :selectRawArtifactNg_dummy_ng.net.neoforged_neoforge_26.1.2.126 UP-TO-DATE
+
+> Task :compileJava
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/item/Vajra.java:128: warning: [removal] ItemHandlerHelper in net.neoforged.neoforge.items has been deprecated and marked for removal
+                    if (!itemEntity.isRemoved()) ItemHandlerHelper.giveItemToPlayer(player, itemEntity.getItem());
+                                                 ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/item/Vajra.java:128: warning: [removal] giveItemToPlayer(Player,ItemStack) in ItemHandlerHelper has been deprecated and marked for removal
+                    if (!itemEntity.isRemoved()) ItemHandlerHelper.giveItemToPlayer(player, itemEntity.getItem());
+                                                                  ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/datagen/server/provider/recipes/CommonRecipesServerDatagenProvider.java:87: warning: [removal] itemIn(String,int) in MIRecipeJson has been deprecated and marked for removal
+                        .itemIn("modern_industrialization:sodium_battery", 1)
+                        ^
+  where T is a type-variable:
+    T extends MIRecipeJson<?> declared in class MIRecipeJson
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchConfigSlot.java:176: warning: [removal] FluidUtil in net.neoforged.neoforge.fluids has been deprecated and marked for removal
+            FluidStack contained = FluidUtil.getFluidContained(carried).orElse(FluidStack.EMPTY);
+                                   ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchConfigSlot.java:176: warning: [removal] getFluidContained(ItemStack) in FluidUtil has been deprecated and marked for removal
+            FluidStack contained = FluidUtil.getFluidContained(carried).orElse(FluidStack.EMPTY);
+                                            ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/machines/guicomponents/mehatch/MEHatchScreenInput.java:105: warning: [removal] getSlotUnderMouse() in AbstractContainerScreen has been deprecated and marked for removal
+        Slot hovered = containerScreen.getSlotUnderMouse();
+                                      ^
+/root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/IOMixinPlugin.java:28: warning: [removal] get() in LoadingModList has been deprecated and marked for removal
+    private static final boolean AE2_PRESENT = LoadingModList.get().getModFileById("ae2") != null;
+                                                             ^
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /root/home/forks/mi-stack/Industrialization-Overdrive/src/main/java/dev/wp/industrialization_overdrive/IOClient.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+7 warnings
+
+[Incubating] Problems report is available at: file:///root/home/forks/mi-stack/Industrialization-Overdrive/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 1m 6s
+14 actionable tasks: 1 executed, 13 up-to-date

@@ -1,0 +1,18 @@
++ pgrep -af GradleDaemon
+3250199 /bin/bash -c exec > >(tee -a .port-tools/qa-out/overdrive-smoke/launch.log) 2>&1 set -x pgrep -af GradleDaemon || true free -m python3 - <<'PY' from pathlib import Path import sys found=[] for p in Path('/proc').iterdir():     if not p.name.isdigit(): continue     try:         args=(p/'cmdline').read_bytes().split(b'\0')         if args and args[0].endswith(b'/java') and any(b'GradleDaemon' in a or b'GradleWrapperMain' in a or b'GradleMain' in a for a in args):             found.append((p.name,b' '.join(args).decode(errors='replace')))     except (OSError,PermissionError): pass print('Gradle process gate:',found or 'CLEAR') if found: sys.exit(75) PY if [ "$?" -ne 0 ]; then exit 75; fi export OUT=/root/home/forks/mi-stack/Industrialization-Overdrive/.port-tools/qa-out/overdrive-smoke export QA_OUT=$OUT TASK=runServer export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 bash "$OUT/qa_server.safe.sh" /root/home/forks/mi-stack/Industrialization-Overdrive overdrive-qa
++ free -m
+               total        used        free      shared  buff/cache   available
+Mem:           15991        6702        4572          75        5131        9289
+Swap:            511         511           0
++ python3 -
+Gradle process gate: CLEAR
++ '[' 0 -ne 0 ']'
++ export OUT=/root/home/forks/mi-stack/Industrialization-Overdrive/.port-tools/qa-out/overdrive-smoke
++ OUT=/root/home/forks/mi-stack/Industrialization-Overdrive/.port-tools/qa-out/overdrive-smoke
++ export QA_OUT=/root/home/forks/mi-stack/Industrialization-Overdrive/.port-tools/qa-out/overdrive-smoke TASK=runServer
++ QA_OUT=/root/home/forks/mi-stack/Industrialization-Overdrive/.port-tools/qa-out/overdrive-smoke
++ TASK=runServer
++ export JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64
++ JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64
++ bash /root/home/forks/mi-stack/Industrialization-Overdrive/.port-tools/qa-out/overdrive-smoke/qa_server.safe.sh /root/home/forks/mi-stack/Industrialization-Overdrive overdrive-qa
+overdrive-qa: STARTED saved=yes errors=0
