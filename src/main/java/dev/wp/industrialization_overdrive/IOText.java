@@ -141,6 +141,10 @@ public interface IOText {
     @WithStyle("red")
     MutableComponent multiblockBuilderBlockCannotBeReplaced(@Parsed("block_pos") BlockPos location);
 
+    @LangKey(text = "Block at %s is outside the build height limit and cannot be placed.")
+    @WithStyle("red")
+    MutableComponent multiblockBuilderOutsideBuildHeight(@Parsed("block_pos") BlockPos location);
+
     @LangKey(text = "Successfully pasted multiblock structure.")
     @WithStyle("green")
     MutableComponent multiblockBuilderPasteSuccess();
